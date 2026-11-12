@@ -114,8 +114,16 @@ function blastHits(c, e) {
 function updateClouds() {
   for (const c of G.clouds) {
     c.t--;
-    for (const e of G.enemies)
+    for (const e of G.enemies) {
+      // (Chris 2026-11-11) a guy who's already frozen and gets horned again is frozen for the whole time again, once per blast
+      if (e.state === 'stun' && blastHits(c, e) && !(c.hit || (c.hit = [])).includes(e)) {
+        c.hit.push(e);
+        e.t = stunTime();
+        SFX.stun();
+        continue;
+      }
       if (e.state === 'walk' && blastHits(c, e)) {
+        (c.hit || (c.hit = [])).push(e);
         e.state = 'stun';
         e.t = stunTime();
         if (GUARD(e.type) && e.mode !== 'patrol') (e.mode = 'patrol'), (e.acc = 0); // (Chris 2026-11-09) a frozen guard drops its rev or charge: it wakes up like it just arrived
@@ -123,6 +131,7 @@ function updateClouds() {
         if (G.st) G.st.stuns = (G.st.stuns || 0) + 1;
         if (PLAYING()) comboMove(1); // each enemy the horn hits is a move (the blast alone isn't)
       }
+    }
   }
   G.clouds = G.clouds.filter(c => c.t > 0);
 }

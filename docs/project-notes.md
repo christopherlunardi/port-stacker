@@ -516,3 +516,4 @@ Started 2026-11-06 as a quick concept ("Stack Style"); moved to this repo with a
 - The launcher's play log needs a new PLAYLOG_TOKEN secret here (fine-grained token, port-stacker only, Issues read/write) and a "Play log"
   issue #1; until then the app keeps its log on the device.
 - 2026-11-11, build 221 (Chris: no other game named anywhere, not even consoles): the horn is called horns in the code now (p.horns, blowHorn, SFX.horn; it had an old name). Comments, notes and Workshop files no longer name other games or consoles (8-bit, old handheld, console start-up instead). The repo's history was started fresh from this state as one commit.
+- 2026-11-11, build 222: horning an enemy who's already stunned starts his stun over, the full stunTime() (Chris). Once per blast (c.hit), with the stun sound; it isn't a new combo move or a new stun in the stats. Encyclopedia THE HORN says so; fasttest hornreach checks it.

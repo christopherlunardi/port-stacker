@@ -182,7 +182,7 @@ body.padmode #screenWrap,body.inapp #screenWrap{position:fixed;top:0;right:0;bot
 // ---------- setup ----------
 // Port Stacker Deluxe: a container-stacking arcade game. One HTML page; played in a browser, on a phone (the artifact link) and on the
 // Retroid handhelds (the launcher app in android/ downloads the newest build and plays the last one it has when offline).
-const BUILD = 221; // set by assemble.py; the launcher compares it with dist/version.json
+const BUILD = 222; // set by assemble.py; the launcher compares it with dist/version.json
 const PW = 384,
   PH = 288,
   TK = PH / 240; // TK: screens laid out for the old 320x240 field (title, cards, menus, boards) draw at TK in their old coordinates           // the playfield in game pixels; the screen around it grows to fit any shape (10-render)
@@ -3571,8 +3571,16 @@ function blastHits(c, e) {
 function updateClouds() {
   for (const c of G.clouds) {
     c.t--;
-    for (const e of G.enemies)
+    for (const e of G.enemies) {
+      // (Chris 2026-11-11) a guy who's already frozen and gets horned again is frozen for the whole time again, once per blast
+      if (e.state === 'stun' && blastHits(c, e) && !(c.hit || (c.hit = [])).includes(e)) {
+        c.hit.push(e);
+        e.t = stunTime();
+        SFX.stun();
+        continue;
+      }
       if (e.state === 'walk' && blastHits(c, e)) {
+        (c.hit || (c.hit = [])).push(e);
         e.state = 'stun';
         e.t = stunTime();
         if (GUARD(e.type) && e.mode !== 'patrol') (e.mode = 'patrol'), (e.acc = 0); // (Chris 2026-11-09) a frozen guard drops its rev or charge: it wakes up like it just arrived
@@ -3580,6 +3588,7 @@ function updateClouds() {
         if (G.st) G.st.stuns = (G.st.stuns || 0) + 1;
         if (PLAYING()) comboMove(1); // each enemy the horn hits is a move (the blast alone isn't)
       }
+    }
   }
   G.clouds = G.clouds.filter(c => c.t > 0);
 }
@@ -4446,7 +4455,7 @@ const HOWTO = [
   {
     name: 'THE HORN',
     title: 'THE AIR HORN',
-    text: "Press A to blow the air horn. It blasts the way you face, most of a container's width, and a little way behind you too: it catches anyone in front of you, even a guy climbing up onto your catwalk. Hold up or down (on its own) to blast at the catwalk above or below instead; on a ladder it blasts up or down. An enemy it hits is stunned for about two and a half seconds: he can't hurt you, so walk straight through him, or across the container he's on. Every stage starts you with at least 5 horns (count bottom right; you keep any extra). During a stage, the only way to get more is to fill a bay: one more horn each. Horns you still have when the ship is loaded are worth a big bonus on the SHIP LOADED card: 2,000 each, times the shift number (see WHAT'S IT WORTH). Each enemy it stuns counts toward your combo.",
+    text: "Press A to blow the air horn. It blasts the way you face, most of a container's width, and a little way behind you too: it catches anyone in front of you, even a guy climbing up onto your catwalk. Hold up or down (on its own) to blast at the catwalk above or below instead; on a ladder it blasts up or down. An enemy it hits is stunned for about two and a half seconds: he can't hurt you, so walk through him or across his container. Horn him again and it starts over. Every stage starts you with at least 5 horns (count bottom right; you keep any extra). During a stage, the only way to get more is to fill a bay: one more horn each. Horns you still have when the ship is loaded are worth a big bonus on the SHIP LOADED card: 2,000 each, times the shift number (see WHAT'S IT WORTH). Each enemy it stuns counts toward your combo.",
     setup() {
       G.pieces = [];
       Object.assign(G.p, { x: 196, y: rowY(19), face: 1 });

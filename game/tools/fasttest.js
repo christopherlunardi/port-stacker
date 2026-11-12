@@ -293,6 +293,11 @@ function ladderhit() { // (Chris 2026-11-08) an enemy on a ladder at a dropping 
   R('G.enemies = []; DEV.noEnemies = false; DEV.inv = false; G.state = "title"');
 }
 function hornreach() { // (Chris 2026-11-09) a guy coming up a ladder right in front of Buck, inside the arcs, should freeze; the catwalk below is out of reach
+  { // (Chris 2026-11-11) horning a frozen guy again starts his stun over, the full time
+    R(`DEV.noEnemies = true; newGame(); G.state = "play"; G.spawnQ = []; G.p.x = 200; G.p.y = rowY(14); G.p.face = 1; G.p.climb = false; G.clouds = []; G.enemies = [Object.assign(demoEnemy('pratt', 230, 14, -1, 0), { state: 'walk' })]`);
+    R('blowHorn(G.p, 0); for (let i = 0; i < 30; i++) updateClouds(); G.enemies[0].t -= 80; G.clouds = []; blowHorn(G.p, 0); updateClouds()');
+    ok(R('G.enemies[0].state') === 'stun' && R('G.enemies[0].t') === R('stunTime()'), 'hornreach: a second horn should restart a stun (' + R('G.enemies[0].t') + ')');
+  }
   for (const [dx, dy, want] of [[16, 14, 'stun'], [16, 0, 'stun'], [30, 8, 'stun'], [40, 0, 'stun'], [8, 16, 'stun'], [16, 40, 'walk'], [16, -40, 'walk'], [30, 40, 'walk'], [30, -40, 'walk'], [16, 26, 'walk'], [-6, 0, 'stun'], [-12, 0, 'stun'], [-20, 0, 'walk'], [-16, 40, 'walk'], [50, 0, 'stun'], [60, 0, 'walk']] /* (Chris 2026-11-11: reaches 52 px in front and 15 behind) */) {
     R(`DEV.noEnemies = true; newGame(); G.state = "play"; G.spawnQ = []; G.p.x = 200; G.p.y = rowY(14); G.p.face = 1; G.p.climb = false; G.p.horns = 5`);
     R(`G.enemies = [{ type: 'pratt', x: 200 + ${dx}, y: rowY(14) + ${dy}, dx: 0, dy: -1, acc: 0, speed: 0, chase: 0.8, state: 'walk', t: 0, anim: 0, rideOff: 0, mode: 'patrol', mt: 0 }]`);
