@@ -144,7 +144,7 @@ function walkerSpeed(type) {
             ? D.top + ((D.last - D.top) * l) / (n || 1)
             : D.top
           : Math.min(D.speed + ((D.top - D.speed) * l) / (n || 1), WALK_MAX);
-  return Math.min(otRamp(at(G.level), at(0), 0.12), 1.3); // each overtime's walkers start 0.12 quicker, was 0.08 (Chris 2026-11-11: a bigger bump at the reset), so OT1 1-1's Pratts start at 1-3's top speed
+  return softUp(otRamp(at(G.level), at(0), 0.12), 1.25, 0.4); // past 1.25 (deep in overtime) still quicker each overtime, more slowly // each overtime's walkers start 0.12 quicker, was 0.08 (Chris 2026-11-11: a bigger bump at the reset), so OT1 1-1's Pratts start at 1-3's top speed
 }
 function killEnemy(e) {
   const i = G.enemies.indexOf(e);
@@ -335,7 +335,7 @@ function updateWatch(e) {
   if (e.turnT > 0) {
     if (--e.turnT === 0) {
       e.dx = -e.dx;
-      e.cool = Math.max(50, WATCH.cool - 25 * heat());
+      e.cool = Math.round(softDown(WATCH.cool - 25 * heat(), 60, 25, 0.9, 20));
     }
     return true;
   }
@@ -347,7 +347,7 @@ function updateWatch(e) {
     Math.abs(p.x - e.x) < WATCH.sight * (1 + 0.2 * heat()) &&
     walkable(floorRowAt(p.y), e.x, p.x); // on his catwalk, at his back (and no gap between: then turning round gets him nowhere)
   if (!e.dy && !e.cool && PLAYING() && canStep(e, -e.dx, 0) && (behind || watchNextDoor(e, p))) {
-    e.turnT = Math.max(12, WATCH.turn - 4 * heat()); // still a warning, shorter each overtime
+    e.turnT = Math.round(softDown(WATCH.turn - 4 * heat(), 14, 4, 0.9, 6)); // still a warning, shorter each overtime
     SFX.watchTurn();
     return true;
   }
@@ -478,7 +478,7 @@ function updateGull(e) {
         return;
       }
       e.mode = 'land';
-      e.mt = Math.max(30, Math.round(GULL.land * (1 - 0.3 * k)));
+      e.mt = Math.round(softDown(GULL.land * (1 - 0.3 * k), 30, 42, 0.85, 8));
       e.x = Math.round(e.x);
       e.landT = 0;
       return;
@@ -520,7 +520,7 @@ function updateGull(e) {
     if (e.y <= cruiseY()) {
       e.y = cruiseY();
       e.mode = 'fly';
-      e.mt = Math.max(20, Math.round(GULL.cool * (1 - 0.45 * k)));
+      e.mt = Math.round(softDown(GULL.cool * (1 - 0.45 * k), 20, 50, 0.85, 6));
     }
   }
 }
@@ -554,7 +554,7 @@ function updateCrab(e) {
     if (same && Math.abs(p.x - e.x) < K.sight * (1 + 0.15 * heat()) && PLAYING()) {
       e.dx = dir;
       e.mode = 'wind';
-      e.mt = Math.round(K.wind * Math.max(0.45, 1 - 0.1 * heat())); // a shorter rev each overtime, never under half
+      e.mt = Math.round(K.wind * softDown(1 - 0.1 * heat(), 0.5, 0.1, 0.92, 0.2)); // a shorter rev each overtime, easing off past half
       if (e.type === 'fork') SFX.rev();
       else SFX.stun();
       return;
@@ -567,7 +567,7 @@ function updateCrab(e) {
     }
     return;
   } else if (e.mode === 'charge') {
-    e.acc += K.charge * Math.min(difficulty(), 1.7) * (1 + 0.15 * heat());
+    e.acc += K.charge * softUp(Math.min(difficulty(), 1.7) * (1 + 0.15 * heat()), 2.3, 0.8); // faster each overtime (as before up to OT2), more slowly deep in it
     // a charge runs out after K.reach (Chris 2026-11-11: run the moment he revs and you can get away), and the Captain also stops once he's
     // well past you or you've left his catwalk
     if (Math.abs(e.x - e.from) >= K.reach || (e.type !== 'fork' && ((p.x - e.x) * e.dx < -28 || (!same && Math.abs(e.x - e.from) > 90)))) {

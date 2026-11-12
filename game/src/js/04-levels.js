@@ -319,7 +319,7 @@ function rollRoster() {
   const base = L.def.enemies.slice(),
     s = baseShift(),
     n = heat(),
-    extra = Math.min(6, n);
+    extra = n <= 6 ? n : 6 + Math.floor(Math.log2(n - 5)); // one more walker each overtime, then one more every time the overtime doubles
   if (!s) {
     // (Chris 2026-11-10, from the new-player review: 1-2 was harder than 1-3) shift 1's Broken Deck has one crab, not two (overtime's
     // shift 1 too, which replays it); later shifts keep both
@@ -357,6 +357,17 @@ function rollRoster() {
 // overtime 1 drops back to Pratts on its first stage, but everything starts further along and ramps faster (otRamp): walkers quicker,
 // guards harder, more Watchmen sooner in its shift 2, more Forklifts and bolder gulls in its shift 3, one more walker each overtime. Per
 // overtime, flat: Watchmen and guards sharper, everyone chases more, enemies back sooner. Your own rules (horns, stuns, par) never change.
+// (Chris 2026-11-11: "it should keep scaling", no overtime where it all stops) every value overtime pushes keeps moving forever: the ones
+// that used to stop at a hard limit (kept so the game can't break: enemies too fast to see, back the instant they're squashed) now ease off
+// past that point instead, a little less each overtime but never quite stopping.
+// softUp: v climbing past knee grows on, more and more slowly (logarithmically).
+function softUp(v, knee, k) {
+  return v <= knee ? v : knee + k * Math.log(1 + (v - knee) / k);
+}
+// softDown: v falling by `step` an overtime: past knee it keeps shrinking by the factor keep for each step's worth, never below low
+function softDown(v, knee, step, keep, low) {
+  return v >= knee ? v : Math.max(low, knee * Math.pow(keep, (knee - v) / step));
+}
 function heat() {
   return otNum();
 }
@@ -392,7 +403,7 @@ function stunTime() {
   return Math.round(160 / buckSpeed());
 }
 function respawnDelay() {
-  return Math.max(50, 220 - 35 * heat()); // enemies come back sooner (their side)
+  return Math.round(softDown(220 - 35 * heat(), 60, 35, 0.88, 12)); // enemies come back sooner (their side), sooner every overtime
 }
 function freeHorns() {
   return 5;

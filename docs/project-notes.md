@@ -517,3 +517,14 @@ Started 2026-11-06 as a quick concept ("Stack Style"); moved to this repo with a
   issue #1; until then the app keeps its log on the device.
 - 2026-11-11, build 221 (Chris: no other game named anywhere, not even consoles): the horn is called horns in the code now (p.horns, blowHorn, SFX.horn; it had an old name). Comments, notes and Workshop files no longer name other games or consoles (8-bit, old handheld, console start-up instead). The repo's history was started fresh from this state as one commit.
 - 2026-11-11, build 222: horning an enemy who's already stunned starts his stun over, the full stunTime() (Chris). Once per blast (c.hit), with the stun sound; it isn't a new combo move or a new stun in the stats. Encyclopedia THE HORN says so; fasttest hornreach checks it.
+- 2026-11-11, build 223: overtime keeps scaling forever (Chris: "it should keep scaling", no point where it all stops). The hard limits became soft ones (softUp / softDown in 04-levels.js), which keep moving more slowly but never stop:
+  - **Walker speed:** past 1.25 it grows logarithmically (it used to stop at 1.3), and Buck follows at 60%.
+  - **Guard charges:** ease off past 2.3x; they used to stop at difficulty 1.7.
+  - **Respawns:** shrink 12% an overtime once under 60 frames (the old floor was 50), never below 12.
+  - **The Watchman:** his cool-off and his turn warning shrink 10% an overtime past 60 and 14 frames.
+  - **Revs:** past half length they keep shortening.
+  - **The gull's rests:** keep shrinking the same way.
+  - **Extra walkers:** one per overtime to 6, then one more each time the overtime doubles.
+  - **Points:** already climbed without limit (time x shift, worth x (1 + 0.25 per overtime)).
+  - **Unchanged up to OT2.** For example, OT5 3-5: Watchman 1.51, Buck 1.36, respawn 57 frames, 10 enemies. OT19: 2.04, 1.68, 12, 14.
+  - **Bots:** elite bots from OT5 and OT9 still clear stages, at 2 to 8 lives each, with nothing stuck.
