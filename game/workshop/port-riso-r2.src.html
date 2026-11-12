@@ -1,0 +1,111 @@
+<title>Port Riso Mockup 2</title>
+<style>html,body{margin:0;background:#111}canvas{display:block}</style>
+<canvas id="out"></canvas>
+<script>
+// Round 2. Art is drawn flat at game pixels onto three ink plates, each pixel holding an ink amount (0..1). The print step then works at
+// full screen resolution: every ink gets its own rotated halftone dot screen, sits a few screen pixels off-register, and multiplies over
+// paper, with grain. So the pixel art stays chunky while the print texture stays fine, on any screen size.
+/*FONT*/
+const INK = { p: [255, 72, 176], b: [38, 86, 196], y: [255, 226, 0] }, PAPER = [247, 236, 222];
+const P = new URLSearchParams(location.search); const LW = +(P.get('w') || 320), LH = 240, S = +(P.get('s') || 3), OX = Math.floor((LW - 320) / 2);
+const plate = {}; for (const k in INK) plate[k] = new Float32Array(LW * LH);
+// colours are ink mixes {p,b,y}; painting replaces what's under it (overlaps happen only where a colour asks for two inks)
+const C = { paper: {}, navy: { b: 1 }, blue: { b: .82 }, sky: { b: .34 }, skyline: { b: .52, p: .08 }, win: { b: .2, y: .5 }, pink: { p: 1 }, pinkL: { p: .45 }, pinkD: { p: 1, b: .4 },
+  yel: { y: 1 }, yelD: { y: 1, p: .4 }, orange: { p: .6, y: 1 }, orangeD: { p: .9, y: 1, b: .15 }, blueD: { b: 1, p: .25 }, skin: { p: .3, y: .38 }, cheek: { p: .6, y: .3 },
+  hull: { b: 1 }, waterL: { b: .45 } };
+function paint(x, y, c) { x |= 0; y |= 0; if (x < 0 || y < 0 || x >= LW || y >= LH) return; const i = y * LW + x; plate.p[i] = c.p || 0; plate.b[i] = c.b || 0; plate.y[i] = c.y || 0; }
+function box(x, y, w, h, c) { for (let j = 0; j < h; j++) for (let i = 0; i < w; i++) paint(x + i, y + j, c); }
+function txt(s, x, y, c, sc = 1) { s = s.toUpperCase(); for (let i = 0; i < s.length; i++) { const gl = FONT[s[i]]; if (!gl) continue;
+  for (let r = 0; r < 5; r++) for (let k = 0; k < 3; k++) if (gl[r] & (4 >> k)) box(x + (i * 4 + k) * sc, y + r * sc, sc, sc, c); } }
+const tw = (s, sc = 1) => (s.length * 4 - 1) * sc;
+const PIX = { b: C.navy, B: C.sky, y: C.yel, g: C.yelD, s: C.skin, o: C.orange, O: C.orangeD, p: C.pink, P: C.cheek, w: C.paper };
+function sprite(rows, x, y, flip) { const w = Math.max(...rows.map(r => r.length)), h = rows.length, x0 = Math.round(x - w / 2), y0 = y - h;
+  rows.forEach((row, j) => { for (let i = 0; i < row.length; i++) { const ch = row[i]; if (ch !== '.') paint(x0 + (flip ? w - 1 - i : i), y0 + j, PIX[ch]); } }); }
+const WORKER = ['.....bbbbbb.....', '....byyyyyyb....', '...byywyyyyyb...', '..byywyyyyyggb..', '..byyyyyyyyggb..', '.bbbbbbbbbbbbbbb', '...bssssssssb...', '...bssbsssbsb...',
+  '...bssbsssbsb...', '...bssssssssb...', '....bssPPssb....', '.....bbbbbb.....', '...bbooooooobb..', '..booyooooyoOb..', '..booyooooyoOb..', '.bwbooooooooObwb',
+  '.bbbooooooooObbb', '...bbbbbbbbbbb..', '...boooobooooOb.', '...boooobboooOb.', '...booob..booOb.', '..bOOOb...bOOOb.', '..bbbbbb..bbbbbb', '..bbbbbb..bbbbbb'];
+const GULL = ['.....bbbb.....', '....bwwwwb....', '....bwbwwbyyy.', '....bwwwwbyy..', '..bbbwwwwb....', '.bwwwwwwwb....', 'bBwwwwwwb.....', 'bBBwwwwb......', '.bbbbbbb......', '....y.y.......', '...yy.yy......'];
+const CRAB = ['.bb.......bb.', 'bppb.b.b.bppb', '.bpbbpbpbbpb.', '..bpppppppb..', '.bpppwpwpppb.', 'bpppppppppppb', '.b.bb...bb.b.'];
+const KIND = { pink: [C.pink, C.pinkD, C.pinkL], yel: [C.yel, C.yelD, { y: .45 }], blue: [C.blue, C.blueD, { b: .45 }], orange: [C.orange, C.orangeD, { p: .3, y: .6 }] };
+function container(x, yb, kind, tag, lit = 0, doorsLeft = false) { // 48 x 18: base, ribs, light top band, door end with lock bars, corner castings, latches
+  const [base, rib, hi] = KIND[kind], H = 18, y = yb - H, d0 = doorsLeft ? x + 2 : x + 35, tx0 = doorsLeft ? x + 17 : x + 6;
+  box(x, y, 48, H, base); box(x + 2, y + 2, 44, 1, hi);
+  for (let i = x + 4; i < x + 45; i += 3) { if (i >= d0 - 1 && i < d0 + 12) continue; if (i >= tx0 - 2 && i < tx0 + 14) continue; box(i, y + 4, 1, H - 7, rib); }
+  box(d0, y + 3, 11, H - 6, rib); box(d0 + 1, y + 4, 4, H - 8, base); box(d0 + 6, y + 4, 4, H - 8, base); for (const bx of [d0 + 2, d0 + 8]) { box(bx, y + 3, 1, H - 6, C.navy); box(bx - 1, y + 8, 3, 2, C.yel); }
+  box(x, y, 48, 2, C.navy); box(x, yb - 2, 48, 2, C.navy); box(x, y, 2, H, C.navy); box(x + 46, y, 2, H, C.navy);
+  for (const [cx, cy] of [[x, y], [x + 45, y], [x, yb - 2], [x + 45, yb - 2]]) box(cx, cy, 3, 2, C.yelD);
+  txt(tag, tx0, y + 7, C.paper);
+  for (let s = 0; s < 6; s++) { const lx = x + 3 + s * 8; box(lx, y - 2, 4, 2, C.navy); if (s < lit) { box(lx, y - 3, 4, 3, C.yelD); box(lx + 1, y - 2, 2, 1, C.yel); } }
+}
+function girder(y, a, b) { box(a, y, b - a, 1, C.navy); box(a, y + 1, b - a, 2, C.pink); box(a, y + 3, b - a, 1, C.navy); box(a, y + 4, b - a, 3, C.pinkL); box(a, y + 7, b - a, 1, C.navy);
+  for (let x = a; x < b; x += 8) for (let j = 0; j < 3; j++) { paint(x + j + 1, y + 4 + j, C.navy); paint(x + 6 - j, y + 4 + j, C.navy); }
+  for (let x = a + 3; x < b; x += 8) paint(x, y + 1, C.yel); }
+function ladder(x, y0, y1) { for (const rx of [x - 6, x + 5]) { box(rx - 1, y0 - 2, 3, y1 - y0 + 2, C.navy); box(rx, y0 - 2, 1, y1 - y0 + 2, C.yel); }
+  for (let y = y0 + 3; y < y1; y += 5) { box(x - 5, y - 1, 10, 3, C.navy); box(x - 5, y, 10, 1, C.yel); } }
+function cloud(x, y, w) { for (let i = 0; i < w; i++) { const h = 4 + Math.round(2.2 * Math.abs(Math.sin(i * 0.33))); box(x + i, y - h, 1, h + 2, C.paper); paint(x + i, y - h - 1, C.sky); } box(x, y + 2, w, 1, { b: .55 }); }
+
+function scene() {
+  const X = v => OX + v, F = [40, 82, 124, 166];
+  box(0, 16, LW, 216, C.sky);
+  cloud(X(60), 50, 34); cloud(X(170), 36, 46); cloud(X(256), 62, 30); if (OX > 30) { cloud(10, 70, 30); cloud(OX + 336, 44, 40); }
+  for (let sx = -OX - 4; sx < LW; sx += 15) { const h = 26 + ((sx * 37 + 11) & 31); const x = OX + sx; box(x, 206 - h, 13, h, C.skyline); for (let wy = 210 - h; wy < 202; wy += 5) for (let wx = 2; wx < 12; wx += 4) if (((wx * 7 + wy * 3 + sx) & 7) < 2) box(x + wx, wy, 2, 2, C.win); }
+  // crane
+  for (const lx of [X(4), X(20)]) { box(lx - 1, 18, 4, 214, C.navy); box(lx, 18, 2, 214, C.yel); }
+  for (let y = 26; y < 214; y += 14) for (let j = 0; j < 14; j++) { paint(X(6) + j, y + j, C.navy); paint(X(19) - j, y + j, C.navy); }
+  box(X(0), 18, 232, 7, C.navy); box(X(1), 19, 230, 5, C.yel); for (let x = X(6); x < X(230); x += 6) { paint(x, 20, C.navy); paint(x + 3, 22, C.navy); }
+  box(X(198), 25, 1, 34, C.navy); box(X(204), 25, 1, 34, C.navy); box(X(194), 59, 15, 4, C.navy); box(X(195), 60, 13, 2, C.yelD);
+  container(X(177), 82, 'yel', 'PSX');
+  // HUD
+  box(0, 0, LW, 16, C.navy); txt('1UP', X(6), 2, C.yel); txt('003500', X(6), 8, C.paper); txt('HI', X(70), 2, C.yel); txt('100000', X(70), 8, C.paper);
+  sprite(['.bbbb.', 'byyyyb', 'bbbbbb', '.bssb.', '.bbbb.'], X(140), 13); txt('X3', X(146), 7, C.paper);
+  txt('HORN', X(184), 2, C.yel); txt('4', X(184), 8, C.paper);
+  box(X(266), 1, 50, 14, C.yel); box(X(267), 2, 48, 12, C.navy); txt('TIME', X(270), 2, C.yel); txt('103', X(270), 8, C.paper);
+  // catwalks, ladders
+  for (const [l, a, b] of [[36, 0, 3], [96, 0, 2], [120, 1, 3], [212, 0, 1], [232, 1, 3], [306, 0, 2]]) ladder(X(l), F[a], F[b]);
+  for (const y of F) girder(y, X(28), X(320));
+  container(X(46), 40, 'pink', 'GJL'); container(X(136), 40, 'yel', 'SSX', 0, true); container(X(246), 82, 'orange', 'HFM');
+  container(X(46), 82, 'blue', 'GJL', 0, true); container(X(136), 124, 'pink', 'SSX', 4); container(X(246), 124, 'yel', 'HFM', 0, true);
+  container(X(46), 166, 'orange', 'GJL');
+  container(X(246), 150, 'blue', 'HFM', 6); sprite(GULL, X(266), 130);
+  // ship
+  const deck = 218;
+  box(X(30), deck, 270, 14, C.hull); for (let j = 0; j < 14; j++) box(X(30) - j, deck + j, j ? 1 : 0, 1, C.hull); box(X(22), deck + 9, 278, 3, C.pink);
+  for (let x = X(44); x < X(286); x += 12) if (x < X(170) || x > X(238)) box(x, deck + 3, 3, 3, C.paper);
+  txt('M/V STACK STYLE', X(176), deck + 3, C.paper);
+  box(X(286), deck - 42, 32, 42, C.navy); box(X(288), deck - 40, 28, 40, C.paper); for (let wy = deck - 35; wy < deck - 4; wy += 8) for (let wx = X(291); wx < X(314); wx += 6) box(wx, wy, 4, 4, C.blue);
+  box(X(296), deck - 54, 12, 12, C.pink); box(X(296), deck - 54, 12, 3, C.navy); box(X(301), deck - 62, 2, 8, C.navy);
+  container(X(46), deck, 'yel', 'GJL', 6); container(X(46), deck - 18, 'pink', 'GJL', 6, true); container(X(136), deck, 'blue', 'SSX', 6);
+  box(0, 232, LW, 8, C.blue); for (let x = 0; x < LW; x += 10) { box(x + 2, 233, 6, 1, C.paper); box(x + 4, 234, 2, 1, C.waterL); }
+  sprite(WORKER, X(108), 124); sprite(CRAB, X(168), 166, true);
+  for (let r = 0; r < 3; r++) for (let a = -0.8; a <= 0.8; a += 0.1) paint(X(120) + Math.cos(a) * (6 + r * 6), 110 + Math.sin(a) * (6 + r * 6), C.pink);
+  txt('BWAAP!', X(125), 93, C.navy); txt('BWAAP!', X(124), 92, C.pink);
+  if (OX >= 40) {
+    for (const sx of [0, OX + 320]) { box(sx, 16, OX, 224, { p: .32 }); box(sx ? sx : OX - 2, 16, 2, 224, C.navy); }
+    const L = Math.round(OX / 2);
+    for (const [w, y, c, sc] of [['STACK', 40, C.blue, 3], ['STYLE', 62, C.pink, 3]]) { txt(w, L - tw(w, sc) / 2 + 2, y + 2, C.navy, sc); txt(w, L - tw(w, sc) / 2, y, c, sc); }
+    sprite(WORKER, L - 6, 160); sprite(CRAB, L + 16, 160);
+    const R = OX + 320 + Math.round(OX / 2);
+    for (const [lab, v, y] of [['SHIP', '2/3', 40], ['HORN', '4', 90], ['LIVES', '3', 140]]) { txt(lab, R - tw(lab) / 2, y, C.navy); txt(v, R - tw(v, 3) / 2 + 2, y + 10, C.navy, 3); txt(v, R - tw(v, 3) / 2, y + 8, C.paper, 3); }
+  }
+}
+function print() {
+  scene();
+  const W = LW * S, H = LH * S, out = document.getElementById('out'); out.width = W; out.height = H; const g = out.getContext('2d'), img = g.createImageData(W, H), d = img.data;
+  const ANG = { p: 0.26, b: 1.31, y: 0.79 }, OFF = { p: [Math.round(S * .7), Math.round(S * .3)], b: [0, 0], y: [-Math.round(S * .4), Math.round(S * .6)] }, PER = S * 1.25;
+  let sd = 3; const rnd = () => (sd = (sd * 16807) % 2147483647) / 2147483647;
+  for (let Y = 0; Y < H; Y++) for (let X = 0; X < W; X++) {
+    let r = PAPER[0], gg = PAPER[1], bb = PAPER[2];
+    const n = rnd(); if (n < 0.04) { r -= 14; gg -= 16; bb -= 18; }
+    for (const k of ['y', 'p', 'b']) {
+      const gx = Math.floor((X - OFF[k][0]) / S), gy = Math.floor((Y - OFF[k][1]) / S); if (gx < 0 || gy < 0 || gx >= LW || gy >= LH) continue;
+      const t = plate[k][gy * LW + gx]; if (t <= 0) continue;
+      const c = Math.cos(ANG[k]), s = Math.sin(ANG[k]), u = (X * c + Y * s) / PER, v = (-X * s + Y * c) / PER;
+      const spot = (Math.cos(2 * Math.PI * u) + Math.cos(2 * Math.PI * v)) / 4 + 0.5; // 0..1 dot screen
+      if (t * 1.04 - 0.02 > spot + (rnd() - 0.5) * 0.12 && rnd() > 0.015) { const ink = INK[k]; r = r * ink[0] / 255; gg = gg * ink[1] / 255; bb = bb * ink[2] / 255; }
+    }
+    const i = (Y * W + X) * 4; d[i] = r; d[i + 1] = gg; d[i + 2] = bb; d[i + 3] = 255;
+  }
+  g.putImageData(img, 0, 0);
+}
+print();
+</script>

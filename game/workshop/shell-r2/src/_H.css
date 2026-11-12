@@ -1,0 +1,28 @@
+/* handhelds: a plastic body, a dark bezel round the screen whose chin carries the name and the power light */
+:root{--body:#e6dfcf;--body2:#d6cdb8;--bezel:#3b3d4a;--lbl:#a7a3b8;--lblhi:#ff8fc8;--dpadc:#2f2e38;--ab:#b3245e;--abtx:#f6e6ee;--pillc:#9a95a6;--pilltx:#34323e;
+  --emb:rgba(60,56,70,.6);--slot:rgba(60,56,70,.34);--led:#ff3b5c;
+  --shell:var(--body);--shell-hi:var(--body2);--ink:#2a2733;--muted:#6f6a7c;--button:var(--dpadc);--button-a:var(--ab);--button-b:var(--ab)}
+body{background:linear-gradient(180deg,var(--body),var(--body2))}
+@media (pointer:coarse){
+  § #screenWrap{border-radius:0}
+  § .top{color:var(--lbl);font-size:7px;letter-spacing:.2em}
+  § .top b{color:var(--lbl);letter-spacing:.2em;font-weight:700}
+  § .dpad span{background:var(--dpadc);border-radius:6px;box-shadow:inset 0 -3px 0 rgba(0,0,0,.4),0 2px 0 rgba(0,0,0,.25)}
+  § .dpad::after{content:'';position:absolute;left:50%;top:50%;width:20%;height:20%;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle at 50% 35%,rgba(0,0,0,.4),rgba(255,255,255,.07))}
+  § .dpad i{opacity:.32}
+  § .btn{background:var(--ab);color:var(--abtx);box-shadow:inset 0 -4px 0 rgba(0,0,0,.28),inset 0 2px 0 rgba(255,255,255,.2),0 3px 0 rgba(0,0,0,.3)}
+  § .btn small{color:var(--abtx);opacity:.85}
+  § .pill .cap{background:var(--pillc);color:var(--pilltx);transform:rotate(-24deg);box-shadow:inset 0 -2px 0 rgba(0,0,0,.25),0 1px 0 rgba(255,255,255,.3)}
+  § .top::before{content:'';flex:none;width:5px;height:5px;border-radius:50%;background:var(--led);box-shadow:0 0 6px var(--led)}
+}
+@media (pointer:coarse) and (orientation:portrait){
+  § .top{background:var(--bezel);border-radius:0 0 22px 9px;margin-top:calc(-1 * var(--bz));padding-top:var(--bz);height:calc(var(--chin) + var(--bz));box-shadow:0 2px 0 rgba(0,0,0,.22)}
+  § .top::before{position:absolute;left:11px;bottom:calc(var(--chin) / 2 - 2.5px)}
+  § .top #devBtn{top:auto;bottom:1.5px;transform:none;right:26px}
+  § #console::after{content:'';grid-area:foot;justify-self:end;align-self:end;margin:0 20px 18px 0;width:72px;height:46px;max-height:55%;border-radius:6px;
+    background:repeating-linear-gradient(-62deg,transparent 0 7px,var(--slot) 7px 11px)}
+}
+@media (pointer:coarse) and (orientation:landscape){
+  § .top,§ .top b{color:var(--emb)}
+  § .top{flex-wrap:wrap;gap:3px 5px}
+}

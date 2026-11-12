@@ -1,0 +1,103 @@
+<title>Port Riso Mockup</title>
+<style>html,body{margin:0;background:#111}canvas{display:block;image-rendering:pixelated}</style>
+<canvas id="out"></canvas>
+<script>
+// Riso print look: every drawing goes onto one of three ink plates (masks). The plates are printed onto paper with multiply,
+// each a pixel off-register, with ink dropouts and paper grain. Overlaps mix: blue + yellow = green, orange + yellow = warm orange, etc.
+/*FONT*/
+const INK = { b: '#0078BF', o: '#FF6C2F', y: '#FFE800' }, PAPER = '#F3EEE3';
+const OFF = { b: [0, 0], o: [1, 0], y: [0, 1] };
+const PARAMS = new URLSearchParams(location.search); const LW = +(PARAMS.get('w') || 320), LH = 240, SC = +(PARAMS.get('s') || 2);
+const OX = Math.floor((LW - 320) / 2);
+let seed = 7; const rnd = () => { seed = (seed * 1103515245 + 12345) & 0x7fffffff; return seed / 0x7fffffff; };
+const plates = {}; for (const k in INK) { const c = document.createElement('canvas'); c.width = LW; c.height = LH; plates[k] = c.getContext('2d'); plates[k].fillStyle = '#000'; }
+const BAYER = [[12, 5, 6, 13], [4, 0, 1, 7], [11, 3, 2, 8], [15, 10, 9, 14]]; // clustered dots: reads as a printed halftone screen
+function px(k, x, y) { plates[k].fillRect(x, y, 1, 1); }
+function rect(k, x, y, w, h, tone = 16) { // tone 0..16: halftone density
+  const g = plates[k]; if (tone >= 16) { g.fillRect(x, y, w, h); return; }
+  for (let j = y; j < y + h; j++) for (let i = x; i < x + w; i++) if (BAYER[((j % 4) + 4) % 4][((i % 4) + 4) % 4] < tone) g.fillRect(i, j, 1, 1);
+}
+function txt(k, s, x, y, sc = 1) { s = s.toUpperCase(); for (let i = 0; i < s.length; i++) { const gl = FONT[s[i]]; if (!gl) continue; for (let r = 0; r < 5; r++) for (let b = 0; b < 3; b++) if (gl[r] & (4 >> b)) plates[k].fillRect(x + (i * 4 + b) * sc, y + r * sc, sc, sc); } }
+function knock(k, s, x, y, sc = 1) { const g = plates[k]; g.globalCompositeOperation = 'destination-out'; txt(k, s, x, y, sc); g.globalCompositeOperation = 'source-over'; } // letters cut out of the ink: bare paper
+function tw(s, sc = 1) { return (s.length * 4 - 1) * sc; }
+// sprites: letters = which inks; h = orange half-tone (skin), p = paper (nothing)
+const MIX = { b: ['b'], o: ['o'], y: ['y'], g: ['b', 'y'], r: ['o', 'y'], v: ['b', 'o'] };
+function sprite(rows, x, y, flip) { // x = middle, y = feet
+  const w = Math.max(...rows.map(r => r.length)), h = rows.length, x0 = Math.round(x - w / 2), y0 = y - h;
+  rows.forEach((row, j) => { for (let i = 0; i < row.length; i++) { const ch = row[i], X = x0 + (flip ? w - 1 - i : i), Y = y0 + j;
+    if (ch === 'h') { if ((X + Y) & 1) px('o', X, Y); continue; } for (const k of (MIX[ch] || [])) px(k, X, Y); } });
+}
+const WORKER = ['....bbbbb....', '...byyyyyb...', '..byyyyyyyb..', '.bbbbbbbbbbb.', '...bhhhhhb...', '...bhhbhhb...', '...bhhhhhb...', '....bbbbb....',
+  '..bbooooobb..', '.boooooooob..', '.brrrrrrrrb..', '.boooooooob..', 'hboooboooobh.', 'hbooobooob.h.', '.bboooooobb..', '..booobooob..',
+  '..boob.boob..', '..boob.boob..', '.bbbb...bbbb.'];
+const GULL = ['.....bbb....', '....bpppb...', '....bpbpbyy.', '..bbbppppb..', '.bppppppb...', 'bppbbbbpb...', '.bbppppb....', '...bbbb.....', '...y..y.....', '..yy.yy.....'];
+const CRAB = ['.o.......o.', 'oo..b.b..oo', '.o.bbbbb.o.', '..ooooooo..', '.ooooooooo.', 'o.ooooooo.o', '.o.o...o.o.'];
+// a container: 48 x 12, corrugated, doors at one end, six latches on top that light up as you walk across
+function container(x, yb, inks, tag, lit = 0, doorsLeft = false) { // 48 x 16: ribs, doors with lock bars, corner castings, latches on top
+  const H = 16, y = yb - H, d0 = doorsLeft ? x : x + 37, blue = inks.includes('b');
+  for (const k of inks) rect(k, x, y, 48, H);
+  for (let i = x + 3; i < x + 46; i += 3) { if (i >= d0 - 1 && i < d0 + 11) continue; const tx0 = doorsLeft ? x + 15 : x + 5; if (i >= tx0 && i < tx0 + 13) continue; if (blue) { plates.b.clearRect(i, y + 3, 1, H - 6); } else rect('b', i, y + 3, 1, H - 6, 12); }
+  rect('b', d0, y + 2, 11, H - 4, 5); rect('b', d0 + 5, y + 2, 1, H - 4); for (const bx of [d0 + 2, d0 + 8]) { rect('b', bx, y + 2, 1, H - 4); rect('o', bx - 1, y + 7, 3, 2); }
+  rect('b', x, y, 48, 2); rect('b', x, yb - 2, 48, 2); rect('b', x, y, 2, H); rect('b', x + 46, y, 2, H);
+  for (const [cx, cy] of [[x, y], [x + 45, y], [x, yb - 2], [x + 45, yb - 2]]) { plates.b.clearRect(cx, cy, 3, 2); rect('o', cx, cy, 3, 2); }
+  const tx = doorsLeft ? x + 16 : x + 6; if (blue) knock('b', tag, tx, y + 5, 1); else { for (const k of inks) knock(k, tag, tx, y + 5, 1); }
+  for (let s = 0; s < 6; s++) { const lx = x + 3 + s * 8; rect('b', lx, y - 2, 4, 2); if (s < lit) { plates.b.clearRect(lx + 1, y - 2, 2, 1); rect('o', lx, y - 2, 4, 2); rect('y', lx, y - 3, 4, 3); } }
+}
+function floor(y, a, b) { rect('b', a, y, b - a, 2); rect('b', a, y + 2, b - a, 2, 6); for (let x = a + 2; x < b; x += 8) { px('y', x, y); } for (let x = a; x < b; x += 16) rect('b', x, y + 4, 1, 5, 10); }
+function ladder(x, y0, y1) { rect('o', x - 5, y0 - 4, 1, y1 - y0 + 4); rect('o', x + 4, y0 - 4, 1, y1 - y0 + 4); for (let y = y0 + 2; y < y1; y += 4) rect('o', x - 4, y, 8, 1, 10); }
+
+function scene() {
+  // sky: yellow haze, fading up; a gantry crane and stacked yards far off in blue half-tone
+  rect('y', 0, 16, LW, 50, 4); rect('y', 0, 66, LW, 70, 2); rect('y', 0, 136, LW, 80, 1);
+  const cx = OX + 196; rect('b', cx, 22, 4, 180, 3); rect('b', cx + 70, 22, 4, 180, 3); rect('b', cx - 40, 22, 160, 5, 4); rect('b', cx + 10, 27, 2, 30, 4); rect('b', cx + 6, 57, 10, 3, 5);
+  for (let i = 0; i < 6; i++) rect('b', OX + 8 + i * 22, 150 - (i % 3) * 8, 20, 8 + (i % 3) * 8, 2);
+  // the band
+  rect('b', 0, 0, LW, 15); knock('b', 'SCORE', OX + 6, 2); knock('b', '004250', OX + 6, 8); knock('b', 'HI', OX + 112, 2); knock('b', '012000', OX + 112, 8);
+  knock('b', 'BERTH 1', OX + 176, 2); knock('b', 'HORN 4', OX + 176, 8); txt('o', 'BERTH 1', OX + 176, 2); for (let i = 0; i < 3; i++) { const x = OX + 300 - i * 10; plates.b.clearRect(x, 3, 7, 9); rect('y', x, 3, 7, 3); rect('o', x + 1, 6, 5, 6); }
+  // catwalks and ladders (field coords + OX)
+  const F = [32, 72, 112, 152], X = v => OX + v;
+  for (const [l, a, b] of [[20, 0, 3], [20, 0, 1], [94, 0, 2], [118, 1, 3], [212, 0, 1], [230, 1, 3], [300, 0, 2]]) ladder(X(l), F[a], F[b]);
+  for (const y of F) floor(y, X(0), X(320));
+  // containers waiting on the catwalks (bays at 30, 136, 242)
+  container(X(30), 32, ['o'], 'GJL', 0); container(X(136), 32, ['b', 'y'], 'SSX', 0, true); container(X(242), 72, ['o', 'y'], 'HFM', 0);
+  container(X(30), 72, ['b'], 'GJL', 0, true); container(X(136), 112, ['o'], 'SSX', 4); container(X(242), 112, ['b'], 'HFM', 0, true);
+  container(X(30), 152, ['y'], 'GJL', 0);
+  // a container mid-drop with a gull riding it
+  container(X(242), 140, ['b', 'y'], 'HFM', 6); sprite(GULL, X(262), 124);
+  // the ship
+  const deck = 216; rect('b', X(14), deck, 292, 13); rect('o', X(14), deck + 9, 292, 2); rect('b', X(20), deck + 13, 280, 3, 10);
+  for (let x = X(14); x < X(306); x += 6) px('y', x + 2, deck + 4);
+  knock('b', 'M/V STACK STYLE', X(130), deck + 3);
+  rect('b', X(296), deck - 30, 16, 30); rect('y', X(299), deck - 26, 3, 3); rect('y', X(305), deck - 26, 3, 3); rect('o', X(298), deck - 36, 12, 6); rect('b', X(301), deck - 44, 3, 8);
+  container(X(30), deck, ['o', 'y'], 'GJL', 6); container(X(30), deck - 16, ['b'], 'GJL', 6, true);
+  container(X(136), deck, ['o'], 'SSX', 6);
+  // water
+  rect('b', 0, 232, LW, 8, 7); for (let x = 0; x < LW; x += 9) rect('b', x, 232, 5, 1);
+  // the worker, a crab coming along the catwalk, and an air-horn blast
+  sprite(WORKER, X(108), 112); sprite(CRAB, X(160), 152);
+  for (let r = 0; r < 3; r++) { const cx2 = X(124), cy = 104; for (let a = -0.8; a <= 0.8; a += 0.12) px('o', Math.round(cx2 + Math.cos(a) * (6 + r * 5)), Math.round(cy + Math.sin(a) * (6 + r * 5))); }
+  txt('o', 'BWAAP!', X(132), 88);
+  txt('b', 'SKIP 50', X(150), 98);
+  // side panels when wide: poster stack
+  if (OX >= 40) { for (const side of [0, OX + 320]) { rect('o', side + 6, 22, OX - 12, LH - 44, 3); rect('b', side + 6, 22, OX - 12, 2); rect('b', side + 6, LH - 24, OX - 12, 2); }
+    const L = OX / 2; txt('b', 'STACK', Math.round(L - tw('STACK', 2) / 2), 40, 2); txt('o', 'STYLE', Math.round(L - tw('STYLE', 2) / 2), 54, 2);
+    txt('b', 'SHIP', Math.round(L - tw('SHIP') / 2), 90); txt('b', '2 OF 3', Math.round(L - tw('2 OF 3') / 2), 98);
+    const R = OX + 320 + OX / 2; txt('b', 'HORN', Math.round(R - tw('HORN') / 2), 40); txt('o', '4', Math.round(R - tw('4', 3) / 2), 48, 3);
+    txt('b', 'LIVES', Math.round(R - tw('LIVES') / 2), 76); txt('o', '3', Math.round(R - tw('3', 3) / 2), 84, 3); }
+}
+function print() {
+  scene();
+  const out = document.getElementById('out'); out.width = LW * SC; out.height = LH * SC; out.style.width = LW * SC + 'px';
+  const big = document.createElement('canvas'); big.width = LW; big.height = LH; const g = big.getContext('2d');
+  g.fillStyle = PAPER; g.fillRect(0, 0, LW, LH);
+  for (let i = 0; i < LW * LH * 0.03; i++) { g.fillStyle = rnd() < 0.5 ? '#E6DFD1' : '#FBF8F1'; g.fillRect(Math.floor(rnd() * LW), Math.floor(rnd() * LH), 1, 1); } // paper grain
+  for (const k of ['y', 'o', 'b']) {
+    const p = plates[k]; p.globalCompositeOperation = 'destination-out'; for (let i = 0; i < LW * LH * 0.012; i++) p.fillRect(Math.floor(rnd() * LW), Math.floor(rnd() * LH), 1, 1); // ink dropouts
+    const t = document.createElement('canvas'); t.width = LW; t.height = LH; const tg = t.getContext('2d');
+    tg.fillStyle = INK[k]; tg.fillRect(0, 0, LW, LH); tg.globalCompositeOperation = 'destination-in'; tg.drawImage(p.canvas, 0, 0);
+    g.globalCompositeOperation = 'multiply'; g.globalAlpha = 0.92; g.drawImage(t, OFF[k][0], OFF[k][1]); g.globalAlpha = 1;
+  }
+  const og = out.getContext('2d'); og.imageSmoothingEnabled = false; og.drawImage(big, 0, 0, LW * SC, LH * SC);
+}
+print();
+</script>

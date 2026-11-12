@@ -1,0 +1,2 @@
+// D: CLEAN CHORDS, SAME VOICE LEADING. The game's own smooth voice leading (each chord as close as it can be to the last, kept in one place), with plain chord notes: 7ths are the 3rd, 5th and 7th (no added 9ths and 13ths), so nothing lands a step apart.
+Object.assign(VOICE, { '': [4, 7, 12], m: [3, 7, 12], 6: [4, 9, 12], m6: [3, 9, 12], 7: [4, 7, 10], m7: [3, 7, 10], maj7: [4, 7, 11], 9: [4, 10, 14], m9: [3, 10, 14] });

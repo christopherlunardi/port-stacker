@@ -1,0 +1,5 @@
+/* H1 Cream classic: round 1's handheld, tightened */
+@media (pointer:coarse){
+  § .top b::before,§ .top b::after{content:'\25A0';color:var(--lblhi);margin:0 .6em;font-size:.8em}
+}
+@media (pointer:coarse) and (orientation:landscape){ § .top b::before,§ .top b::after{content:none} }

@@ -1,0 +1,14 @@
+/* R1 Clean print: round 1's riso tightened: flat inks with a 2px slip, yellow Select/Start, printer's colour bar at the foot */
+@media (pointer:coarse){
+  § .dpad span{background:var(--blue);border-radius:3px;box-shadow:none}
+  § .dpad{filter:drop-shadow(2.5px 2px 0 rgba(255,72,176,.8))}
+  § .dpad.on-up,§ .dpad.on-dn,§ .dpad.on-lf,§ .dpad.on-rt{filter:drop-shadow(1px 1px 0 rgba(255,72,176,.8))}
+  § .btn{color:#fff6ea;box-shadow:3px 2px 0 rgba(38,86,196,.75)}
+  § .btn.b{box-shadow:3px 2px 0 rgba(255,72,176,.75)}
+  § .pill .cap{box-shadow:2px 1.5px 0 rgba(255,72,176,.75);border-radius:4px}
+}
+@media (pointer:coarse) and (orientation:portrait){
+  § .top b::before,§ .top b::after{content:'\271A';color:var(--blue);text-shadow:none;margin:0 .8em;font-size:.9em}
+  § #console::after{content:'';grid-area:foot;align-self:end;justify-self:center;margin-bottom:14px;width:108px;height:12px;max-height:40%;
+    background:linear-gradient(90deg,var(--pink) 0 25%,var(--blue) 25% 50%,var(--yel) 50% 75%,#6a2f9a 75% 100%);box-shadow:1.5px 1px 0 rgba(38,86,196,.5);opacity:.85}
+}

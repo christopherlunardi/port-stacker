@@ -1,0 +1,21 @@
+/* H3 See-through purple: a clear grape shell with the circuit board showing through, glossy black bezel, smoky buttons */
+:root{--body:#7a4fd0;--body2:#5630a8;--bezel:#15121d;--lbl:#b9a8ea;--lblhi:#ffe200;--dpadc:rgba(28,18,56,.82);--ab:rgba(34,20,70,.8);--abtx:#f0e9ff;--pillc:rgba(34,20,70,.72);--pilltx:#e3d8ff;
+  --emb:rgba(240,230,255,.75);--slot:rgba(20,8,50,.5);--led:#ffe200;--muted:#d9ccff;--ink:#f0e9ff}
+body{background:
+  linear-gradient(112deg,rgba(255,255,255,.2) 0 9%,rgba(255,255,255,0) 26%,rgba(255,255,255,0) 70%,rgba(255,255,255,.1) 100%),
+  url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='150' viewBox='0 0 150 150' fill='none' stroke='%231c0b4a' stroke-opacity='.15' stroke-width='2.2'%3E%3Cpath d='M0 20h38l14 14v40l12 12h86M0 58h22l10 10v54l14 14h42l12-12h50M70 0v22l16 16h30l12 12v24M112 150v-30l-10-10H82M0 104h14M134 0v30'/%3E%3Cg fill='%23ffd76a' fill-opacity='.16' stroke='none'%3E%3Ccircle cx='52' cy='74' r='4'/%3E%3Ccircle cx='128' cy='74' r='4'/%3E%3Ccircle cx='82' cy='110' r='4'/%3E%3Ccircle cx='14' cy='104' r='4'/%3E%3Ccircle cx='134' cy='30' r='4'/%3E%3C/g%3E%3Crect x='86' y='48' width='22' height='14' rx='2' fill='%231c0b4a' fill-opacity='.13' stroke='none'/%3E%3C/svg%3E"),
+  radial-gradient(130% 90% at 50% 0%,var(--body),var(--body2))}
+@media (pointer:coarse){
+  § .dpad span{box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.2),inset 0 -3px 0 rgba(0,0,0,.35),0 2px 6px rgba(20,0,60,.4)}
+  § .dpad i{opacity:.6}
+  § .btn{box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.22),inset 0 9px 10px -6px rgba(255,255,255,.4),inset 0 -4px 0 rgba(0,0,0,.3),0 3px 7px rgba(20,0,60,.45)}
+  § .btn.a{color:#ffe200} § .btn.a small{color:#ffe200}
+  § .btn.b{color:#ff8fd0} § .btn.b small{color:#ff8fd0}
+  § .pill .cap{box-shadow:inset 0 0 0 1px rgba(255,255,255,.22),0 2px 4px rgba(20,0,60,.35)}
+  § .top b::before,§ .top b::after{content:'\25CF';color:var(--lblhi);margin:0 .7em;font-size:.6em;vertical-align:.15em}
+}
+@media (pointer:coarse) and (orientation:portrait){
+  § .top{box-shadow:0 2px 0 rgba(20,0,60,.35)}
+  § #console::after{background:radial-gradient(circle,var(--slot) 0 2.6px,transparent 3px) 0 0/9px 9px;width:63px;height:45px;border-radius:0}
+}
+@media (pointer:coarse) and (orientation:landscape){ § .top b::before,§ .top b::after{content:none} }

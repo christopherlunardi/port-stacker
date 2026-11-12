@@ -1,0 +1,41 @@
+// Workshop keys round 1 (Chris 2026-11-11: the theme song is perfect, workshop the keyboard sound): every option replaces the 'honky'
+// voice (the ragtime piano that plays both hands of Dockside Rag) with another keyboard, same notes, same timing, same loudness.
+function keysVoice(fn, k = 1) {
+  // k: a rough loudness match to the game's own mix (the Workshop files are also loudness-matched, so no option wins by being louder)
+  const was = voiceNote;
+  voiceNote = function (voice, m, at, dur, vol) {
+    if (voice !== 'honky' || !AC || !musicGain || at < MUS_CUT) return was.apply(this, arguments);
+    fn(m, at, dur, vol * k, hz(m), musicGain);
+  };
+}
+function kOsc(type, f, det) {
+  const o = AC.createOscillator();
+  const W = waves();
+  if (W && W[type]) o.setPeriodicWave(W[type]);
+  else o.type = type;
+  o.frequency.value = f;
+  o.detune.value = det || 0;
+  return o;
+}
+function kGain(at, a, peak, dec, sus, end) {
+  const g = AC.createGain();
+  env(g, at, a, Math.max(0.0002, peak), dec, sus, end);
+  return g;
+}
+function kClick(at, vol, freq, out) {
+  // a hammer or key thump: a few milliseconds of filtered noise
+  const s = AC.createBufferSource(), f = AC.createBiquadFilter(), g = AC.createGain();
+  s.buffer = noiseBuf;
+  f.type = 'bandpass'; f.frequency.value = freq; f.Q.value = 1.2;
+  g.gain.setValueAtTime(vol, at); g.gain.exponentialRampToValueAtTime(0.0001, at + 0.025);
+  s.connect(f); f.connect(g); g.connect(out);
+  s.start(at); s.stop(at + 0.04);
+}
+// G: marimba: warm wooden bars, a soft knock and a quick ring, the left hand deep and round
+keysVoice((m, at, dur, vol, f, out) => {
+  const end = at + Math.min(0.9, 0.25 + dur * 0.6);
+  const o = kOsc('sine', f), g = kGain(at, 0.002, vol * 1.25, 0.05, 0.6, end);
+  const o2 = kOsc('sine', f * 3.9), g2 = kGain(at, 0.001, vol * 0.25, 0, 1, at + 0.07);
+  const o3 = kOsc('sine', f * 10), g3 = kGain(at, 0.001, vol * 0.06, 0, 1, at + 0.025);
+  for (const [x, y] of [[o, g], [o2, g2], [o3, g3]]) { x.connect(y); y.connect(out); x.start(at); x.stop(end + 0.05); }
+}, 0.89);

@@ -1,0 +1,4460 @@
+{
+ "topics": [
+  {
+   "id": "crabsfx",
+   "title": "Crab drop sounds",
+   "rounds": [
+    {
+     "id": "r1",
+     "date": "2026-11-08",
+     "status": "decided",
+     "question": "The sounds for the crab dropping in: the whistle as he falls and the landing.",
+     "found": "Each video is the real drop-in with that option's sounds (press Play with sound under it, or tap it for the big view with sound). Play in game to hear it with the music.",
+     "options": [
+      {
+       "id": "A",
+       "title": "As it is (in the game now)",
+       "note": "A plain whistle down, then a thud.",
+       "images": [
+        {
+         "src": "img/crabsfx-r1/A.mp4",
+         "label": "Drop in"
+        }
+       ],
+       "sound": true
+      },
+      {
+       "id": "B",
+       "title": "Slide whistle and boing",
+       "note": "A cartoon slide whistle down, then a springy boing as he lands.",
+       "images": [
+        {
+         "src": "img/crabsfx-r1/B.mp4",
+         "label": "Drop in"
+        }
+       ],
+       "sound": true
+      },
+      {
+       "id": "C",
+       "title": "Bomb whistle and clang",
+       "note": "A falling-bomb whistle, then a metal clang on the steel catwalk.",
+       "images": [
+        {
+         "src": "img/crabsfx-r1/C.mp4",
+         "label": "Drop in"
+        }
+       ],
+       "sound": true
+      },
+      {
+       "id": "D",
+       "title": "Whoosh and splat",
+       "note": "A rush of air as he falls, then a wet splat.",
+       "images": [
+        {
+         "src": "img/crabsfx-r1/D.mp4",
+         "label": "Drop in"
+        }
+       ],
+       "sound": true
+      },
+      {
+       "id": "E",
+       "title": "Eeeooo and plop",
+       "note": "A goofy falling eeeooo and a soft plop.",
+       "images": [
+        {
+         "src": "img/crabsfx-r1/E.mp4",
+         "label": "Drop in"
+        }
+       ],
+       "sound": true
+      }
+     ],
+     "chosen": "B"
+    }
+   ]
+  },
+  {
+   "id": "doorsfx",
+   "title": "Door sounds",
+   "rounds": [
+    {
+     "id": "r1",
+     "date": "2026-11-08",
+     "status": "decided",
+     "question": "The door sounds: the lamps lighting one by one, and the shutter opening as Pratt comes out.",
+     "found": "Each video is the real top-left door with that option's sounds (press Play with sound under it, or tap it for the big view with sound). A is the chain-like clinking you noticed.",
+     "options": [
+      {
+       "id": "A",
+       "title": "As it is",
+       "note": "Three rising blips as the lamps light, then the chain-like rattle as the shutter goes up.",
+       "images": [
+        {
+         "src": "img/doorsfx-r1/A.mp4",
+         "label": "Door"
+        }
+       ],
+       "sound": true
+      },
+      {
+       "id": "B",
+       "title": "Factory",
+       "note": "A relay click and a hum for each lamp; the shutter rolls up with a rumble and stops with a clunk.",
+       "images": [
+        {
+         "src": "img/doorsfx-r1/B.mp4",
+         "label": "Door"
+        }
+       ],
+       "sound": true
+      },
+      {
+       "id": "C",
+       "title": "Arcade",
+       "note": "Clean beeps rising with each lamp, then a quick bwip and a whoosh.",
+       "images": [
+        {
+         "src": "img/doorsfx-r1/C.mp4",
+         "label": "Door"
+        }
+       ],
+       "sound": true
+      },
+      {
+       "id": "D",
+       "title": "Alarm",
+       "note": "A two-tone warning bleep per lamp, higher each time; a hydraulic hiss and a clunk as it opens.",
+       "images": [
+        {
+         "src": "img/doorsfx-r1/D.mp4",
+         "label": "Door"
+        }
+       ],
+       "sound": true
+      },
+      {
+       "id": "E",
+       "title": "Bells",
+       "note": "A little bell per lamp, up a chord; the shutter rattles up softer and lower.",
+       "images": [
+        {
+         "src": "img/doorsfx-r1/E.mp4",
+         "label": "Door"
+        }
+       ],
+       "sound": true
+      }
+     ],
+     "chosen": "B"
+    }
+   ]
+  },
+  {
+   "id": "crabspawn",
+   "title": "Crab entrance",
+   "rounds": [
+    {
+     "id": "r1",
+     "date": "2026-11-08",
+     "status": "decided",
+     "question": "How should a crab arrive? (The warning before it, and the entrance.)",
+     "found": "Each clip: the warning, then the crab comes in on the second catwalk. The sounds are part of each option: play in game to hear them. The chain-like clinking you heard is most likely the door shutter rattling up when Pratt comes out; the faster clicking before a crab is his claws (A).",
+     "options": [
+      {
+       "id": "A",
+       "title": "As it is",
+       "note": "Claws poke up over the catwalk edge and snap (the clicky sound), then he hauls himself up and hops on.",
+       "images": [
+        {
+         "src": "img/crabspawn-r1/A.mp4",
+         "label": "Entrance"
+        }
+       ]
+      },
+      {
+       "id": "B",
+       "title": "Bubbles and leap",
+       "note": "Bubbles rise under the catwalk edge with soft blub sounds, then he leaps up out of the harbor in an arc, spraying drops.",
+       "images": [
+        {
+         "src": "img/crabspawn-r1/B.mp4",
+         "label": "Entrance"
+        }
+       ]
+      },
+      {
+       "id": "C",
+       "title": "Drop in",
+       "note": "A shadow grows where he will land, a falling whistle, then he drops from the top of the screen and lands with a squash and dust.",
+       "images": [
+        {
+         "src": "img/crabspawn-r1/C.mp4",
+         "label": "Entrance"
+        }
+       ]
+      },
+      {
+       "id": "D",
+       "title": "Hatch",
+       "note": "A hatch appears in the catwalk and rattles (knock-knock), its lid lifting with two eyes peering out; then he springs out.",
+       "images": [
+        {
+         "src": "img/crabspawn-r1/D.mp4",
+         "label": "Entrance"
+        }
+       ]
+      },
+      {
+       "id": "E",
+       "title": "As it is, new sound",
+       "note": "The same claws and climb, but a low rumbling warning that rises as he nears instead of the clicks.",
+       "images": [
+        {
+         "src": "img/crabspawn-r1/E.mp4",
+         "label": "Entrance"
+        }
+       ]
+      }
+     ],
+     "chosen": "C"
+    }
+   ]
+  },
+  {
+   "id": "pickup",
+   "title": "Horn pickups",
+   "rounds": [
+    {
+     "id": "r1",
+     "date": "2026-11-08",
+     "status": "decided",
+     "question": "How should a horn refill arrive and show itself, so it is an enticing pickup?",
+     "found": "Each clip: a refill arriving on the bottom catwalk and sitting there. One still turns up per stage, after 5 containers have landed, and lasts about 9 seconds. Play in game to hear the jingles.",
+     "options": [
+      {
+       "id": "A",
+       "title": "As it is",
+       "note": "The horn icon appears with no warning and bobs.",
+       "images": [
+        {
+         "src": "img/pickup-r1/A.mp4",
+         "label": "Arriving"
+        }
+       ]
+      },
+      {
+       "id": "B",
+       "title": "Crane delivery",
+       "note": "A crate comes down on a rope, bursts open in a pop of stars: HORN! and a jingle.",
+       "images": [
+        {
+         "src": "img/pickup-r1/B.mp4",
+         "label": "Arriving"
+        }
+       ]
+      },
+      {
+       "id": "C",
+       "title": "Spotlight",
+       "note": "A beam shines down, the horn spins in, rays turn behind it, an arrow bounces over it, and a ring shows the time left.",
+       "images": [
+        {
+         "src": "img/pickup-r1/C.mp4",
+         "label": "Arriving"
+        }
+       ]
+      },
+      {
+       "id": "D",
+       "title": "Balloon",
+       "note": "The horn floats down on a pink balloon and hangs swaying just above the catwalk.",
+       "images": [
+        {
+         "src": "img/pickup-r1/D.mp4",
+         "label": "Arriving"
+        }
+       ]
+      },
+      {
+       "id": "E",
+       "title": "Big and bright",
+       "note": "Pops in with a burst of stars and a jingle, then sits bigger with turning rays and a bounce.",
+       "images": [
+        {
+         "src": "img/pickup-r1/E.mp4",
+         "label": "Arriving"
+        }
+       ]
+      }
+     ],
+     "chosen": "B"
+    }
+   ]
+  },
+  {
+   "id": "hornsfx",
+   "title": "Horn sound",
+   "rounds": [
+    {
+     "id": "r1",
+     "date": "2026-11-08",
+     "status": "decided",
+     "question": "What should the air horn sound like?",
+     "found": "Each plays the horn three times, as it repeats in play. Play in game to hear it with the music (press A to honk). None of these: round 2 next.",
+     "options": [
+      {
+       "id": "A",
+       "title": "As it is",
+       "note": "Three buzzy notes at once, a short sour BRAAP.",
+       "audio": "img/hornsfx-r1/A.mp3"
+      },
+      {
+       "id": "B",
+       "title": "Ship's foghorn",
+       "note": "Deep two-note BWAAAMP that sags at the end, like the big harbor horns.",
+       "audio": "img/hornsfx-r1/B.mp3"
+      },
+      {
+       "id": "C",
+       "title": "Squeeze honk",
+       "note": "Short nasal cartoon HONK that bends up and back, like a bulb horn.",
+       "audio": "img/hornsfx-r1/C.mp3"
+      },
+      {
+       "id": "D",
+       "title": "Party air horn",
+       "note": "Bright blaring major chord, hard start, quick drop at the end: BWAAH.",
+       "audio": "img/hornsfx-r1/D.mp3"
+      },
+      {
+       "id": "E",
+       "title": "Double honk",
+       "note": "Two quick truck-horn blasts: HONK-HONK.",
+       "audio": "img/hornsfx-r1/E.mp3"
+      },
+      {
+       "id": "F",
+       "title": "Tugboat toot",
+       "note": "Rounder, friendlier TOOOT that swells up to pitch.",
+       "audio": "img/hornsfx-r1/F.mp3"
+      }
+     ],
+     "chosen": null
+    },
+    {
+     "id": "r2",
+     "date": "2026-11-08",
+     "status": "decided",
+     "question": "Horn sound, round 2: built more like real horns (several detuned voices, a bit of overdrive, a scoop into the note, a breath of air). Any of these?",
+     "found": "Each plays three times, as in play. Play in game to hear it with the music. Chris kept the current horn sound.",
+     "options": [
+      {
+       "id": "A",
+       "title": "Stadium air horn",
+       "note": "The classic canned air horn: two close notes beating, overdriven and nasal. BWAAAAH.",
+       "audio": "img/hornsfx-r2/A.mp3"
+      },
+      {
+       "id": "B",
+       "title": "Bulb horn",
+       "note": "A rubber squeeze horn: a quick squeak, then a fat nasal HONK that droops.",
+       "audio": "img/hornsfx-r2/B.mp3"
+      },
+      {
+       "id": "C",
+       "title": "Arcade bwomp",
+       "note": "Punchy chiptune: a pulse that drops an octave fast with a burst of noise.",
+       "audio": "img/hornsfx-r2/C.mp3"
+      },
+      {
+       "id": "D",
+       "title": "Tug horn",
+       "note": "Short, warm, gritty harbor horn: one low growling note. BRRRMP.",
+       "audio": "img/hornsfx-r2/D.mp3"
+      },
+      {
+       "id": "E",
+       "title": "Clown honk-honk",
+       "note": "Two quick rubber honks, the second higher.",
+       "audio": "img/hornsfx-r2/E.mp3"
+      },
+      {
+       "id": "F",
+       "title": "Kazoo braap",
+       "note": "Buzzy, wobbly, comic BRAAAP with vibrato.",
+       "audio": "img/hornsfx-r2/F.mp3"
+      }
+     ],
+     "chosen": null
+    }
+   ]
+  },
+  {
+   "id": "hud",
+   "title": "Lives and horns",
+   "rounds": [
+    {
+     "id": "r1",
+     "date": "2026-11-08",
+     "status": "decided",
+     "question": "Lives bottom-left and horns bottom-right: which way? (In B, C and D the top bar keeps SCORE, HIGH and STAGE, bigger.)",
+     "found": "All stay below the bottom catwalk, out of the way of play. The counts pop when they change (use a horn in the game to see it).",
+     "options": [
+      {
+       "id": "A",
+       "title": "As it is",
+       "note": "Lives and horns in the top bar, between HIGH and STAGE.",
+       "images": [
+        {
+         "src": "img/hud-r1/A-rp2s.jpg",
+         "label": "Retroid 2S"
+        },
+        {
+         "src": "img/hud-r1/A-phone.jpg",
+         "label": "Phone"
+        },
+        {
+         "src": "img/hud-r1/A-rp6.jpg",
+         "label": "Pocket 6"
+        }
+       ]
+      },
+      {
+       "id": "B",
+       "title": "Icons in the corners",
+       "note": "A little Buck per life bottom-left, a horn per blast bottom-right, three to a row on cream cards in the clear water beside the ship.",
+       "images": [
+        {
+         "src": "img/hud-r1/B-rp2s.jpg",
+         "label": "Retroid 2S"
+        },
+        {
+         "src": "img/hud-r1/B-phone.jpg",
+         "label": "Phone"
+        },
+        {
+         "src": "img/hud-r1/B-rp6.jpg",
+         "label": "Pocket 6"
+        }
+       ]
+      },
+      {
+       "id": "C",
+       "title": "Corner badges",
+       "note": "Rope-edged badges like the menus: Buck x2 bottom-left, horn x4 bottom-right.",
+       "images": [
+        {
+         "src": "img/hud-r1/C-rp2s.jpg",
+         "label": "Retroid 2S"
+        },
+        {
+         "src": "img/hud-r1/C-phone.jpg",
+         "label": "Phone"
+        },
+        {
+         "src": "img/hud-r1/C-rp6.jpg",
+         "label": "Pocket 6"
+        }
+       ]
+      },
+      {
+       "id": "D",
+       "title": "Painted on the ship",
+       "note": "Plates on the hull: LIVES at the stern, HORN at the bow. They sail in and out with the ship.",
+       "images": [
+        {
+         "src": "img/hud-r1/D-rp2s.jpg",
+         "label": "Retroid 2S"
+        },
+        {
+         "src": "img/hud-r1/D-phone.jpg",
+         "label": "Phone"
+        },
+        {
+         "src": "img/hud-r1/D-rp6.jpg",
+         "label": "Pocket 6"
+        }
+       ]
+      }
+     ],
+     "chosen": "C"
+    }
+   ]
+  },
+  {
+   "id": "hornfx",
+   "title": "Horn blast",
+   "rounds": [
+    {
+     "id": "r1",
+     "date": "2026-11-08",
+     "status": "decided",
+     "question": "What should the horn blast look like? (Separate from the sound: pick each on its own.)",
+     "found": "The real game: Buck honks at Pratt as he walks up, Pratt goes dizzy, then a second honk. Every option also works straight up or down on a ladder. Play in game to try it. Chris kept the current arcs.",
+     "options": [
+      {
+       "id": "A",
+       "title": "As it is",
+       "note": "Three thin pink and yellow arcs.",
+       "images": [
+        {
+         "src": "img/hornfx-r1/A.mp4",
+         "label": "Honk"
+        }
+       ]
+      },
+      {
+       "id": "B",
+       "title": "HONK!",
+       "note": "A comic HONK! bursts out of the bell, jumps up big and fades, with two fat rings.",
+       "images": [
+        {
+         "src": "img/hornfx-r1/B.mp4",
+         "label": "Honk"
+        }
+       ]
+      },
+      {
+       "id": "C",
+       "title": "Gust",
+       "note": "A cone of air: a soft cream wedge, wind streaks and little puffs tumbling away.",
+       "images": [
+        {
+         "src": "img/hornfx-r1/C.mp4",
+         "label": "Honk"
+        }
+       ]
+      },
+      {
+       "id": "D",
+       "title": "Shockwave",
+       "note": "Thick rings thump out fast like a speaker, each flattening as it spreads.",
+       "images": [
+        {
+         "src": "img/hornfx-r1/D.mp4",
+         "label": "Honk"
+        }
+       ]
+      },
+      {
+       "id": "E",
+       "title": "Sound waves",
+       "note": "Three wiggly cartoon sound lines stream out of the bell.",
+       "images": [
+        {
+         "src": "img/hornfx-r1/E.mp4",
+         "label": "Honk"
+        }
+       ]
+      }
+     ],
+     "chosen": "A"
+    },
+    {
+     "id": "r2",
+     "date": "2026-11-08",
+     "status": "decided",
+     "question": "Horn blast, round 2: your arcs, made to stand out. Which one?",
+     "found": "Same arcs you kept, made easier to see. Each clip shows Buck honking at the day dock and at night. Play in game to honk yourself (A).",
+     "options": [
+      {
+       "id": "A",
+       "title": "As it is",
+       "note": "The three thin pink and yellow arcs you picked last time.",
+       "images": [
+        {
+         "src": "img/hornfx-r2/A-day.mp4",
+         "label": "Day"
+        },
+        {
+         "src": "img/hornfx-r2/A-night.mp4",
+         "label": "Night"
+        }
+       ]
+      },
+      {
+       "id": "B",
+       "title": "Bolder arcs",
+       "note": "The same three arcs, twice as thick and a little wider, with a white glint along each.",
+       "images": [
+        {
+         "src": "img/hornfx-r2/B-day.mp4",
+         "label": "Day"
+        },
+        {
+         "src": "img/hornfx-r2/B-night.mp4",
+         "label": "Night"
+        }
+       ]
+      },
+      {
+       "id": "C",
+       "title": "Flash",
+       "note": "A yellow-and-white burst pops at the bell for an instant, then the bold arcs.",
+       "images": [
+        {
+         "src": "img/hornfx-r2/C-day.mp4",
+         "label": "Day"
+        },
+        {
+         "src": "img/hornfx-r2/C-night.mp4",
+         "label": "Night"
+        }
+       ]
+      },
+      {
+       "id": "D",
+       "title": "Light cone",
+       "note": "A pale wedge of air behind the bold arcs, so they read on any background.",
+       "images": [
+        {
+         "src": "img/hornfx-r2/D-day.mp4",
+         "label": "Day"
+        },
+        {
+         "src": "img/hornfx-r2/D-night.mp4",
+         "label": "Night"
+        }
+       ]
+      },
+      {
+       "id": "E",
+       "title": "Everything",
+       "note": "The flash, the light cone and the bold arcs together.",
+       "images": [
+        {
+         "src": "img/hornfx-r2/E-day.mp4",
+         "label": "Day"
+        },
+        {
+         "src": "img/hornfx-r2/E-night.mp4",
+         "label": "Night"
+        }
+       ]
+      }
+     ],
+     "chosen": "B"
+    }
+   ]
+  },
+  {
+   "id": "chords",
+   "title": "Backing chords",
+   "rounds": [
+    {
+     "id": "r1",
+     "date": "2026-11-08",
+     "status": "decided",
+     "question": "The chords on the off-beats (the left hand). The chords are right; the way their notes are stacked made some smudgy. Which sounds best?",
+     "found": "Each is the full song (about 2.5 minutes), recorded from the game. Listen especially to the G7, D7 and A7 bars (the end of each phrase). Only the backing chords change; the tune and bass are the same. Chris liked D (and C) but D drifted far too low: round 2 fixes that.",
+     "options": [
+      {
+       "id": "A",
+       "title": "As it is",
+       "note": "The backing chords cram jazz notes into one octave and drop one: D7 plays B C E, G7 plays A B E. Notes a step apart, the 7th missing.",
+       "images": [],
+       "removed": "media removed to make room (not picked)"
+      },
+      {
+       "id": "D",
+       "title": "Clean chords, same voice leading",
+       "note": "Recommended. Keeps the smooth voice leading you like (each chord stays put and moves as little as it can), but plays only the real chord notes: G7 = B D F, D7 = F# A C. Nothing a step apart.",
+       "audio": "img/chords-r1/D.mp3"
+      },
+      {
+       "id": "B",
+       "title": "Clean chords, stacked",
+       "note": "The same clean notes, always stacked from the bottom in order (C = E G C, G7 = B D F). A little less smooth between chords.",
+       "images": [],
+       "removed": "media removed to make room (not picked)"
+      },
+      {
+       "id": "C",
+       "title": "Open rag chords",
+       "note": "7th chords spread wide: the 7th, the 3rd, and the root on top (G7 = F B G). Bouncier, more open.",
+       "images": [],
+       "removed": "media removed to make room (not picked)"
+      }
+     ],
+     "chosen": "D"
+    },
+    {
+     "id": "r2",
+     "date": "2026-11-08",
+     "status": "decided",
+     "question": "Backing chords, round 2. Which one? (The tune is 20% quieter in all three, and in the game now.)",
+     "found": "Full song each, recorded from the game. Only the off-beat chords differ.",
+     "options": [
+      {
+       "id": "A",
+       "title": "Clean chords, same voice leading (fixed)",
+       "note": "Round 1's D, kept in the middle register (around middle C, where the old chords sat) so it can't sink. Smooth voice leading, real chord notes only.",
+       "audio": "img/chords-r2/A.mp3"
+      },
+      {
+       "id": "B",
+       "title": "Clean, same voice leading, a little higher",
+       "note": "The same, sitting a few notes higher: brighter, a bit closer to the tune.",
+       "images": [],
+       "removed": "media removed to make room (not picked)"
+      },
+      {
+       "id": "C",
+       "title": "Open rag chords",
+       "note": "Round 1's C, unchanged: 7th chords spread wide (G7 = F B G).",
+       "images": [],
+       "removed": "media removed to make room (not picked)"
+      }
+     ],
+     "chosen": "A"
+    }
+   ]
+  },
+  {
+   "id": "fonts",
+   "title": "The game font",
+   "rounds": [
+    {
+     "id": "r1",
+     "date": "2026-11-08",
+     "status": "decided",
+     "question": "One font for every word in the game and on the phone page. Which one? (All are free to use in a commercial game.)",
+     "found": "Each option swaps every word at once: the score bar, pop-ups, cards, menus, high scores, the title menu, and the label and buttons on the phone page. Flip the tabs to see each screen; the shots use the longest values (999999 scores, stage 6-1, a full board) so you can see the worst case. Every option passed the text check (nothing off screen, over the edge or overlapping). Play in game to see it moving. Chris kept Bungee.",
+     "options": [
+      {
+       "id": "A",
+       "title": "Bungee (as it is)",
+       "note": "Square, wide, signage feel. Even width letters; very readable small.",
+       "images": [
+        {
+         "src": "img/fonts-r1/A-game.jpg",
+         "label": "In play (pop-ups, combo, score bar)"
+        },
+        {
+         "src": "img/fonts-r1/A-over.jpg",
+         "label": "Game over"
+        },
+        {
+         "src": "img/fonts-r1/A-card.jpg",
+         "label": "Stage card"
+        },
+        {
+         "src": "img/fonts-r1/A-board.jpg",
+         "label": "High scores"
+        },
+        {
+         "src": "img/fonts-r1/A-pause.jpg",
+         "label": "Pause menu"
+        },
+        {
+         "src": "img/fonts-r1/A-title.jpg",
+         "label": "Title menu"
+        },
+        {
+         "src": "img/fonts-r1/A-phone.jpg",
+         "label": "Phone page"
+        }
+       ]
+      },
+      {
+       "id": "B",
+       "title": "Lilita One",
+       "note": "Rounded, friendly and bold, a bit narrower than Bungee: more room in cards and pop-ups.",
+       "images": [
+        {
+         "src": "img/fonts-r1/B-game.jpg",
+         "label": "In play (pop-ups, combo, score bar)"
+        },
+        {
+         "src": "img/fonts-r1/B-over.jpg",
+         "label": "Game over"
+        },
+        {
+         "src": "img/fonts-r1/B-card.jpg",
+         "label": "Stage card"
+        },
+        {
+         "src": "img/fonts-r1/B-board.jpg",
+         "label": "High scores"
+        },
+        {
+         "src": "img/fonts-r1/B-pause.jpg",
+         "label": "Pause menu"
+        },
+        {
+         "src": "img/fonts-r1/B-title.jpg",
+         "label": "Title menu"
+        },
+        {
+         "src": "img/fonts-r1/B-phone.jpg",
+         "label": "Phone page"
+        }
+       ]
+      },
+      {
+       "id": "C",
+       "title": "Titan One",
+       "note": "Bubbly cartoon letters with soft corners, the most playful.",
+       "images": [
+        {
+         "src": "img/fonts-r1/C-game.jpg",
+         "label": "In play (pop-ups, combo, score bar)"
+        },
+        {
+         "src": "img/fonts-r1/C-over.jpg",
+         "label": "Game over"
+        },
+        {
+         "src": "img/fonts-r1/C-card.jpg",
+         "label": "Stage card"
+        },
+        {
+         "src": "img/fonts-r1/C-board.jpg",
+         "label": "High scores"
+        },
+        {
+         "src": "img/fonts-r1/C-pause.jpg",
+         "label": "Pause menu"
+        },
+        {
+         "src": "img/fonts-r1/C-title.jpg",
+         "label": "Title menu"
+        },
+        {
+         "src": "img/fonts-r1/C-phone.jpg",
+         "label": "Phone page"
+        }
+       ]
+      },
+      {
+       "id": "D",
+       "title": "Luckiest Guy",
+       "note": "Comic-book lettering, slightly bouncy, like a cartoon title card.",
+       "images": [
+        {
+         "src": "img/fonts-r1/D-game.jpg",
+         "label": "In play (pop-ups, combo, score bar)"
+        },
+        {
+         "src": "img/fonts-r1/D-over.jpg",
+         "label": "Game over"
+        },
+        {
+         "src": "img/fonts-r1/D-card.jpg",
+         "label": "Stage card"
+        },
+        {
+         "src": "img/fonts-r1/D-board.jpg",
+         "label": "High scores"
+        },
+        {
+         "src": "img/fonts-r1/D-pause.jpg",
+         "label": "Pause menu"
+        },
+        {
+         "src": "img/fonts-r1/D-title.jpg",
+         "label": "Title menu"
+        },
+        {
+         "src": "img/fonts-r1/D-phone.jpg",
+         "label": "Phone page"
+        }
+       ]
+      },
+      {
+       "id": "E",
+       "title": "Alfa Slab One",
+       "note": "Heavy slab serif: old shipping crates and dock signs, the most nautical.",
+       "images": [
+        {
+         "src": "img/fonts-r1/E-game.jpg",
+         "label": "In play (pop-ups, combo, score bar)"
+        },
+        {
+         "src": "img/fonts-r1/E-over.jpg",
+         "label": "Game over"
+        },
+        {
+         "src": "img/fonts-r1/E-card.jpg",
+         "label": "Stage card"
+        },
+        {
+         "src": "img/fonts-r1/E-board.jpg",
+         "label": "High scores"
+        },
+        {
+         "src": "img/fonts-r1/E-pause.jpg",
+         "label": "Pause menu"
+        },
+        {
+         "src": "img/fonts-r1/E-title.jpg",
+         "label": "Title menu"
+        },
+        {
+         "src": "img/fonts-r1/E-phone.jpg",
+         "label": "Phone page"
+        }
+       ]
+      },
+      {
+       "id": "F",
+       "title": "Bowlby One",
+       "note": "Very heavy and compact, punchy arcade numbers.",
+       "images": [
+        {
+         "src": "img/fonts-r1/F-game.jpg",
+         "label": "In play (pop-ups, combo, score bar)"
+        },
+        {
+         "src": "img/fonts-r1/F-over.jpg",
+         "label": "Game over"
+        },
+        {
+         "src": "img/fonts-r1/F-card.jpg",
+         "label": "Stage card"
+        },
+        {
+         "src": "img/fonts-r1/F-board.jpg",
+         "label": "High scores"
+        },
+        {
+         "src": "img/fonts-r1/F-pause.jpg",
+         "label": "Pause menu"
+        },
+        {
+         "src": "img/fonts-r1/F-title.jpg",
+         "label": "Title menu"
+        },
+        {
+         "src": "img/fonts-r1/F-phone.jpg",
+         "label": "Phone page"
+        }
+       ]
+      },
+      {
+       "id": "G",
+       "title": "Passion One",
+       "note": "Tall and narrow, takes the least room, but small labels come out tiny.",
+       "images": [
+        {
+         "src": "img/fonts-r1/G-game.jpg",
+         "label": "In play (pop-ups, combo, score bar)"
+        },
+        {
+         "src": "img/fonts-r1/G-over.jpg",
+         "label": "Game over"
+        },
+        {
+         "src": "img/fonts-r1/G-card.jpg",
+         "label": "Stage card"
+        },
+        {
+         "src": "img/fonts-r1/G-board.jpg",
+         "label": "High scores"
+        },
+        {
+         "src": "img/fonts-r1/G-pause.jpg",
+         "label": "Pause menu"
+        },
+        {
+         "src": "img/fonts-r1/G-title.jpg",
+         "label": "Title menu"
+        },
+        {
+         "src": "img/fonts-r1/G-phone.jpg",
+         "label": "Phone page"
+        }
+       ]
+      }
+     ],
+     "chosen": "A"
+    }
+   ]
+  },
+  {
+   "id": "lamps",
+   "title": "Container lamps",
+   "rounds": [
+    {
+     "id": "r1",
+     "date": "2026-11-08",
+     "status": "decided",
+     "question": "The lamps on top of the containers that light up as you walk across: which way of lighting them feels best? (Mixing is fine, e.g. the sparks from B with the chime from E.)",
+     "found": "Each clip is the real game: Buck walks across a container, lights three lamps and stops, so you see the moment it lights and how it looks while it stays lit. They all glow on the night stage too. Play in game to feel it (E has sound). Chris picked D with C's marquee chase added.",
+     "options": [
+      {
+       "id": "N",
+       "title": "As it is",
+       "note": "The yellow block with three little lines over it.",
+       "images": [
+        {
+         "src": "img/lamps-r1/N.mp4",
+         "label": "Lighting up"
+        }
+       ]
+      },
+      {
+       "id": "A",
+       "title": "Pop and breathe",
+       "note": "The bulb pops in with a white flash ring, then a soft halo breathes slowly while it stays lit.",
+       "images": [
+        {
+         "src": "img/lamps-r1/A.mp4",
+         "label": "Lighting up"
+        }
+       ]
+      },
+      {
+       "id": "B",
+       "title": "Sparks",
+       "note": "A burst of sparks jumps up as it lights; then a star glint twinkles on it now and then.",
+       "images": [
+        {
+         "src": "img/lamps-r1/B.mp4",
+         "label": "Lighting up"
+        }
+       ]
+      },
+      {
+       "id": "C",
+       "title": "Marquee",
+       "note": "Each pops in; the lit lamps on a container then chase brightness along the row, like theatre lights.",
+       "images": [
+        {
+         "src": "img/lamps-r1/C.mp4",
+         "label": "Lighting up"
+        }
+       ]
+      },
+      {
+       "id": "D",
+       "title": "Work light",
+       "note": "A caged work lamp that flickers on and pours a soft cone of light down over its panel.",
+       "images": [
+        {
+         "src": "img/lamps-r1/D.mp4",
+         "label": "Lighting up"
+        }
+       ]
+      },
+      {
+       "id": "E",
+       "title": "Pop and chime",
+       "note": "Like A, plus a chime that climbs a note with each lamp you light on that container, and a ring that spreads over it. Play it to hear it.",
+       "images": [
+        {
+         "src": "img/lamps-r1/E.mp4",
+         "label": "Lighting up"
+        }
+       ]
+      }
+     ],
+     "chosen": "D"
+    }
+   ]
+  },
+  {
+   "id": "layout",
+   "title": "Screen size and room",
+   "rounds": [
+    {
+     "id": "r1",
+     "date": "2026-11-07",
+     "status": "decided",
+     "question": "The field feels cramped: the score bar sits on the top catwalk's heads and there's no room to make it nicer. B zooms the whole game out about 20% (384x288 instead of 320x240, still 4:3). Keep it as it is, or go with B?",
+     "found": "Both are the real game, stage 1 unless the tab says otherwise. In B: catwalks 40px apart instead of 32 so nobody's head touches the bar, a 22px score bar with clear space under it, and the stages carried over onto a wider grid (48 columns). Same art, same size in game pixels, so on screen everything looks about 17% smaller; the Retroid 2S still fills its screen exactly. The title in B is just the current title on the bigger canvas, not redone yet. Play in game to feel it on your phone.",
+     "options": [
+      {
+       "id": "A",
+       "title": "As it is",
+       "note": "320x240. Characters biggest; bar overlaps the top catwalk.",
+       "images": [],
+       "removed": "media removed to make room (not picked)"
+      },
+      {
+       "id": "B",
+       "title": "Zoomed out 20%",
+       "note": "384x288, still 4:3. Room above every catwalk, a proper score bar, more sea between stage and ship.",
+       "images": [
+        {
+         "src": "img/layout-r1/B-rp2s.jpg",
+         "label": "Retroid 2S"
+        },
+        {
+         "src": "img/layout-r1/B-stage3.jpg",
+         "label": "Stage 3 (2S)"
+        },
+        {
+         "src": "img/layout-r1/B-title.jpg",
+         "label": "Title (2S)"
+        },
+        {
+         "src": "img/layout-r1/B-phone.jpg",
+         "label": "Phone"
+        },
+        {
+         "src": "img/layout-r1/B-phoneland.jpg",
+         "label": "Phone sideways"
+        },
+        {
+         "src": "img/layout-r1/B-rp6.jpg",
+         "label": "Pocket 6"
+        },
+        {
+         "src": "img/layout-r1/B-tv4k.jpg",
+         "label": "4K TV"
+        }
+       ]
+      }
+     ],
+     "chosen": "B"
+    }
+   ]
+  },
+  {
+   "id": "ui",
+   "title": "Menus, cards and the board",
+   "rounds": [
+    {
+     "id": "r1",
+     "date": "2026-11-07",
+     "status": "decided",
+     "question": "A look for the pause menu, the stage card, the high scores and the initials screen, all together. Which style? (Mixing is fine: say which parts you like from which.)",
+     "found": "Each is the real game at Retroid 2S size; flip between the four screens with the tabs, and the arrows in the big view flip between styles on the same screen. Every style brings its own typeface (free, open-licence fonts carried inside the game). The pause menu shows the DEV lines because you're the owner; players don't see them. Play in game to see the stage card animate.",
+     "options": [
+      {
+       "id": "A",
+       "title": "As it is",
+       "note": "System font, pink header boxes.",
+       "images": [
+        {
+         "src": "img/ui-r1/A-pause.png",
+         "label": "Pause menu"
+        },
+        {
+         "src": "img/ui-r1/A-card.png",
+         "label": "Stage card"
+        },
+        {
+         "src": "img/ui-r1/A-board.png",
+         "label": "High scores"
+        },
+        {
+         "src": "img/ui-r1/A-initials.png",
+         "label": "Initials"
+        }
+       ]
+      },
+      {
+       "id": "B",
+       "title": "Shipping manifest",
+       "note": "Harbour-office paperwork: a clipboard work order for pause, a luggage tag for the stage card (it swings in), a typed cargo manifest for the scores, a sign-here slip. Typewriter type, stencil headings, pink rubber stamps.",
+       "images": [
+        {
+         "src": "img/ui-r1/B-pause.png",
+         "label": "Pause menu"
+        },
+        {
+         "src": "img/ui-r1/B-card.png",
+         "label": "Stage card"
+        },
+        {
+         "src": "img/ui-r1/B-board.png",
+         "label": "High scores"
+        },
+        {
+         "src": "img/ui-r1/B-initials.png",
+         "label": "Initials"
+        }
+       ]
+      },
+      {
+       "id": "C",
+       "title": "Rope and ribbon",
+       "note": "Matches the rope logo: rope frames, pink ribbon headers, life rings as the selection marker and top-3 medals. The stage card drops in hanging on two ropes and swings.",
+       "images": [
+        {
+         "src": "img/ui-r1/C-pause.png",
+         "label": "Pause menu"
+        },
+        {
+         "src": "img/ui-r1/C-card.png",
+         "label": "Stage card"
+        },
+        {
+         "src": "img/ui-r1/C-board.png",
+         "label": "High scores"
+        },
+        {
+         "src": "img/ui-r1/C-initials.png",
+         "label": "Initials"
+        }
+       ]
+      },
+      {
+       "id": "D",
+       "title": "Enamel dock sign",
+       "note": "Deep blue enamel plates with a cream border and corner bolts, chunky sign lettering in cream, yellow for what’s selected. The stage card is a berth sign; the board is HARBOR RECORDS.",
+       "images": [
+        {
+         "src": "img/ui-r1/D-pause.png",
+         "label": "Pause menu"
+        },
+        {
+         "src": "img/ui-r1/D-card.png",
+         "label": "Stage card"
+        },
+        {
+         "src": "img/ui-r1/D-board.png",
+         "label": "High scores"
+        },
+        {
+         "src": "img/ui-r1/D-initials.png",
+         "label": "Initials"
+        }
+       ]
+      },
+      {
+       "id": "E",
+       "title": "Ragtime playbill",
+       "note": "A 1910s theatre bill: double rules, diamond ornaments, old-west poster type printed pink with a blue offset, tall condensed lists. Pause is the INTERMISSION; the board is the HALL OF FAME.",
+       "images": [
+        {
+         "src": "img/ui-r1/E-pause.png",
+         "label": "Pause menu"
+        },
+        {
+         "src": "img/ui-r1/E-card.png",
+         "label": "Stage card"
+        },
+        {
+         "src": "img/ui-r1/E-board.png",
+         "label": "High scores"
+        },
+        {
+         "src": "img/ui-r1/E-initials.png",
+         "label": "Initials"
+        }
+       ]
+      }
+     ],
+     "chosen": "C"
+    }
+   ]
+  },
+  {
+   "id": "music",
+   "title": "The music",
+   "rounds": [
+    {
+     "id": "r1",
+     "date": "2026-11-07",
+     "status": "decided",
+     "question": "Dockside Rag is in the game now. Three new original rags to set beside it, each its own idea. Which should play in the harbour? (We can keep more than one: a song per world, or one for the title.) (Chris: the new ones felt random, not composed enough or jazzy enough. Round 2 starts over.)",
+     "found": "Every song is written from scratch for this game and played by the game's own synth, so what you hear here is what plays. Each runs A A B B A (about a minute and a half), then loops; every other loop the repeats jump an octave. Hit Play in game to hear it under the real thing.",
+     "options": [
+      {
+       "id": "A",
+       "title": "Dockside Rag",
+       "note": "The one in the game now. C major, honky-tonk piano, oom-pah left hand, 96 bpm.",
+       "audio": "img/music-r1/A.mp3"
+      },
+      {
+       "id": "B",
+       "title": "Gangplank Strut",
+       "note": "F major, a strut built on a 3-3-2 hook (dum . . dum . . dum .), light brushes and kick, a little swing, 104 bpm. In the B strain the band stops dead and the tune answers alone (stop-time breaks).",
+       "images": [],
+       "removed": "media removed to make room (not picked)"
+      },
+      {
+       "id": "C",
+       "title": "Hook & Ladder Hop",
+       "note": "G major on a steam calliope (fairground organ), 112 bpm, the bounciest: big leaps, chromatic runs, a call-and-answer B strain.",
+       "images": [],
+       "removed": "media removed to make room (not picked)"
+      },
+      {
+       "id": "D",
+       "title": "Low Tide Tango",
+       "note": "A minor over a habanera bass (the tango lilt early ragtime borrowed), xylophone lead, 92 bpm. Sneaky and moody, then the B strain turns sunny in C major and slides back.",
+       "images": [],
+       "removed": "media removed to make room (not picked)"
+      }
+     ],
+     "chosen": "A"
+    },
+    {
+     "id": "r2",
+     "date": "2026-11-07",
+     "status": "decided",
+     "question": "Round 1 felt random and not jazzy enough. Two pieces written properly this time, the way classic game ragtime and swing tunes are built: a real song form, jazz chords, one hook that keeps coming back, and a band. Closer? (Chris: too jazzy and complex. Round 3 goes back to ragtime: think classic platformer overworld.)",
+     "found": "The engine got a real band: walking bass with chromatic approach notes, swing drums, piano comping with smooth voicings, and better instruments (muted trumpet, clarinet, vibes, a fuller piano). Every on-beat note was checked against its chord. Each has an intro that plays once, then loops; the lead instrument changes the second time round.",
+     "options": [
+      {
+       "id": "A",
+       "title": "Dockside Rag",
+       "note": "The one in the game now, for comparison.",
+       "audio": "img/music-r2/A.mp3"
+      },
+      {
+       "id": "B",
+       "title": "Hard Hat Shuffle",
+       "note": "Medium-up swing in F, built like a jazz standard: 32 bars, A A B A. Turnarounds with sixth chords, a diminished passing chord, a bluesy IV to iv turn. The bridge goes round the cycle of fifths (A7 D7 G7 C7) with the same little phrase moved onto each chord, and every phrase slides down by half steps into the next. Muted trumpet, then clarinet; walking bass, ride cymbal, piano comping.",
+       "images": [],
+       "removed": "media removed to make room (not picked)"
+      },
+      {
+       "id": "C",
+       "title": "Pier Pressure Stomp",
+       "note": "A stride-piano rag with jazz harmony: the left hand jumps between low bass notes and chords, the right hand plays the tune in octaves. A tripping three-note hook, a cycle-of-fifths A strain, and a trio in F with stop-time breaks (the left hand stops and the right answers alone) and a line played major then minor. Brushes under it; vibes take the tune the second time.",
+       "images": [],
+       "removed": "media removed to make room (not picked)"
+      }
+     ],
+     "chosen": "A"
+    },
+    {
+     "id": "r3",
+     "date": "2026-11-07",
+     "status": "decided",
+     "question": "Back to ragtime, simple and bouncy, with a clever hook: a classic platformer overworld direction. Which tune, and which sound? (Chris: Dockside Rag is easily the best. Round 4 dresses it up.)",
+     "found": "Two new tunes, short enough to loop like an 8-bit track (about a minute). Crate Hop comes twice, once with an 8-bit band and once on ragtime piano, so you can judge the tune and the sound separately. All of them start with the new stage fanfare in the game (Play in game, then press Start).",
+     "options": [
+      {
+       "id": "A",
+       "title": "Dockside Rag",
+       "note": "The one in the game now, for comparison.",
+       "audio": "img/music-r3/A.mp3"
+      },
+      {
+       "id": "B",
+       "title": "Crate Hop (8-bit band)",
+       "note": "C major, plain I / IV / V7 with one F to Fm turn. The hook hops: its notes land between the beats with rests around them. The second phrase answers on G7 with a chromatic step (A# to B); the middle part opens into long notes and a D7 walks it home. Pulse-wave lead, square chords on 2 and 4, triangle bass hopping octaves, noise drums.",
+       "images": [],
+       "removed": "media removed to make room (not picked)"
+      },
+      {
+       "id": "C",
+       "title": "Bollard Cakewalk",
+       "note": "Proper ragtime in 2/4: a piano left hand (bass on the beat, chord in between) and the cakewalk rhythm (short-long-short) as the hook. The hook comes back over D7 with one note bent (F to F#); the trio has stop-time breaks and plays one line over Eb then Eb minor. Piano, then the 8-bit pulse the second time round.",
+       "images": [],
+       "removed": "media removed to make room (not picked)"
+      },
+      {
+       "id": "D",
+       "title": "Crate Hop (piano)",
+       "note": "The same tune as B on ragtime piano with brushes, to hear the tune apart from the sound.",
+       "images": [],
+       "removed": "media removed to make room (not picked)"
+      }
+     ],
+     "chosen": "A"
+    },
+    {
+     "id": "r4",
+     "date": "2026-11-07",
+     "status": "decided",
+     "question": "Dockside Rag, dressed up the way a rag pianist would play it: flourishes at the big moments and a little more going on here and there. Which version?",
+     "found": "Same tune and chords throughout. Added: a 4-bar intro vamp in octaves; grace notes into the accented high notes; the right hand in octaves at the high points; chromatic runs leading into the next phrase; stop-time breaks at the start of the second strain (the band drops out and the tune answers alone); and every other time round the repeats jump up an octave.",
+     "options": [
+      {
+       "id": "A",
+       "title": "Dockside Rag (as it is)",
+       "note": "The one in the game now, for comparison.",
+       "images": [],
+       "removed": "media removed to make room (not picked)"
+      },
+      {
+       "id": "B",
+       "title": "Dressed up",
+       "note": "The flourishes above, on the same honky-tonk piano.",
+       "images": [],
+       "removed": "media removed to make room (not picked)"
+      },
+      {
+       "id": "C",
+       "title": "Dressed up, 8-bit band",
+       "note": "The same notes as B on the 8-bit band: pulse-wave tune, triangle bass hopping octaves, square chords, noise drums.",
+       "images": [],
+       "removed": "media removed to make room (not picked)"
+      },
+      {
+       "id": "D",
+       "title": "Dressed up, with a trio",
+       "note": "B, plus a third strain in F after it (the bouncy short-long-short cakewalk rhythm, with a stop-time pair of bars), so the loop is longer and has more to come back to.",
+       "audio": "img/music-r4/D.mp3"
+      }
+     ],
+     "chosen": "D"
+    }
+   ]
+  },
+  {
+   "id": "fanfare",
+   "title": "The stage fanfare",
+   "rounds": [
+    {
+     "id": "r1",
+     "date": "2026-11-07",
+     "status": "decided",
+     "question": "The little tune when a stage starts, while the ship sails in. Which one? Each recording runs on into READY, then the gameplay tune, the way it plays in the game.",
+     "found": "The READY beat stretches to fit each fanfare, so the music always starts a moment after the last chord, as you get control. Play in game, then press Start, to see it with the ship coming in.",
+     "options": [
+      {
+       "id": "A",
+       "title": "Run up",
+       "note": "The one in the game now: a chromatic run up, a bounce through C6, A7, D7 G7, and a final stab.",
+       "audio": "img/fanfare-r1/A.mp3"
+      },
+      {
+       "id": "B",
+       "title": "Ship's horn",
+       "note": "The ship blows its horn as it pulls in, then a quick rag tag answers it.",
+       "audio": "img/fanfare-r1/B.mp3"
+      },
+      {
+       "id": "C",
+       "title": "Cakewalk strut",
+       "note": "The short-long-short ragtime strut, answered on F, then a turnaround. A bit longer.",
+       "audio": "img/fanfare-r1/C.mp3"
+      },
+      {
+       "id": "D",
+       "title": "Big hits",
+       "note": "The whole band hits together on a slow walk down (C, Bb, A, Ab, G), then the stab. Dramatic.",
+       "audio": "img/fanfare-r1/D.mp3"
+      },
+      {
+       "id": "E",
+       "title": "8-bit arpeggio",
+       "note": "Quick, bright arpeggios on the 8-bit band. The shortest.",
+       "audio": "img/fanfare-r1/E.mp3"
+      }
+     ],
+     "chosen": "B"
+    }
+   ]
+  },
+  {
+   "id": "logoidle",
+   "title": "The logo, sitting there",
+   "rounds": [
+    {
+     "id": "r1",
+     "date": "2026-11-07",
+     "status": "decided",
+     "question": "Once the logo has slammed down, how should it move while it sits on the title?",
+     "found": "Each clip is the real title screen at true speed (the first clips were sped up by mistake). Play in game to see it with the intro.",
+     "options": [
+      {
+       "id": "A",
+       "title": "Still",
+       "note": "No movement (as it is now).",
+       "images": [
+        {
+         "src": "img/logoidle-r1/A.mp4",
+         "label": "Moving"
+        }
+       ]
+      },
+      {
+       "id": "B",
+       "title": "Float",
+       "note": "Bobs gently up and down with a slight tilt, like it’s floating on the water.",
+       "images": [
+        {
+         "src": "img/logoidle-r1/B.mp4",
+         "label": "Moving"
+        }
+       ]
+      },
+      {
+       "id": "C",
+       "title": "Hop to the beat",
+       "note": "A little hop and squash on every beat of the rag.",
+       "images": [
+        {
+         "src": "img/logoidle-r1/C.mp4",
+         "label": "Moving"
+        }
+       ]
+      },
+      {
+       "id": "D",
+       "title": "Swing",
+       "note": "Hangs from its top and swings slowly, like it’s on the crane.",
+       "images": [
+        {
+         "src": "img/logoidle-r1/D.mp4",
+         "label": "Moving"
+        }
+       ]
+      },
+      {
+       "id": "E",
+       "title": "Wave",
+       "note": "A ripple runs through the letters from left to right, like a flag or a rope being shaken.",
+       "images": [
+        {
+         "src": "img/logoidle-r1/E.mp4",
+         "label": "Moving"
+        }
+       ]
+      }
+     ],
+     "chosen": "D"
+    }
+   ]
+  },
+  {
+   "id": "death",
+   "title": "Buck getting caught",
+   "rounds": [
+    {
+     "id": "r1",
+     "date": "2026-11-07",
+     "status": "decided",
+     "question": "How Buck goes down when an enemy catches him. Which one?",
+     "found": "Clips are the real game at true speed, played the length of a death (just under two seconds). Buck uses his standing pose for now; if you pick one, ChatGPT can paint him a proper hurt pose for it.",
+     "options": [
+      {
+       "id": "A",
+       "title": "Wobble (now)",
+       "note": "He shakes, squashes a little and blinks.",
+       "images": [
+        {
+         "src": "img/death-r1/A.mp4",
+         "label": "Moving"
+        }
+       ]
+      },
+      {
+       "id": "B",
+       "title": "Hop and fall",
+       "note": "A beat of shock, a hop up, then straight down off the bottom of the screen, in front of everything (the classic arcade way).",
+       "images": [
+        {
+         "src": "img/death-r1/B.mp4",
+         "label": "Moving"
+        }
+       ]
+      },
+      {
+       "id": "C",
+       "title": "Spin and fall",
+       "note": "The same hop and drop, spinning as he goes.",
+       "images": [
+        {
+         "src": "img/death-r1/C.mp4",
+         "label": "Moving"
+        }
+       ]
+      },
+      {
+       "id": "D",
+       "title": "Pancake",
+       "note": "Squashed flat on the spot with stars over him, then he peels up and blinks out.",
+       "images": [
+        {
+         "src": "img/death-r1/D.mp4",
+         "label": "Moving"
+        }
+       ]
+      },
+      {
+       "id": "E",
+       "title": "Knocked out",
+       "note": "Sees stars and wobbles, then topples over backwards and lies there.",
+       "images": [
+        {
+         "src": "img/death-r1/E.mp4",
+         "label": "Moving"
+        }
+       ]
+      }
+     ],
+     "chosen": "B"
+    }
+   ]
+  },
+  {
+   "id": "logo",
+   "title": "The logo's style",
+   "rounds": [
+    {
+     "id": "r1",
+     "date": "2026-11-07",
+     "status": "decided",
+     "question": "ChatGPT's logos come out glossy mobile-game. Six directions that belong to this game instead (riso inks, the harbour, the ragtime). Pick a direction (or two to mix), and say what you'd change.",
+     "found": "These are style sketches set in real typefaces (all free, open-licence fonts we could use in the game), printed in the game's inks on its paper. Once you pick, the logo gets drawn properly in that style: either in code from the font, or ChatGPT gets a prompt that names the exact style so it can't drift into shiny mobile art.",
+     "options": [
+      {
+       "id": "A",
+       "title": "Ragtime sheet music",
+       "note": "Like the cover of a 1910s rag: arched circus-poster letters, a ribbon with Deluxe in script, a double rule border, a strapline. Matches the music.",
+       "images": [
+        {
+         "src": "img/logo-r1/A.png",
+         "label": "Logo"
+        }
+       ]
+      },
+      {
+       "id": "B",
+       "title": "Cargo stencil",
+       "note": "Spray-stencilled on the side of a container, with the box's code and weights, DELUXE as a rubber stamp. Plain and real, very 'port'.",
+       "images": [
+        {
+         "src": "img/logo-r1/B.png",
+         "label": "Logo"
+        }
+       ]
+      },
+      {
+       "id": "C",
+       "title": "Wood-type dock notice",
+       "note": "A letterpress poster from the harbour office: fat wood type, rules, two inks slightly off register. The most riso of the six.",
+       "images": [
+        {
+         "src": "img/logo-r1/C.png",
+         "label": "Logo"
+        }
+       ]
+      },
+      {
+       "id": "D",
+       "title": "Sign-painter",
+       "note": "Chunky hand-lettered sign with a drop shade and a swash, Deluxe in fat script. Closest to an arcade marquee without the gloss.",
+       "images": [
+        {
+         "src": "img/logo-r1/D.png",
+         "label": "Logo"
+        }
+       ]
+      },
+      {
+       "id": "E",
+       "title": "Stacked containers",
+       "note": "Each letter is a container, the words stacked like a bay, Deluxe on a plate below. Says what the game is at a glance, and the letters could drop in one by one on the title.",
+       "images": [
+        {
+         "src": "img/logo-r1/E.png",
+         "label": "Logo"
+        }
+       ]
+      },
+      {
+       "id": "F",
+       "title": "Customs stamp",
+       "note": "The whole logo is Inspector Pratt's INSPECTED stamp, slammed on at an angle and initialled. Could thump onto the title screen with a sound.",
+       "images": [
+        {
+         "src": "img/logo-r1/F.png",
+         "label": "Logo"
+        }
+       ]
+      },
+      {
+       "id": "rope",
+       "title": "Rope lettering (ChatGPT)",
+       "note": "From the nine-style ChatGPT sheet: the title in thick knotted rope, DELUXE on a life ring. Chris's pick; in the game from build 39.",
+       "images": [
+        {
+         "src": "img/logo-r1/rope.png",
+         "label": "Logo"
+        }
+       ]
+      }
+     ],
+     "chosen": "rope"
+    }
+   ]
+  },
+  {
+   "id": "ship",
+   "title": "The ship",
+   "rounds": [
+    {
+     "id": "r2",
+     "date": "2026-11-07",
+     "status": "decided",
+     "chosen": "A",
+     "question": "Three ships drawn in code, with the one before them. Which one gets loaded?",
+     "found": "Each shot is the real game at stage 1: the Retroid 2S, the Pocket 6, and a close-up.",
+     "options": [
+      {
+       "id": "base",
+       "title": "Before",
+       "note": "The plain hull that was in the game.",
+       "images": [
+        {
+         "src": "img/ship-r2/base-2s.png",
+         "label": "Retroid 2S"
+        },
+        {
+         "src": "img/ship-r2/base-rp6.png",
+         "label": "Pocket 6"
+        },
+        {
+         "src": "img/ship-r2/base-zoom.png",
+         "label": "Close-up"
+        }
+       ]
+      },
+      {
+       "id": "A",
+       "title": "Harbor classic",
+       "note": "A chunky cartoon freighter: deep blue hull, pink waterline, portholes, a raised bow with its anchor, a two-tier bridge and a pink funnel puffing smoke.",
+       "images": [
+        {
+         "src": "img/ship-r2/A-2s.png",
+         "label": "Retroid 2S"
+        },
+        {
+         "src": "img/ship-r2/A-rp6.png",
+         "label": "Pocket 6"
+        },
+        {
+         "src": "img/ship-r2/A-zoom.png",
+         "label": "Close-up"
+        }
+       ]
+      },
+      {
+       "id": "B",
+       "title": "Tug and barge",
+       "note": "A stubby pink harbour tug with a fat yellow funnel, pushing a low orange barge that carries the containers.",
+       "images": [
+        {
+         "src": "img/ship-r2/B-2s.png",
+         "label": "Retroid 2S"
+        },
+        {
+         "src": "img/ship-r2/B-rp6.png",
+         "label": "Pocket 6"
+        },
+        {
+         "src": "img/ship-r2/B-zoom.png",
+         "label": "Close-up"
+        }
+       ]
+      },
+      {
+       "id": "C",
+       "title": "Modern liner",
+       "note": "A long low cream hull with a bold pink band, a raked bow, and a tall slim bridge tower at the back with a turning radar.",
+       "images": [
+        {
+         "src": "img/ship-r2/C-2s.png",
+         "label": "Retroid 2S"
+        },
+        {
+         "src": "img/ship-r2/C-rp6.png",
+         "label": "Pocket 6"
+        },
+        {
+         "src": "img/ship-r2/C-zoom.png",
+         "label": "Close-up"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "overtime",
+   "title": "Overtime brand",
+   "rounds": [
+    {
+     "id": "r1",
+     "date": "2026-11-09",
+     "status": "decided",
+     "question": "Overtime is its own thing now: the stage number reads 1-1 to 3-5 like normal, and OVERTIME 1 / OT1 shows separately. How should it show?",
+     "found": "All shots are OVERTIME 1, stage 2-3. The play copies start every new game in OVERTIME 1, 1-1.",
+     "options": [
+      {
+       "id": "A",
+       "title": "Tag",
+       "note": "An orange OT1 tag beside the stage number; on the cards, an orange OVERTIME 1 tag pinned crooked on the top corner.",
+       "images": [],
+       "removed": "media removed to make room (not picked)"
+      },
+      {
+       "id": "B",
+       "title": "Label",
+       "note": "The score bar's STAGE label turns into OVERTIME 1 in orange, right over the stage number; on the cards, an orange OVERTIME 1 ribbon along the bottom edge.",
+       "images": [
+        {
+         "src": "img/overtime-r1/B-play-2s.png",
+         "label": "Playing"
+        },
+        {
+         "src": "img/overtime-r1/B-intro-2s.png",
+         "label": "Stage card"
+        },
+        {
+         "src": "img/overtime-r1/B-clear-2s.png",
+         "label": "Ship loaded"
+        },
+        {
+         "src": "img/overtime-r1/B-over-2s.png",
+         "label": "Game over"
+        },
+        {
+         "src": "img/overtime-r1/B-play-rp6.png",
+         "label": "Pocket 6"
+        }
+       ]
+      },
+      {
+       "id": "C",
+       "title": "Hazard plate",
+       "note": "A yellow-and-black striped plate hangs under the score bar with OT1 on it; on the cards, a strip of hazard tape across the top corner with OVERTIME 1.",
+       "images": [],
+       "removed": "media removed to make room (not picked)"
+      },
+      {
+       "id": "D",
+       "title": "Stamp",
+       "note": "OT1 rubber-stamped in pink beside the stage number, a little crooked; on the cards, a big OVERTIME 1 stamp slams down a moment after the card lands.",
+       "images": [],
+       "removed": "media removed to make room (not picked)"
+      }
+     ],
+     "chosen": "B"
+    }
+   ]
+  },
+  {
+   "id": "otlook",
+   "title": "Overtime screen look",
+   "rounds": [
+    {
+     "id": "r1",
+     "date": "2026-11-09",
+     "status": "decided",
+     "question": "Overtime 1 as an old green-screen handheld: the play area goes greenscale, the score bar, cards and menus keep their colours. Which way?",
+     "found": "All four use the same four handheld greens. The play copies start every new game in OVERTIME 1 with that look. The Close-up tab shows it at full size.",
+     "options": [
+      {
+       "id": "A",
+       "title": "Classic",
+       "note": "Four flat old handheld greens, crisp, no print dots. The backdrop is washed pale so the stage reads over it.",
+       "images": [
+        {
+         "src": "img/otlook-r1/A-day-2s.png",
+         "label": "1-1 (day)"
+        },
+        {
+         "src": "img/otlook-r1/A-night-2s.png",
+         "label": "2-3 (night)"
+        },
+        {
+         "src": "img/otlook-r1/A-storm-2s.png",
+         "label": "3-5 (storm)"
+        },
+        {
+         "src": "img/otlook-r1/A-card-2s.png",
+         "label": "Stage card"
+        },
+        {
+         "src": "img/otlook-r1/A-night-zoom.png",
+         "label": "Close-up"
+        }
+       ]
+      },
+      {
+       "id": "B",
+       "title": "Printed",
+       "note": "Four old handheld greens, but the riso print's dots stay, printed in green.",
+       "images": [
+        {
+         "src": "img/otlook-r1/B-day-2s.png",
+         "label": "1-1 (day)"
+        },
+        {
+         "src": "img/otlook-r1/B-night-2s.png",
+         "label": "2-3 (night)"
+        },
+        {
+         "src": "img/otlook-r1/B-storm-2s.png",
+         "label": "3-5 (storm)"
+        },
+        {
+         "src": "img/otlook-r1/B-card-2s.png",
+         "label": "Stage card"
+        },
+        {
+         "src": "img/otlook-r1/B-night-zoom.png",
+         "label": "Close-up"
+        }
+       ]
+      },
+      {
+       "id": "C",
+       "title": "LCD",
+       "note": "Four flat greens with an old green-screen handheld screen's pixel grid over the play area.",
+       "images": [
+        {
+         "src": "img/otlook-r1/C-day-2s.png",
+         "label": "1-1 (day)"
+        },
+        {
+         "src": "img/otlook-r1/C-night-2s.png",
+         "label": "2-3 (night)"
+        },
+        {
+         "src": "img/otlook-r1/C-storm-2s.png",
+         "label": "3-5 (storm)"
+        },
+        {
+         "src": "img/otlook-r1/C-card-2s.png",
+         "label": "Stage card"
+        },
+        {
+         "src": "img/otlook-r1/C-night-zoom.png",
+         "label": "Close-up"
+        }
+       ]
+      },
+      {
+       "id": "D",
+       "title": "Soft",
+       "note": "A smooth green ramp from the print: more in-between shades, dots stay.",
+       "images": [
+        {
+         "src": "img/otlook-r1/D-day-2s.png",
+         "label": "1-1 (day)"
+        },
+        {
+         "src": "img/otlook-r1/D-night-2s.png",
+         "label": "2-3 (night)"
+        },
+        {
+         "src": "img/otlook-r1/D-storm-2s.png",
+         "label": "3-5 (storm)"
+        },
+        {
+         "src": "img/otlook-r1/D-card-2s.png",
+         "label": "Stage card"
+        },
+        {
+         "src": "img/otlook-r1/D-night-zoom.png",
+         "label": "Close-up"
+        }
+       ]
+      }
+     ],
+     "chosen": "D"
+    }
+   ]
+  },
+  {
+   "id": "otlooks",
+   "title": "Looks for later overtimes",
+   "rounds": [
+    {
+     "id": "r1",
+     "date": "2026-11-09",
+     "status": "decided",
+     "question": "Each overtime gets its own screen look (Overtime 1 the green old handheld). Which of these should come after it, and in what order? Pick a favourite and list the order in the notes.",
+     "found": "All shown the Classic way (four flat shades, pale backdrop) so they compare; whichever way wins an old green-screen handheld round applies to all of them. Play copies start in OVERTIME 1 with that look.",
+     "options": [
+      {
+       "id": "A",
+       "title": "Pocket grey",
+       "note": "An old pocket handheld: grey on grey with a hint of green.",
+       "images": [
+        {
+         "src": "img/otlooks-r1/A-day-2s.png",
+         "label": "1-1 (day)"
+        },
+        {
+         "src": "img/otlooks-r1/A-night-2s.png",
+         "label": "2-3 (night)"
+        }
+       ]
+      },
+      {
+       "id": "B",
+       "title": "Red viewer",
+       "note": "Red on black, like an old red-on-black viewer.",
+       "images": [
+        {
+         "src": "img/otlooks-r1/B-day-2s.png",
+         "label": "1-1 (day)"
+        },
+        {
+         "src": "img/otlooks-r1/B-night-2s.png",
+         "label": "2-3 (night)"
+        }
+       ]
+      },
+      {
+       "id": "C",
+       "title": "Amber monitor",
+       "note": "An old amber computer monitor.",
+       "images": [
+        {
+         "src": "img/otlooks-r1/C-day-2s.png",
+         "label": "1-1 (day)"
+        },
+        {
+         "src": "img/otlooks-r1/C-night-2s.png",
+         "label": "2-3 (night)"
+        }
+       ]
+      },
+      {
+       "id": "D",
+       "title": "Blue LCD",
+       "note": "A backlit blue LCD, like an old handheld or a pager.",
+       "images": [
+        {
+         "src": "img/otlooks-r1/D-day-2s.png",
+         "label": "1-1 (day)"
+        },
+        {
+         "src": "img/otlooks-r1/D-night-2s.png",
+         "label": "2-3 (night)"
+        }
+       ]
+      },
+      {
+       "id": "E",
+       "title": "Sepia",
+       "note": "An old brown photograph.",
+       "images": [
+        {
+         "src": "img/otlooks-r1/E-day-2s.png",
+         "label": "1-1 (day)"
+        },
+        {
+         "src": "img/otlooks-r1/E-night-2s.png",
+         "label": "2-3 (night)"
+        }
+       ]
+      },
+      {
+       "id": "F",
+       "title": "Pink",
+       "note": "Purple to pink, like a special-edition handheld.",
+       "images": [
+        {
+         "src": "img/otlooks-r1/F-day-2s.png",
+         "label": "1-1 (day)"
+        },
+        {
+         "src": "img/otlooks-r1/F-night-2s.png",
+         "label": "2-3 (night)"
+        }
+       ]
+      }
+     ],
+     "chosen": "B"
+    }
+   ]
+  },
+  {
+   "id": "combohud",
+   "title": "Combo display",
+   "rounds": [
+    {
+     "id": "r1",
+     "date": "2026-11-08",
+     "status": "decided",
+     "question": "How should the combo show at the top so it stands out?",
+     "found": "A made-up run of moves so the count climbs to 12 in each clip. Play in game to see it during real play.",
+     "options": [
+      {
+       "id": "A",
+       "title": "As it is",
+       "note": "The count in big outlined letters, the multiplier and bar under it.",
+       "images": [
+        {
+         "src": "img/combohud-r1/A.mp4",
+         "label": "Combo"
+        }
+       ]
+      },
+      {
+       "id": "B",
+       "title": "Plate",
+       "note": "The combo on its own little cream plate with a shadow, so it reads over anything; the bar drains along its bottom.",
+       "images": [
+        {
+         "src": "img/combohud-r1/B.mp4",
+         "label": "Combo"
+        }
+       ]
+      },
+      {
+       "id": "C",
+       "title": "Burst",
+       "note": "A yellow starburst spins behind the count and jumps on every move; the multiplier in a pink tag.",
+       "images": [
+        {
+         "src": "img/combohud-r1/C.mp4",
+         "label": "Combo"
+        }
+       ]
+      },
+      {
+       "id": "D",
+       "title": "Chunky 3D",
+       "note": "Thick letters with a deep shadow, tilted; flashes white and shakes on every move; the multiplier in a pink tag.",
+       "images": [
+        {
+         "src": "img/combohud-r1/D.mp4",
+         "label": "Combo"
+        }
+       ]
+      }
+     ],
+     "chosen": "C"
+    },
+    {
+     "id": "r2",
+     "date": "2026-11-09",
+     "status": "decided",
+     "question": "The combo starburst gets in the way of play at the top of the screen. Where should it go?",
+     "found": "All shots: stage 1-2, an 11 combo (x6). The play copies are the whole game with the combo shown that way.",
+     "options": [
+      {
+       "id": "A",
+       "title": "Over the water",
+       "note": "The same starburst, moved down over the water above your lives, where nothing you play with ever goes.",
+       "images": [
+        {
+         "src": "img/combohud-r2/A-2s.png",
+         "label": "Playing"
+        },
+        {
+         "src": "img/combohud-r2/A-rp6.png",
+         "label": "Pocket 6"
+        }
+       ]
+      },
+      {
+       "id": "B",
+       "title": "In the score bar",
+       "note": "A small starburst between SCORE and PAR TIME, the multiplier beside it.",
+       "images": [
+        {
+         "src": "img/combohud-r2/B-2s.png",
+         "label": "Playing"
+        },
+        {
+         "src": "img/combohud-r2/B-rp6.png",
+         "label": "Pocket 6"
+        }
+       ]
+      },
+      {
+       "id": "C",
+       "title": "Over Buck",
+       "note": "A small starburst riding above his hat, so your eyes never leave him.",
+       "images": [
+        {
+         "src": "img/combohud-r2/C-2s.png",
+         "label": "Playing"
+        },
+        {
+         "src": "img/combohud-r2/C-rp6.png",
+         "label": "Pocket 6"
+        }
+       ]
+      },
+      {
+       "id": "D",
+       "title": "Plate on the water",
+       "note": "No starburst: COMBO 11 and the multiplier on a yellow plate at the bottom between your lives and horns, jumping on every move.",
+       "images": [
+        {
+         "src": "img/combohud-r2/D-2s.png",
+         "label": "Playing"
+        },
+        {
+         "src": "img/combohud-r2/D-rp6.png",
+         "label": "Pocket 6"
+        }
+       ]
+      }
+     ],
+     "chosen": "D"
+    }
+   ]
+  },
+  {
+   "id": "holo",
+   "title": "Power crate shine",
+   "rounds": [
+    {
+     "id": "r1",
+     "date": "2026-11-09",
+     "status": "decided",
+     "question": "How should the power crate and Buck in POWER RUSH shine? (Both always get the same look.)",
+     "found": "Each option has two clips: the crate waiting on a catwalk, and Buck knocking it down (it shatters a floor below and POWER RUSH starts). The play copies start on 1-2 and the crate comes down after a second and a half.",
+     "options": [
+      {
+       "id": "A",
+       "title": "Full",
+       "note": "What the game has now: rainbow foil, rainbow edge, light rays, pearly glow and sparkles.",
+       "images": [
+        {
+         "src": "img/holo-r1/A-crate.mp4",
+         "label": "Crate (moving)"
+        },
+        {
+         "src": "img/holo-r1/A-rush.mp4",
+         "label": "Knocked down, POWER RUSH (moving)"
+        },
+        {
+         "src": "img/holo-r1/A-crate-close.png",
+         "label": "Crate"
+        },
+        {
+         "src": "img/holo-r1/A-buck-close.png",
+         "label": "Buck"
+        }
+       ]
+      },
+      {
+       "id": "B",
+       "title": "Clean",
+       "note": "The same without the rays, so less is going on around them.",
+       "images": [
+        {
+         "src": "img/holo-r1/B-crate.mp4",
+         "label": "Crate (moving)"
+        },
+        {
+         "src": "img/holo-r1/B-rush.mp4",
+         "label": "Knocked down, POWER RUSH (moving)"
+        },
+        {
+         "src": "img/holo-r1/B-crate-close.png",
+         "label": "Crate"
+        },
+        {
+         "src": "img/holo-r1/B-buck-close.png",
+         "label": "Buck"
+        }
+       ]
+      },
+      {
+       "id": "C",
+       "title": "Bold",
+       "note": "Longer rays, a wider rainbow edge, stronger foil on both (Buck most).",
+       "images": [
+        {
+         "src": "img/holo-r1/C-crate.mp4",
+         "label": "Crate (moving)"
+        },
+        {
+         "src": "img/holo-r1/C-rush.mp4",
+         "label": "Knocked down, POWER RUSH (moving)"
+        },
+        {
+         "src": "img/holo-r1/C-crate-close.png",
+         "label": "Crate"
+        },
+        {
+         "src": "img/holo-r1/C-buck-close.png",
+         "label": "Buck"
+        }
+       ]
+      },
+      {
+       "id": "D",
+       "title": "Soft",
+       "note": "No rays, a lighter glow, a thin rainbow edge; Buck keeps his own colours (edge and sparkles only), the crate a gentler foil.",
+       "images": [
+        {
+         "src": "img/holo-r1/D-crate.mp4",
+         "label": "Crate (moving)"
+        },
+        {
+         "src": "img/holo-r1/D-rush.mp4",
+         "label": "Knocked down, POWER RUSH (moving)"
+        },
+        {
+         "src": "img/holo-r1/D-crate-close.png",
+         "label": "Crate"
+        },
+        {
+         "src": "img/holo-r1/D-buck-close.png",
+         "label": "Buck"
+        }
+       ]
+      }
+     ],
+     "chosen": "B"
+    },
+    {
+     "id": "r2",
+     "date": "2026-11-09",
+     "status": "open",
+     "question": "The crate is settled (B, Clean). Now Buck in POWER RUSH: how should he shine?",
+     "found": "Each clip is Buck in POWER RUSH running back and forth on 1-2 (he knocks a container down on the way). The play copies start on 1-2 and the crate comes down after a second and a half.",
+     "options": [
+      {
+       "id": "A",
+       "title": "Like the crate",
+       "note": "His rainbow edge, a light foil over him, the pearly glow and sparkles (no rays): what the game has now.",
+       "images": [
+        {
+         "src": "img/holo-r2/A-run.mp4",
+         "label": "Running (moving)"
+        },
+        {
+         "src": "img/holo-r2/A-still.png",
+         "label": "Still"
+        }
+       ],
+       "play": "play/holo-r2-A.html"
+      },
+      {
+       "id": "B",
+       "title": "Edge only",
+       "note": "A thicker rainbow edge round him, his own colours inside, sparkles and a softer glow.",
+       "images": [
+        {
+         "src": "img/holo-r2/B-run.mp4",
+         "label": "Running (moving)"
+        },
+        {
+         "src": "img/holo-r2/B-still.png",
+         "label": "Still"
+        }
+       ],
+       "play": "play/holo-r2-B.html"
+      },
+      {
+       "id": "C",
+       "title": "Full foil",
+       "note": "He turns as holographic as the crate: washed pale under strong foil, with the edge, glow and sparkles.",
+       "images": [
+        {
+         "src": "img/holo-r2/C-run.mp4",
+         "label": "Running (moving)"
+        },
+        {
+         "src": "img/holo-r2/C-still.png",
+         "label": "Still"
+        }
+       ],
+       "play": "play/holo-r2-C.html"
+      },
+      {
+       "id": "D",
+       "title": "Rainbow trail",
+       "note": "The edge and a light foil, and rainbow copies of him trailing behind as he runs.",
+       "images": [
+        {
+         "src": "img/holo-r2/D-run.mp4",
+         "label": "Running (moving)"
+        },
+        {
+         "src": "img/holo-r2/D-still.png",
+         "label": "Still"
+        }
+       ],
+       "play": "play/holo-r2-D.html"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "otglass",
+   "title": "A shiny, glassy overtime",
+   "rounds": [
+    {
+     "id": "r1",
+     "date": "2026-11-10",
+     "status": "decided",
+     "question": "A later overtime that goes shiny and glassy, like slot-machine graphics. Which of these, and which overtime should it be (say, every 5th, or after the handheld colours run out)? Notes on any of them welcome.",
+     "found": "Each one is drawn by the screen itself over the real game, so it works on every stage, day, night and storm, and the menus, cards and score bar keep their normal colours. The clip shows the light sweep and the glints, which a still can't. The play copies start in OVERTIME 1 with that look.",
+     "options": [
+      {
+       "id": "A",
+       "title": "Candy glass",
+       "note": "Everything lit like raised glass: the colours punched up, a glossy highlight on every edge, a band of light sweeping across now and then, and glints twinkling on the bright parts.",
+       "images": []
+      },
+      {
+       "id": "B",
+       "title": "Chrome and gold",
+       "note": "The same glass, but every dark outline is polished gold, banded like the rim of a slot reel.",
+       "images": []
+      },
+      {
+       "id": "C",
+       "title": "Neon",
+       "note": "The lights go down: pale walls turn dark, the outlines glow in colours that drift along them, and anything coloured blooms, like a Vegas sign at night.",
+       "images": []
+      },
+      {
+       "id": "D",
+       "title": "Holo foil",
+       "note": "The power crate's rainbow foil over everything, shifting as it catches the light (the most going on).",
+       "images": []
+      }
+     ],
+     "chosen": null,
+     "outcome": "None of them: not the clean glassy look. Chris wants jelly / candy buttons (round 2)."
+    },
+    {
+     "id": "r2",
+     "date": "2026-11-10",
+     "status": "decided",
+     "question": "Round 2, clean and glassy like jelly candy buttons. Which one, and which overtime should get it?",
+     "found": "This time the gloss is drawn on each shape by the game itself (containers, catwalks, posts, ladder rails), so it sits cleanly on them instead of being guessed from the picture, and the print dots are off in this look. Buck and the enemies stay as they are. The play copies start in OVERTIME 1 with the look.",
+     "options": [
+      {
+       "id": "A",
+       "title": "Jelly",
+       "note": "Clean colours with no print dots, and a candy gloss on every container, catwalk, post and ladder rail: a bright sheen over the top half with a crisp edge, and a soft light along the bottom, like jelly buttons.",
+       "images": []
+      },
+      {
+       "id": "B",
+       "title": "Jelly shine",
+       "note": "A, plus a band of light sweeping across now and then and a few glints twinkling on the bright parts.",
+       "images": []
+      },
+      {
+       "id": "C",
+       "title": "Deep candy",
+       "note": "B with richer colours and a stronger gloss.",
+       "images": []
+      }
+     ],
+     "chosen": null,
+     "outcome": "Scrapped (Chris 2026-11-10): \"just an idea anyway\". The glass code was taken back out of the game."
+    }
+   ]
+  },
+  {
+   "id": "otnew",
+   "title": "New overtime looks (made by Fable)",
+   "rounds": [
+    {
+     "id": "r1",
+     "date": "2026-11-10",
+     "status": "decided",
+     "question": "Fresh directions for how each overtime looks, instead of (or as well as) the handheld colours you have now. Which do you like? It can be one of these, a mix (say, new inks for some overtimes and weather for others), or keep the handheld colours.",
+     "found": "Made by a Fable helper. Every option keeps the score bar, corner badges, cards and menus in their normal colours. Most change from one overtime to the next: each has a clip for every overtime it has, plus a sheet of all of them on day, night and storm. The play copies start in OVERTIME 1. Its own notes: C (night print) is the least readable, enemies come out pale; D's snow tints yellows slightly olive. Its favourite: A, then D's red sky.",
+     "options": [
+      {
+       "id": "A",
+       "title": "New inks",
+       "note": "The same print, but the press is loaded with different inks each overtime: teal and flame red, then plum and coral, pine and pink, black and red. Still full colour and still the game's own print look, just a special-edition run.",
+       "images": [],
+       "removed": "media removed to make room (not picked)"
+      },
+      {
+       "id": "B",
+       "title": "Two-ink reprint",
+       "note": "Only two inks on the press: one dark and one bright colour on cream paper (navy + orange, teal + pink, black + red, purple + gold). Bolder and simpler than A, like a gig poster.",
+       "images": [
+        {
+         "src": "img/otnew-r1/B-ot1.mp4",
+         "label": "OVERTIME 1 (moving)"
+        },
+        {
+         "src": "img/otnew-r1/B-ot2.mp4",
+         "label": "OVERTIME 2 (moving)"
+        },
+        {
+         "src": "img/otnew-r1/B-ot3.mp4",
+         "label": "OVERTIME 3 (moving)"
+        },
+        {
+         "src": "img/otnew-r1/B-ot4.mp4",
+         "label": "OVERTIME 4 (moving)"
+        },
+        {
+         "src": "img/otnew-r1/B-all-overtimes.png",
+         "label": "Every overtime"
+        },
+        {
+         "src": "img/otnew-r1/B-day-zoom.png",
+         "label": "Close-up"
+        },
+        {
+         "src": "img/otnew-r1/B-day-2s.png",
+         "label": "Day"
+        },
+        {
+         "src": "img/otnew-r1/B-night-2s.png",
+         "label": "Night"
+        },
+        {
+         "src": "img/otnew-r1/B-storm-2s.png",
+         "label": "Storm"
+        }
+       ]
+      },
+      {
+       "id": "C",
+       "title": "Night print",
+       "note": "Dark paper and light inks: the harbour sinks into the dark and the catwalks, containers and characters glow in pink, blue and yellow. Paper changes each overtime (midnight blue, oxblood, deep sea).",
+       "images": [],
+       "removed": "media removed to make room (not picked)"
+      },
+      {
+       "id": "D",
+       "title": "Weather",
+       "note": "The normal colours stay and the weather changes each overtime: a red sky, then fog rolling behind the catwalks, then gentle snow.",
+       "images": [],
+       "removed": "media removed to make room (not picked)"
+      },
+      {
+       "id": "E",
+       "title": "Paper stock",
+       "note": "The quietest one: the game's own three inks, untouched, printed on a different coloured paper each overtime (kraft brown, mint, rose, sky, sunflower, newsprint).",
+       "images": [],
+       "removed": "media removed to make room (not picked)"
+      },
+      {
+       "id": "F",
+       "title": "Arcade tube",
+       "note": "The play area as an old arcade monitor: flat bright colours with no print dots, the harbour dimmed to deep purple so the stage pops, faint scanlines and slightly darker corners. One look for every overtime.",
+       "images": [],
+       "removed": "media removed to make room (not picked)"
+      }
+     ],
+     "chosen": "B",
+     "outcome": "B, the two-ink reprint, for overtimes 1 to 4 (navy + orange, teal + pink, black + red, purple + gold), then the handheld colours (old handheld green first) after that, then round again (Chris 2026-11-10)."
+    }
+   ]
+  },
+  {
+   "id": "print",
+   "title": "The print look (made by Fable)",
+   "rounds": [
+    {
+     "id": "r1",
+     "date": "2026-11-10",
+     "status": "decided",
+     "question": "Different ways of doing the game's paper and print style, for the whole game (play, menus, cards, title). Which one, or keep Now?",
+     "found": "Made by a Fable helper; 'Now' is the current print for comparison. Each changes only how the picture is printed (dots, paper, ink), so everything else stays the same, and the overtime reprints still work on top (checked on A and C). The PRINT setting in the pause menu still sets how strong it is. Its favourite: A (line screen), then C (poster, the cleanest). It says F (grain) is the busiest. (Its pictures and clips were taken off the Workshop on 2026-11-10 to make room; they are still in the repo.)",
+     "options": [
+      {
+       "id": "Now",
+       "title": "Now",
+       "note": "The print as it is today: small round dots, cream paper.",
+       "images": []
+      },
+      {
+       "id": "A",
+       "title": "Line screen",
+       "note": "The tints are drawn with fine ruled lines instead of dots, each ink at its own angle, so pale areas look hatched like an engraving or a banknote. Same cream paper and inks as now.",
+       "images": []
+      },
+      {
+       "id": "B",
+       "title": "Big dot",
+       "note": "Pop-comic print: bigger, rounder, crisper dots you can clearly see, on slightly yellower pulp paper. Solid colours stay solid.",
+       "images": []
+      },
+      {
+       "id": "C",
+       "title": "Poster",
+       "note": "Screen-printed poster: no dots at all, flat thick inks on bright white stock, colours a little deeper, and a touch darker where two inks overlap. The cleanest one.",
+       "images": []
+      },
+      {
+       "id": "D",
+       "title": "Newsprint",
+       "note": "Old newspaper comics page: greyer paper with little fibres in it, soft dots, inks slightly faded as if soaked into the paper.",
+       "images": []
+      },
+      {
+       "id": "E",
+       "title": "Letterpress",
+       "note": "Pressed into thick ivory paper: no dots, deeper old-shop inks, every shape with a slightly darker edge where the ink squeezed out, and a faint bite into the paper.",
+       "images": []
+      },
+      {
+       "id": "F",
+       "title": "Grain",
+       "note": "Sandy grain instead of dots, like a crayon lithograph or a riso in grain mode: tints look speckled and soft. The busiest of the set.",
+       "images": []
+      }
+     ],
+     "chosen": null,
+     "outcome": "None as they are: big dot came closest but 'a bit too comic booky'; Chris wanted different ways of doing the current riso look instead (riso round 1)."
+    }
+   ]
+  },
+  {
+   "id": "riso",
+   "title": "Ways of doing the riso print (made by Fable)",
+   "rounds": [
+    {
+     "id": "r1",
+     "date": "2026-11-10",
+     "status": "decided",
+     "question": "Six takes on the game's own riso print (same cream paper, inks, dots and misprint), several with dots between now and the big-dot look. Which one, or keep Now? Notes on mixing them welcome (D's riso quirks can go on top of another).",
+     "found": "Made by a Fable helper. Dot sizes (times a game pixel): Now 1.3, A 1.4, B 1.7, C 1.65, D 1.7, E 1.7, F 1.85 (the comic big-dot was 2.3). It found much of the busyness in Now is per-pixel speckle and paper flecks (the night sky looks like extra stars), and every option drops that. The differences are small: the side-by-side sheet (first picture on Now) is the best way to compare, and dots read differently on the Pocket 6. Overtime reprints work in all six. Its favourite: F (solid darks), then B for the plainest in-between.",
+     "options": [
+      {
+       "id": "Now",
+       "title": "Now",
+       "note": "The print as it is in the game today, for comparison.",
+       "images": [
+        {
+         "src": "img/riso-r1/compare-closeup.png",
+         "label": "All of them side by side (day, night, Pocket 6)"
+        },
+        {
+         "src": "img/riso-r1/Now.mp4",
+         "label": "Playing (moving)"
+        },
+        {
+         "src": "img/riso-r1/Now-day-zoom.png",
+         "label": "Close-up"
+        },
+        {
+         "src": "img/riso-r1/Now-day-2s.png",
+         "label": "Day"
+        },
+        {
+         "src": "img/riso-r1/Now-night-2s.png",
+         "label": "Night"
+        },
+        {
+         "src": "img/riso-r1/Now-storm-2s.png",
+         "label": "Storm"
+        },
+        {
+         "src": "img/riso-r1/Now-title-2s.png",
+         "label": "Title"
+        },
+        {
+         "src": "img/riso-r1/Now-card-2s.png",
+         "label": "Ship Loaded card"
+        },
+        {
+         "src": "img/riso-r1/Now-ot1-2s.png",
+         "label": "Overtime 1"
+        },
+        {
+         "src": "img/riso-r1/Now-strong-2s.png",
+         "label": "PRINT: STRONG"
+        },
+        {
+         "src": "img/riso-r1/Now-day-rp6.png",
+         "label": "Pocket 6 (1920x1080)"
+        }
+       ]
+      },
+      {
+       "id": "A",
+       "title": "Same dots, cleaned up",
+       "note": "The dots stay about the size they are now, but each one is a clean round dot instead of a slightly noisy one, so tints look smoother and steadier.",
+       "images": [
+        {
+         "src": "img/riso-r1/A.mp4",
+         "label": "Playing (moving)"
+        },
+        {
+         "src": "img/riso-r1/A-day-zoom.png",
+         "label": "Close-up"
+        },
+        {
+         "src": "img/riso-r1/A-day-2s.png",
+         "label": "Day"
+        },
+        {
+         "src": "img/riso-r1/A-night-2s.png",
+         "label": "Night"
+        },
+        {
+         "src": "img/riso-r1/A-storm-2s.png",
+         "label": "Storm"
+        },
+        {
+         "src": "img/riso-r1/A-title-2s.png",
+         "label": "Title"
+        },
+        {
+         "src": "img/riso-r1/A-card-2s.png",
+         "label": "Ship Loaded card"
+        },
+        {
+         "src": "img/riso-r1/A-ot1-2s.png",
+         "label": "Overtime 1"
+        },
+        {
+         "src": "img/riso-r1/A-strong-2s.png",
+         "label": "PRINT: STRONG"
+        },
+        {
+         "src": "img/riso-r1/A-day-rp6.png",
+         "label": "Pocket 6 (1920x1080)"
+        }
+       ]
+      },
+      {
+       "id": "B",
+       "title": "Halfway dots",
+       "note": "Dots about a third bigger than now (halfway to the big-dot version), clean and round. Nothing else changes: same paper, same inks.",
+       "images": [
+        {
+         "src": "img/riso-r1/B.mp4",
+         "label": "Playing (moving)"
+        },
+        {
+         "src": "img/riso-r1/B-day-zoom.png",
+         "label": "Close-up"
+        },
+        {
+         "src": "img/riso-r1/B-day-2s.png",
+         "label": "Day"
+        },
+        {
+         "src": "img/riso-r1/B-night-2s.png",
+         "label": "Night"
+        },
+        {
+         "src": "img/riso-r1/B-storm-2s.png",
+         "label": "Storm"
+        },
+        {
+         "src": "img/riso-r1/B-title-2s.png",
+         "label": "Title"
+        },
+        {
+         "src": "img/riso-r1/B-card-2s.png",
+         "label": "Ship Loaded card"
+        },
+        {
+         "src": "img/riso-r1/B-ot1-2s.png",
+         "label": "Overtime 1"
+        },
+        {
+         "src": "img/riso-r1/B-strong-2s.png",
+         "label": "PRINT: STRONG"
+        },
+        {
+         "src": "img/riso-r1/B-day-rp6.png",
+         "label": "Pocket 6 (1920x1080)"
+        }
+       ]
+      },
+      {
+       "id": "C",
+       "title": "Soft ink",
+       "note": "In-between dots with soft, slightly spread edges, like ink soaking into the paper, and pink over blue prints a little darker, so outlines and shadows are richer.",
+       "images": [
+        {
+         "src": "img/riso-r1/C.mp4",
+         "label": "Playing (moving)"
+        },
+        {
+         "src": "img/riso-r1/C-day-zoom.png",
+         "label": "Close-up"
+        },
+        {
+         "src": "img/riso-r1/C-day-2s.png",
+         "label": "Day"
+        },
+        {
+         "src": "img/riso-r1/C-night-2s.png",
+         "label": "Night"
+        },
+        {
+         "src": "img/riso-r1/C-storm-2s.png",
+         "label": "Storm"
+        },
+        {
+         "src": "img/riso-r1/C-title-2s.png",
+         "label": "Title"
+        },
+        {
+         "src": "img/riso-r1/C-card-2s.png",
+         "label": "Ship Loaded card"
+        },
+        {
+         "src": "img/riso-r1/C-ot1-2s.png",
+         "label": "Overtime 1"
+        },
+        {
+         "src": "img/riso-r1/C-strong-2s.png",
+         "label": "PRINT: STRONG"
+        },
+        {
+         "src": "img/riso-r1/C-day-rp6.png",
+         "label": "Pocket 6 (1920x1080)"
+        }
+       ]
+      },
+      {
+       "id": "D",
+       "title": "Off the drum",
+       "note": "In-between dots printed like a real riso sheet: the ink is a touch thinner in some places than others, there are very faint roller streaks, the dots aren't all perfectly identical, and each colour is off by a slightly different amount across the page.",
+       "images": [
+        {
+         "src": "img/riso-r1/D.mp4",
+         "label": "Playing (moving)"
+        },
+        {
+         "src": "img/riso-r1/D-day-zoom.png",
+         "label": "Close-up"
+        },
+        {
+         "src": "img/riso-r1/D-day-2s.png",
+         "label": "Day"
+        },
+        {
+         "src": "img/riso-r1/D-night-2s.png",
+         "label": "Night"
+        },
+        {
+         "src": "img/riso-r1/D-storm-2s.png",
+         "label": "Storm"
+        },
+        {
+         "src": "img/riso-r1/D-title-2s.png",
+         "label": "Title"
+        },
+        {
+         "src": "img/riso-r1/D-card-2s.png",
+         "label": "Ship Loaded card"
+        },
+        {
+         "src": "img/riso-r1/D-ot1-2s.png",
+         "label": "Overtime 1"
+        },
+        {
+         "src": "img/riso-r1/D-strong-2s.png",
+         "label": "PRINT: STRONG"
+        },
+        {
+         "src": "img/riso-r1/D-day-rp6.png",
+         "label": "Pocket 6 (1920x1080)"
+        }
+       ]
+      },
+      {
+       "id": "E",
+       "title": "Heavy paper",
+       "note": "In-between dots on thicker, slightly warmer paper with a soft tooth you can see in the cream areas and faintly through the ink, as if printed on textured card.",
+       "images": [
+        {
+         "src": "img/riso-r1/E.mp4",
+         "label": "Playing (moving)"
+        },
+        {
+         "src": "img/riso-r1/E-day-zoom.png",
+         "label": "Close-up"
+        },
+        {
+         "src": "img/riso-r1/E-day-2s.png",
+         "label": "Day"
+        },
+        {
+         "src": "img/riso-r1/E-night-2s.png",
+         "label": "Night"
+        },
+        {
+         "src": "img/riso-r1/E-storm-2s.png",
+         "label": "Storm"
+        },
+        {
+         "src": "img/riso-r1/E-title-2s.png",
+         "label": "Title"
+        },
+        {
+         "src": "img/riso-r1/E-card-2s.png",
+         "label": "Ship Loaded card"
+        },
+        {
+         "src": "img/riso-r1/E-ot1-2s.png",
+         "label": "Overtime 1"
+        },
+        {
+         "src": "img/riso-r1/E-strong-2s.png",
+         "label": "PRINT: STRONG"
+        },
+        {
+         "src": "img/riso-r1/E-day-rp6.png",
+         "label": "Pocket 6 (1920x1080)"
+        }
+       ]
+      },
+      {
+       "id": "F",
+       "title": "Solid darks",
+       "note": "The biggest dots of the set in the light tints, but anything dark prints as solid ink instead of dots, so night, the storm and outlines stay deep and calm.",
+       "images": [
+        {
+         "src": "img/riso-r1/F.mp4",
+         "label": "Playing (moving)"
+        },
+        {
+         "src": "img/riso-r1/F-day-zoom.png",
+         "label": "Close-up"
+        },
+        {
+         "src": "img/riso-r1/F-day-2s.png",
+         "label": "Day"
+        },
+        {
+         "src": "img/riso-r1/F-night-2s.png",
+         "label": "Night"
+        },
+        {
+         "src": "img/riso-r1/F-storm-2s.png",
+         "label": "Storm"
+        },
+        {
+         "src": "img/riso-r1/F-title-2s.png",
+         "label": "Title"
+        },
+        {
+         "src": "img/riso-r1/F-card-2s.png",
+         "label": "Ship Loaded card"
+        },
+        {
+         "src": "img/riso-r1/F-ot1-2s.png",
+         "label": "Overtime 1"
+        },
+        {
+         "src": "img/riso-r1/F-strong-2s.png",
+         "label": "PRINT: STRONG"
+        },
+        {
+         "src": "img/riso-r1/F-day-rp6.png",
+         "label": "Pocket 6 (1920x1080)"
+        }
+       ]
+      }
+     ],
+     "chosen": "D",
+     "outcome": "D, off the drum, is now the game's print (build 173). Chris worried about a texture moving with Pratt on a ladder: that was the clip's video compression; the print is fixed to the screen (Chris 2026-11-10)."
+    }
+   ]
+  },
+  {
+   "id": "intro",
+   "title": "Idle Looping Studios intro",
+   "rounds": [
+    {
+     "id": "r1",
+     "date": "2026-11-10",
+     "status": "decided",
+     "question": "Five ways to animate your logo as the studio intro, each about 5 seconds long. In every one the pink wave moves thin, rubbery and a bit odd, like audio, before it settles into your logo. Which one, or which parts should be mixed? The sounds are first drafts and are easy to change.",
+     "options": [
+      {
+       "id": "A",
+       "title": "Plucked string",
+       "note": "The wave starts as a thin, still string. It gets plucked and rings in its harmonics, wobbling through odd shapes. Then it settles into the logo shape and swells up to full thickness. The name fades in. Sound: a plucked bass string, then a soft chord and a bell.",
+       "images": [
+        {
+         "src": "img/intro-r1/A.mp4",
+         "label": "The intro, with sound"
+        },
+        {
+         "src": "img/intro-r1/sheet-A.png",
+         "label": "Every half second"
+        },
+        {
+         "src": "img/intro-r1/A-mid.png",
+         "label": "At 2 seconds"
+        }
+       ]
+      },
+      {
+       "id": "B",
+       "title": "Oscilloscope",
+       "note": "A thin, glowing line jitters like a voice on a scope, then tunes in and locks onto the logo shape with a glow. The name types in letter by letter. Sound: a wobbly voice-like bleep that tunes to one clean note, with clicks as the letters type.",
+       "images": [
+        {
+         "src": "img/intro-r1/B.mp4",
+         "label": "The intro, with sound"
+        },
+        {
+         "src": "img/intro-r1/sheet-B.png",
+         "label": "Every half second"
+        },
+        {
+         "src": "img/intro-r1/B-mid.png",
+         "label": "At 2 seconds"
+        }
+       ]
+      },
+      {
+       "id": "C",
+       "title": "Rubber band",
+       "note": "A pink blob stretches out into a thin, wriggly band, pulled tight. It snaps into the wave and jiggles like rubber before it settles. The name drops in. Sound: a stretchy boing, a snap and a wobble, then a soft thud.",
+       "images": [
+        {
+         "src": "img/intro-r1/C.mp4",
+         "label": "The intro, with sound"
+        },
+        {
+         "src": "img/intro-r1/sheet-C.png",
+         "label": "Every half second"
+        },
+        {
+         "src": "img/intro-r1/C-mid.png",
+         "label": "At 2 seconds"
+        }
+       ]
+      },
+      {
+       "id": "D",
+       "title": "Idle loop",
+       "note": "The wave rolls along like a loop playing, thinning and thickening as it breathes. It slows to a stop on the logo shape. \"studios\" spreads out under the name. Sound: a little looping arpeggio that lands on a held chord.",
+       "images": [
+        {
+         "src": "img/intro-r1/D.mp4",
+         "label": "The intro, with sound"
+        },
+        {
+         "src": "img/intro-r1/sheet-D.png",
+         "label": "Every half second"
+        },
+        {
+         "src": "img/intro-r1/D-mid.png",
+         "label": "At 2 seconds"
+        }
+       ]
+      },
+      {
+       "id": "E",
+       "title": "Wobbly pen",
+       "note": "A thin, shaky pen line draws the wave from left to right. Then it puffs up like jelly to full thickness and wobbles. The name fades in. Sound: a pen scratch, a rising whoop and a jelly wobble, then a chime.",
+       "images": [
+        {
+         "src": "img/intro-r1/E.mp4",
+         "label": "The intro, with sound"
+        },
+        {
+         "src": "img/intro-r1/sheet-E.png",
+         "label": "Every half second"
+        },
+        {
+         "src": "img/intro-r1/E-mid.png",
+         "label": "At 2 seconds"
+        }
+       ]
+      }
+     ],
+     "found": "Picked D. Note (sent in chat): too long; drop the part where it moves left; a smooth entrance into the quick rightward part through to the end; did not like how the text came in. (The note was lost by a bug in this page, now fixed.)"
+    },
+    {
+     "id": "r2",
+     "date": "2026-11-10",
+     "status": "decided",
+     "question": "The new D: your original D exactly, starting at the moment it turns to run right (the slow drift left at the start is cut). The wave eases up out of a flat line and runs right into the landing. About 4 seconds, was 6.5. Which sound? Press \"Play with sound\" under a video, or open it big. These use the wipe text entrance; the text choices are in round 3.",
+     "options": [
+      {
+       "id": "D1",
+       "title": "Music box",
+       "note": "The arpeggio runs fast and slows down along with the wave, then lands on a warm chord with a sparkle.",
+       "sound": true,
+       "images": [
+        {
+         "src": "img/intro-r2/D1.mp4",
+         "label": "Intro with sound"
+        }
+       ]
+      },
+      {
+       "id": "D2",
+       "title": "Tape loop",
+       "note": "A soft electric piano on worn tape, with vinyl crackle. Its pitch warbles while the wave rolls and goes steady as it lands.",
+       "sound": true,
+       "images": [
+        {
+         "src": "img/intro-r2/D2.mp4",
+         "label": "Intro with sound"
+        }
+       ]
+      },
+      {
+       "id": "D3",
+       "title": "Rubber synth",
+       "note": "One gooey synth voice bends with the wave and slides up into the landing note, with a \"bwomp\" as the wave puffs up.",
+       "sound": true,
+       "images": [
+        {
+         "src": "img/intro-r2/D3.mp4",
+         "label": "Intro with sound"
+        }
+       ]
+      },
+      {
+       "id": "D4",
+       "title": "Beat drop",
+       "note": "A quick 84 BPM groove while it rolls, then a short riser and a drop (kick, deep bass, one chord) as it lands.",
+       "sound": true,
+       "images": [
+        {
+         "src": "img/intro-r2/D4.mp4",
+         "label": "Intro with sound"
+        }
+       ]
+      }
+     ],
+     "found": "Moved on to round 4 (three more sounds, and the sounds on both logos)."
+    },
+    {
+     "id": "r3",
+     "date": "2026-11-10",
+     "status": "decided",
+     "question": "New ways for the text to come in, on the new D (all with the music box sound so you can compare them). Which one?",
+     "options": [
+      {
+       "id": "still",
+       "title": "Clean fade",
+       "note": "It fades in exactly where it sits. Nothing moves.",
+       "sound": true,
+       "images": [
+        {
+         "src": "img/intro-r3/still.mp4",
+         "label": "Intro with sound"
+        }
+       ]
+      },
+      {
+       "id": "wipe",
+       "title": "Wipe",
+       "note": "A soft edge sweeps in from the left, following the wave, as if the wave pushed it in. It starts a little before the wave lands.",
+       "sound": true,
+       "images": [
+        {
+         "src": "img/intro-r3/wipe.mp4",
+         "label": "Intro with sound"
+        }
+       ]
+      },
+      {
+       "id": "pop",
+       "title": "Letter pop",
+       "note": "Each letter pops up in turn with a small springy bounce, \"idle looping\" first and then \"studios\".",
+       "sound": true,
+       "images": [
+        {
+         "src": "img/intro-r3/pop.mp4",
+         "label": "Intro with sound"
+        }
+       ]
+      },
+      {
+       "id": "rubber",
+       "title": "Rubber snap",
+       "note": "The name comes in stretched wide and flat, then snaps to its real size and jiggles.",
+       "sound": true,
+       "images": [
+        {
+         "src": "img/intro-r3/rubber.mp4",
+         "label": "Intro with sound"
+        }
+       ]
+      }
+     ],
+     "found": "Picked: wipe (Chris, in chat)."
+    },
+    {
+     "id": "r4",
+     "date": "2026-11-10",
+     "status": "decided",
+     "question": "Sound for the intro: your original D from where it turns right, with the wipe text, on both logos (the \"First logo\" and \"Stepped logo\" tabs above the videos switch between them). Press \"Play with sound\", or open it big. Headphones help with the new ones: their sound follows the wave from left to right. Which sound? Say if each logo should get a different one.",
+     "found": "Picked: D5, sub glide (Chris, in chat). The stepped logo still was not smooth: see \"Second logo intro\", round 2.",
+     "options": [
+      {
+       "id": "D1",
+       "title": "Music box",
+       "note": "The arpeggio runs fast and slows down along with the wave, then lands on a warm chord with a sparkle.",
+       "sound": true,
+       "images": [
+        {
+         "src": "img/intro-r4/D1-logo1.mp4",
+         "label": "First logo"
+        },
+        {
+         "src": "img/intro-r4/D1-logo2.mp4",
+         "label": "Stepped logo"
+        }
+       ]
+      },
+      {
+       "id": "D2",
+       "title": "Tape loop",
+       "note": "A soft electric piano on worn tape, with vinyl crackle. Its pitch warbles while the wave rolls and goes steady as it lands.",
+       "sound": true,
+       "images": [
+        {
+         "src": "img/intro-r4/D2-logo1.mp4",
+         "label": "First logo"
+        },
+        {
+         "src": "img/intro-r4/D2-logo2.mp4",
+         "label": "Stepped logo"
+        }
+       ]
+      },
+      {
+       "id": "D3",
+       "title": "Rubber synth",
+       "note": "One gooey synth voice bends with the wave and slides up into the landing note, with a \"bwomp\" as the wave puffs up.",
+       "sound": true,
+       "images": [
+        {
+         "src": "img/intro-r4/D3-logo1.mp4",
+         "label": "First logo"
+        },
+        {
+         "src": "img/intro-r4/D3-logo2.mp4",
+         "label": "Stepped logo"
+        }
+       ]
+      },
+      {
+       "id": "D4",
+       "title": "Beat drop",
+       "note": "A quick 84 BPM groove while it rolls, then a short riser and a drop (kick, deep bass, one chord) as it lands.",
+       "sound": true,
+       "images": [
+        {
+         "src": "img/intro-r4/D4-logo1.mp4",
+         "label": "First logo"
+        },
+        {
+         "src": "img/intro-r4/D4-logo2.mp4",
+         "label": "Stepped logo"
+        }
+       ]
+      },
+      {
+       "id": "D5",
+       "title": "Sub glide (new)",
+       "note": "A deep 808-style bass slides up as the wave runs right, with a hiss that travels left to right alongside it. A snap as it lands, then a warm chord with a reverb tail.",
+       "sound": true,
+       "images": [
+        {
+         "src": "img/intro-r4/D5-logo1.mp4",
+         "label": "First logo"
+        },
+        {
+         "src": "img/intro-r4/D5-logo2.mp4",
+         "label": "Stepped logo"
+        }
+       ]
+      },
+      {
+       "id": "D6",
+       "title": "Stutter (new)",
+       "note": "The landing chord is already playing but chopped up. The chops slow down with the wave and sweep from left to right, then the chord plays whole as it lands.",
+       "sound": true,
+       "images": [
+        {
+         "src": "img/intro-r4/D6-logo1.mp4",
+         "label": "First logo"
+        },
+        {
+         "src": "img/intro-r4/D6-logo2.mp4",
+         "label": "Stepped logo"
+        }
+       ]
+      },
+      {
+       "id": "D7",
+       "title": "Air (new)",
+       "note": "A breathy whoosh travels left to right with the wave, then a deep plucked bass note as it lands, with a soft pad.",
+       "sound": true,
+       "images": [
+        {
+         "src": "img/intro-r4/D7-logo1.mp4",
+         "label": "First logo"
+        },
+        {
+         "src": "img/intro-r4/D7-logo2.mp4",
+         "label": "Stepped logo"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "r5",
+     "date": "2026-11-10",
+     "status": "decided",
+     "question": "The text gathering in from a scatter of light, quick and subtle (Chris: that one is). The specks start close by, small and faint with a light glow, and gather in under a second, with the real lettering coming up as they settle. Three takes, plus the wipe for comparison, all on both logos (tabs above the videos), all with sub glide. Which one?",
+     "options": [
+      {
+       "id": "scatter",
+       "title": "Scatter",
+       "note": "Faint specks drift in from just around the letters, swirling a little, and settle into them.",
+       "sound": true,
+       "images": [
+        {
+         "src": "img/intro-r5/scatter-logo1.mp4",
+         "label": "First logo"
+        },
+        {
+         "src": "img/intro-r5/scatter-logo2.mp4",
+         "label": "Stepped logo"
+        }
+       ]
+      },
+      {
+       "id": "focus",
+       "title": "Focus",
+       "note": "The specks start right where their letters are, slightly blurred apart and twinkling, and pull into focus.",
+       "sound": true,
+       "images": [
+        {
+         "src": "img/intro-r5/focus-logo1.mp4",
+         "label": "First logo"
+        },
+        {
+         "src": "img/intro-r5/focus-logo2.mp4",
+         "label": "Stepped logo"
+        }
+       ]
+      },
+      {
+       "id": "sweep",
+       "title": "Sweep",
+       "note": "Like scatter, but the letters fill in from left to right, following the wave.",
+       "sound": true,
+       "images": [
+        {
+         "src": "img/intro-r5/sweep-logo1.mp4",
+         "label": "First logo"
+        },
+        {
+         "src": "img/intro-r5/sweep-logo2.mp4",
+         "label": "Stepped logo"
+        }
+       ]
+      },
+      {
+       "id": "wipe",
+       "title": "Wipe (picked before)",
+       "note": "The wipe you picked in round 3, for comparison.",
+       "sound": true,
+       "images": [
+        {
+         "src": "img/intro-r5/wipe-logo1.mp4",
+         "label": "First logo"
+        },
+        {
+         "src": "img/intro-r5/wipe-logo2.mp4",
+         "label": "Stepped logo"
+        }
+       ]
+      }
+     ],
+     "found": "Picked: scatter."
+    }
+   ]
+  },
+  {
+   "id": "intro2",
+   "title": "Second logo intro (the stepped wave)",
+   "rounds": [
+    {
+     "id": "r1",
+     "date": "2026-11-10",
+     "status": "decided",
+     "question": "The same ideas on your second logo. Its wave gets thicker and thinner along its length, so each animation hands off to your painted wave once it lands and ends exactly as you painted it. D is the new, shorter D from intro round 2. Which one?",
+     "options": [
+      {
+       "id": "A",
+       "title": "Plucked string",
+       "note": "A thin string gets plucked, rings in odd shapes, then swells into the wave.",
+       "sound": true,
+       "images": [
+        {
+         "src": "img/intro2-r1/A.mp4",
+         "label": "Intro with sound"
+        },
+        {
+         "src": "img/intro2-r1/sheet-A.png",
+         "label": "Frame by frame"
+        }
+       ]
+      },
+      {
+       "id": "B",
+       "title": "Oscilloscope",
+       "note": "A glowing line jitters like a voice, then locks onto the wave. The name types in.",
+       "sound": true,
+       "images": [
+        {
+         "src": "img/intro2-r1/B.mp4",
+         "label": "Intro with sound"
+        },
+        {
+         "src": "img/intro2-r1/sheet-B.png",
+         "label": "Frame by frame"
+        }
+       ]
+      },
+      {
+       "id": "C",
+       "title": "Rubber band",
+       "note": "A blob stretches into a thin, wriggly band and snaps into the wave. The name drops in.",
+       "sound": true,
+       "images": [
+        {
+         "src": "img/intro2-r1/C.mp4",
+         "label": "Intro with sound"
+        },
+        {
+         "src": "img/intro2-r1/sheet-C.png",
+         "label": "Frame by frame"
+        }
+       ]
+      },
+      {
+       "id": "D",
+       "title": "Idle loop (new)",
+       "note": "Your original D from the moment it turns right: it eases in, runs right into the landing, and the name wipes in. Music box sound.",
+       "sound": true,
+       "images": [
+        {
+         "src": "img/intro2-r1/D.mp4",
+         "label": "Intro with sound"
+        },
+        {
+         "src": "img/intro2-r1/sheet-D.png",
+         "label": "Frame by frame"
+        }
+       ]
+      },
+      {
+       "id": "E",
+       "title": "Wobbly pen",
+       "note": "A shaky pen line draws the wave on, then it puffs up.",
+       "sound": true,
+       "images": [
+        {
+         "src": "img/intro2-r1/E.mp4",
+         "label": "Intro with sound"
+        },
+        {
+         "src": "img/intro2-r1/sheet-E.png",
+         "label": "Frame by frame"
+        }
+       ]
+      }
+     ],
+     "found": "Chris: the same animation as the first logo (D, with the wipe). Its sounds are in \"Idle Looping Studios intro\", round 4."
+    },
+    {
+     "id": "r2",
+     "date": "2026-11-10",
+     "status": "decided",
+     "question": "Which logo? Both with the finished intro: your original D from where it turns right, the scatter for the text, and sub glide for the sound.",
+     "found": "Picked: the stepped logo (Chris, in chat). In the game from build 174.",
+     "options": [
+      {
+       "id": "first",
+       "title": "First logo",
+       "note": "The smooth wave.",
+       "sound": true,
+       "images": [
+        {
+         "src": "img/intro2-r2/first.mp4",
+         "label": "Intro with sound"
+        }
+       ]
+      },
+      {
+       "id": "stepped",
+       "title": "Stepped logo, all of it rolls",
+       "note": "The stepped wave smoothed. The straight lines on the left and right are your painted lines, rounded ends and all, still from the first frame: they never change weight or shape. Only the wave between them moves, and it meets each line at that line's own thickness.",
+       "sound": true,
+       "images": [
+        {
+         "src": "img/intro2-r2/stepped.mp4",
+         "label": "Intro with sound"
+        }
+       ]
+      },
+      {
+       "id": "stepped-edges",
+       "title": "Stepped logo, edges stretch out",
+       "note": "Your idea: only the humped middle rolls right, pinned at its ends like the first logo, and as it settles the flat lines stretch out to the sides.",
+       "sound": true,
+       "images": [
+        {
+         "src": "img/intro2-r2/stepped-edges.mp4",
+         "label": "Intro with sound"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "r3",
+     "date": "2026-11-10",
+     "status": "decided",
+     "question": "Ways of finishing the intro, so it goes to black before the title (Chris: it never went to black). Each video is the end of the intro, the finish, a beat of black, then the real title screen coming up, shown on a 4:3 game screen the way the game letterboxes it. Which one?",
+     "found": "Picked: fade to black (Chris, in chat). In the game from build 178.",
+     "options": [
+      {
+       "id": "fade",
+       "title": "Fade to black",
+       "note": "A plain, smooth fade: the finished logo fades out to black, a beat of black, then the title comes up.",
+       "sound": true,
+       "images": [
+        {
+         "src": "img/intro2-r3/fade.mp4",
+         "label": "The finish, then the title"
+        },
+        {
+         "src": "img/intro2-r3/sheet-fade.png",
+         "label": "Frame by frame"
+        }
+       ]
+      },
+      {
+       "id": "tv",
+       "title": "TV switch-off",
+       "note": "Like an old set turning off: the picture squashes to a bright line, the line shrinks to a dot, and the dot winks out.",
+       "sound": true,
+       "images": [
+        {
+         "src": "img/intro2-r3/tv.mp4",
+         "label": "The finish, then the title"
+        },
+        {
+         "src": "img/intro2-r3/sheet-tv.png",
+         "label": "Frame by frame"
+        }
+       ]
+      },
+      {
+       "id": "scatter",
+       "title": "Scatter away",
+       "note": "The way in, run backwards: the letters break back into specks that drift off, the wave sinks into a flat line, and the line pulls in to nothing.",
+       "sound": true,
+       "images": [
+        {
+         "src": "img/intro2-r3/scatter.mp4",
+         "label": "The finish, then the title"
+        },
+        {
+         "src": "img/intro2-r3/sheet-scatter.png",
+         "label": "Frame by frame"
+        }
+       ]
+      },
+      {
+       "id": "roll",
+       "title": "Roll away",
+       "note": "The wave sets off again, rolling right and sinking into the line as it goes. The name wipes out to the right after it, then the line fades.",
+       "sound": true,
+       "images": [
+        {
+         "src": "img/intro2-r3/roll.mp4",
+         "label": "The finish, then the title"
+        },
+        {
+         "src": "img/intro2-r3/sheet-roll.png",
+         "label": "Frame by frame"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "shell",
+   "title": "The phone page around the game",
+   "rounds": [
+    {
+     "id": "r1",
+     "date": "2026-11-10",
+     "status": "decided",
+     "question": "Looks for the page around the game on the iPhone: the frame and the buttons. In every option, sideways now gives a 4:3 game with the controller on its sides (Chris: 16:9 gets checked on desktop and the Pocket 6 instead). Each one can be played: on your phone press \"Play in game\", then \"Own tab\" so it fills the phone, and turn it sideways. Which look, or which parts to mix?",
+     "found": "Shown on an iPhone 15 size (393x852), with stage 1-1 being played. The play copies are the current build (179) with the look added on top. Chris: versions of the retro handheld and the riso print next, with the most room for the game, the controls a bit higher, and Select/Start overlapping nothing.",
+     "options": [
+      {
+       "id": "Now",
+       "title": "Now",
+       "note": "The phone page as it is: sideways, the game goes 16:9 with its side panels (that was for checking the Pocket 6 layout).",
+       "images": [
+        {
+         "src": "img/shell-r1/Now-up.jpg",
+         "label": "Upright"
+        },
+        {
+         "src": "img/shell-r1/Now-side.jpg",
+         "label": "Sideways"
+        }
+       ]
+      },
+      {
+       "id": "A",
+       "title": "The navy, tidied",
+       "note": "Today's colours and buttons. Upright, the controls sit in the middle of the space under the screen instead of right below it. Sideways, a 4:3 game with the d-pad on the left, A and B on the right, and Select and Start under each side.",
+       "images": [
+        {
+         "src": "img/shell-r1/A-up.jpg",
+         "label": "Upright"
+        },
+        {
+         "src": "img/shell-r1/A-side.jpg",
+         "label": "Sideways"
+        }
+       ]
+      },
+      {
+       "id": "B",
+       "title": "Handheld console",
+       "note": "Cream plastic, like a pocket console: a dark screen bezel with the game's name and a red power light, a charcoal d-pad, berry-coloured A and B, slanted grey Select and Start, and speaker slots in the corner.",
+       "images": [
+        {
+         "src": "img/shell-r1/B-up.jpg",
+         "label": "Upright"
+        },
+        {
+         "src": "img/shell-r1/B-side.jpg",
+         "label": "Sideways"
+        }
+       ]
+      },
+      {
+       "id": "C",
+       "title": "Riso print",
+       "note": "The page printed like the game: cream paper with faint pink and blue dots, and the screen and buttons in the game's pink, blue and yellow inks, a little off-register.",
+       "images": [
+        {
+         "src": "img/shell-r1/C-up.jpg",
+         "label": "Upright"
+        },
+        {
+         "src": "img/shell-r1/C-side.jpg",
+         "label": "Sideways"
+        }
+       ]
+      },
+      {
+       "id": "D",
+       "title": "Harbour container",
+       "note": "A ribbed rust-orange shipping container with stencilled yellow markings, a bolted steel plate under the d-pad, a steel frame round the screen, and chunky arcade buttons with chrome rings.",
+       "images": [
+        {
+         "src": "img/shell-r1/D-up.jpg",
+         "label": "Upright"
+        },
+        {
+         "src": "img/shell-r1/D-side.jpg",
+         "label": "Sideways"
+        }
+       ]
+      },
+      {
+       "id": "E",
+       "title": "Minimal",
+       "note": "Just the game on black. Upright the screen runs edge to edge. The controls are thin outlines that light up when pressed.",
+       "images": [
+        {
+         "src": "img/shell-r1/E-up.jpg",
+         "label": "Upright"
+        },
+        {
+         "src": "img/shell-r1/E-side.jpg",
+         "label": "Sideways"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "r2",
+     "date": "2026-11-10",
+     "status": "decided",
+     "question": "Versions of the retro handheld and the riso print (made by Fable). In all of them the screen sits at the very top, edge to edge, the controls are higher (the d-pad about halfway down the phone), and Select and Start have their own row, so they overlap nothing. Sideways, the game is 4:3 with the d-pad on the left, A and B on the right, Select under the d-pad and Start under A and B. Try them on your phone: \"Play in game\", then \"Own tab\", and turn it sideways. Which one, or which parts to mix?",
+     "found": "Upright, the game takes about a third of an iPhone 15's screen (32-33%; the most a full-width 4:3 game can take is 34.6%). Sideways it takes about 58%. Fable checked every button and the screen on the iPhone SE, 15 and 15 Pro Max, upright and sideways, with and without the notch and home bar: nothing overlaps, nothing runs off the screen, and every button is at least 44px. Its favourites: H2 (grey brick) of the handhelds, and R2 (heavy ink) of the riso, with R1 the safe pick if R2 is too busy. The iPhone SE picture is the third on each. Picked: H1, cream classic. In the game from build 180.",
+     "options": [
+      {
+       "id": "H1",
+       "title": "Cream classic",
+       "note": "The handheld you liked, tightened: cream body, a thin dark bezel with the name and the red power light on its chin, charcoal d-pad, berry A and B, slanted grey Select and Start, speaker slots.",
+       "images": [
+        {
+         "src": "img/shell-r2/H1-up.jpg",
+         "label": "Upright"
+        },
+        {
+         "src": "img/shell-r2/H1-side.jpg",
+         "label": "Sideways"
+        },
+        {
+         "src": "img/shell-r2/H1-se.jpg",
+         "label": "iPhone SE"
+        }
+       ]
+      },
+      {
+       "id": "H2",
+       "title": "Grey brick",
+       "note": "A 1989 grey brick: a lighter grey bezel with pink and blue stripes beside the name, the d-pad and maroon A and B sunk in wells, dark rubber Select and Start with their names printed in blue under them.",
+       "images": [
+        {
+         "src": "img/shell-r2/H2-up.jpg",
+         "label": "Upright"
+        },
+        {
+         "src": "img/shell-r2/H2-side.jpg",
+         "label": "Sideways"
+        },
+        {
+         "src": "img/shell-r2/H2-se.jpg",
+         "label": "iPhone SE"
+        }
+       ]
+      },
+      {
+       "id": "H3",
+       "title": "See-through purple",
+       "note": "A clear grape shell with a faint circuit board showing through, a black bezel, smoky dark buttons with a yellow A and pink B, a yellow power light and round speaker holes.",
+       "images": [
+        {
+         "src": "img/shell-r2/H3-up.jpg",
+         "label": "Upright"
+        },
+        {
+         "src": "img/shell-r2/H3-side.jpg",
+         "label": "Sideways"
+        },
+        {
+         "src": "img/shell-r2/H3-se.jpg",
+         "label": "iPhone SE"
+        }
+       ]
+      },
+      {
+       "id": "H4",
+       "title": "Flip-top cobalt",
+       "note": "The game's blue as a metallic fold-up: a hinge bar under the screen with the name on it, a silver d-pad and buttons with blue letters, flat Select and Start, a green power light.",
+       "images": [
+        {
+         "src": "img/shell-r2/H4-up.jpg",
+         "label": "Upright"
+        },
+        {
+         "src": "img/shell-r2/H4-side.jpg",
+         "label": "Sideways"
+        },
+        {
+         "src": "img/shell-r2/H4-se.jpg",
+         "label": "iPhone SE"
+        }
+       ]
+      },
+      {
+       "id": "R1",
+       "title": "Clean print",
+       "note": "Round 1's riso, tightened: cream paper with faint dots and grain, a flat blue d-pad and pink and blue A and B slipped 2px off register, yellow Select and Start, a printer's colour bar at the foot.",
+       "images": [
+        {
+         "src": "img/shell-r2/R1-up.jpg",
+         "label": "Upright"
+        },
+        {
+         "src": "img/shell-r2/R1-side.jpg",
+         "label": "Sideways"
+        },
+        {
+         "src": "img/shell-r2/R1-se.jpg",
+         "label": "iPhone SE"
+        }
+       ]
+      },
+      {
+       "id": "R2",
+       "title": "Heavy ink",
+       "note": "Much more ink: halftone washes (blue under the screen, pink rising from the bottom, yellow at the foot), and each control a flat ink shape with its outline printed off register in another ink.",
+       "images": [
+        {
+         "src": "img/shell-r2/R2-up.jpg",
+         "label": "Upright"
+        },
+        {
+         "src": "img/shell-r2/R2-side.jpg",
+         "label": "Sideways"
+        },
+        {
+         "src": "img/shell-r2/R2-se.jpg",
+         "label": "iPhone SE"
+        }
+       ]
+      },
+      {
+       "id": "R3",
+       "title": "Sticker sheet",
+       "note": "The game's blue for the paper, and the screen and every control a die-cut sticker with a white edge, stuck on a little crooked: a yellow d-pad, pink A, cream B, and a \"PORT ★ STACKER\" sticker at the foot.",
+       "images": [
+        {
+         "src": "img/shell-r2/R3-up.jpg",
+         "label": "Upright"
+        },
+        {
+         "src": "img/shell-r2/R3-side.jpg",
+         "label": "Sideways"
+        },
+        {
+         "src": "img/shell-r2/R3-se.jpg",
+         "label": "iPhone SE"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "stage11",
+   "title": "Stage 1-1 Harbor Pier: its layout",
+   "rounds": [
+    {
+     "id": "r1",
+     "date": "2026-11-10",
+     "status": "decided",
+     "question": "Fable looked at why the stages feel unplanned. All five are the same picture: four full catwalks, twelve containers in the same grid, and ladders that drift a column from stage to stage, so they look almost symmetrical, which reads as a mistake. Its fix: every stage an exact mirror or an exact upside-down copy, ladders only on a few set columns, and gaps that mean something. Here is 1-1 Harbor Pier (in its day). Play each with \"Play in game\": START GAME goes straight to this stage. Which one, or which parts to mix?",
+     "found": "Every version passes all the fast tests, and a bot clears each one. The death counts are bots (8 beginners and 8 good players per stage), a small sample, so only a rough guide to difficulty. Nobody has played these by hand yet. If a new layout goes in, the title demos get new seeds. Picked: A. In the game from build 187.",
+     "options": [
+      {
+       "id": "Now",
+       "title": "As it is",
+       "note": "Stage 1-1 today. The bots died 7 times in 16 games here.",
+       "images": [
+        {
+         "src": "img/stage11-r1/Now.jpg",
+         "label": "day"
+        }
+       ]
+      },
+      {
+       "id": "A",
+       "title": "Fable's pick",
+       "note": "Just an exact mirror, with the short ladders thinning out going down (six off the top where the doors are, then five, then four). A subtle change that gives 1-1 its own layout. Bots: 10 deaths in 16 games.",
+       "images": [
+        {
+         "src": "img/stage11-r1/A.jpg",
+         "label": "day"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "stage12",
+   "title": "Stage 1-2 Broken Deck: its layout",
+   "rounds": [
+    {
+     "id": "r1",
+     "date": "2026-11-10",
+     "status": "decided",
+     "question": "Fable looked at why the stages feel unplanned. All five are the same picture: four full catwalks, twelve containers in the same grid, and ladders that drift a column from stage to stage, so they look almost symmetrical, which reads as a mistake. Its fix: every stage an exact mirror or an exact upside-down copy, ladders only on a few set columns, and gaps that mean something. Here is 1-2 Broken Deck (in its day). Play each with \"Play in game\": START GAME goes straight to this stage. Which one, or which parts to mix?",
+     "found": "Every version passes all the fast tests, and a bot clears each one. The death counts are bots (8 beginners and 8 good players per stage), a small sample, so only a rough guide to difficulty. Nobody has played these by hand yet. If a new layout goes in, the title demos get new seeds. Picked: Now (kept as it is).",
+     "options": [
+      {
+       "id": "Now",
+       "title": "As it is",
+       "note": "Stage 1-2 today. The bots died 11 times in 16 games here.",
+       "images": [
+        {
+         "src": "img/stage12-r1/Now.jpg",
+         "label": "day"
+        }
+       ]
+      },
+      {
+       "id": "A",
+       "title": "Fable's pick",
+       "note": "\"The hole\": the middle of the second catwalk is knocked out, the two tall ladders stand free in it, and the top middle container drops two floors when you walk it (the gap rule How to Play already describes, but no stage used). 11 containers, no deep dead ends. Easier than 1-3 again. Bots: 7 deaths in 16 games.",
+       "images": [
+        {
+         "src": "img/stage12-r1/A.jpg",
+         "label": "day"
+        }
+       ]
+      },
+      {
+       "id": "B",
+       "title": "Another way",
+       "note": "\"The island\": keeps all 12 containers, with the middle one on a catwalk island of its own. Bots: 13 deaths in 16 games.",
+       "images": [
+        {
+         "src": "img/stage12-r1/B.jpg",
+         "label": "day"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "stage13",
+   "title": "Stage 1-3 Conveyor Line: its layout",
+   "rounds": [
+    {
+     "id": "r1",
+     "date": "2026-11-10",
+     "status": "decided",
+     "question": "Fable looked at why the stages feel unplanned. All five are the same picture: four full catwalks, twelve containers in the same grid, and ladders that drift a column from stage to stage, so they look almost symmetrical, which reads as a mistake. Its fix: every stage an exact mirror or an exact upside-down copy, ladders only on a few set columns, and gaps that mean something. Here is 1-3 Conveyor Line (in its day). Play each with \"Play in game\": START GAME goes straight to this stage. Which one, or which parts to mix?",
+     "found": "Every version passes all the fast tests, and a bot clears each one. The death counts are bots (8 beginners and 8 good players per stage), a small sample, so only a rough guide to difficulty. Nobody has played these by hand yet. If a new layout goes in, the title demos get new seeds. Picked: A. In the game from build 187.",
+     "options": [
+      {
+       "id": "Now",
+       "title": "As it is",
+       "note": "Stage 1-3 today. The bots died 19 times in 16 games here.",
+       "images": [
+        {
+         "src": "img/stage13-r1/Now.jpg",
+         "label": "day"
+        }
+       ]
+      },
+      {
+       "id": "A",
+       "title": "Fable's pick",
+       "note": "An exact upside-down copy of the pinwheel it nearly was: a big clockwise loop (belts and side ladders) and a small one around the middle column. Two middle ladders gone, one moved a column. A subtle change. Bots: 12 deaths in 16 games.",
+       "images": [
+        {
+         "src": "img/stage13-r1/A.jpg",
+         "label": "day"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "stage24",
+   "title": "Stage 2-4 Pier 9: its layout",
+   "rounds": [
+    {
+     "id": "r1",
+     "date": "2026-11-10",
+     "status": "decided",
+     "question": "Fable looked at why the stages feel unplanned. All five are the same picture: four full catwalks, twelve containers in the same grid, and ladders that drift a column from stage to stage, so they look almost symmetrical, which reads as a mistake. Its fix: every stage an exact mirror or an exact upside-down copy, ladders only on a few set columns, and gaps that mean something. Here is 2-4 Pier 9 (in its night shift). Play each with \"Play in game\": START GAME goes straight to this stage. Which one, or which parts to mix?",
+     "found": "Every version passes all the fast tests, and a bot clears each one. The death counts are bots (8 beginners and 8 good players per stage), a small sample, so only a rough guide to difficulty. Nobody has played these by hand yet. If a new layout goes in, the title demos get new seeds. Picked: A. In the game from build 187.",
+     "options": [
+      {
+       "id": "Now",
+       "title": "As it is",
+       "note": "Stage 2-4 today. The bots died 42 times in 16 games here.",
+       "images": [
+        {
+         "src": "img/stage24-r1/Now.jpg",
+         "label": "night shift"
+        }
+       ]
+      },
+      {
+       "id": "A",
+       "title": "Fable's pick",
+       "note": "\"Tidy S\": one ladder moves a column, and the second catwalk's long half becomes a belt too, so both belts carry you away from the breaks. A bit harder. Bots: 50 deaths in 16 games.",
+       "images": [
+        {
+         "src": "img/stage24-r1/A.jpg",
+         "label": "night shift"
+        }
+       ]
+      },
+      {
+       "id": "B",
+       "title": "Another way",
+       "note": "\"Two piers\": the short halves gone, leaving one pier jutting from each wall: 10 containers, two long drops, five plain ladders. The strongest shape of them all, but about half as hard (Fable would win it back with the enemies, or belts running toward the pier ends). Bots: 21 deaths in 16 games.",
+       "images": [
+        {
+         "src": "img/stage24-r1/B.jpg",
+         "label": "night shift"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "stage35",
+   "title": "Stage 3-5 Last Call: its layout",
+   "rounds": [
+    {
+     "id": "r1",
+     "date": "2026-11-10",
+     "status": "decided",
+     "question": "Fable looked at why the stages feel unplanned. All five are the same picture: four full catwalks, twelve containers in the same grid, and ladders that drift a column from stage to stage, so they look almost symmetrical, which reads as a mistake. Its fix: every stage an exact mirror or an exact upside-down copy, ladders only on a few set columns, and gaps that mean something. Here is 3-5 Last Call (in its storm). Play each with \"Play in game\": START GAME goes straight to this stage. Which one, or which parts to mix?",
+     "found": "Every version passes all the fast tests, and a bot clears each one. The death counts are bots (8 beginners and 8 good players per stage), a small sample, so only a rough guide to difficulty. Nobody has played these by hand yet. If a new layout goes in, the title demos get new seeds. Picked: A. In the game from build 187.",
+     "options": [
+      {
+       "id": "Now",
+       "title": "As it is",
+       "note": "Stage 3-5 today. The bots died 54 times in 16 games here.",
+       "images": [
+        {
+         "src": "img/stage35-r1/Now.jpg",
+         "label": "storm"
+        }
+       ]
+      },
+      {
+       "id": "A",
+       "title": "Fable's pick",
+       "note": "\"Tidy Z\": Pier 9's S flipped, on the same ladder columns as every other stage: the belts drag you into the dead ends, the top belt stays, the ladders by the doors go. Bots: 52 deaths in 16 games.",
+       "images": [
+        {
+         "src": "img/stage35-r1/A.jpg",
+         "label": "storm"
+        }
+       ]
+      },
+      {
+       "id": "B",
+       "title": "Another way",
+       "note": "\"Downhill\": a mirror image where every belt runs the way down, so going down is a slide and you climb against them to reach the containers. 11 containers, no top belt; its middle hole echoes Broken Deck's. Easier. Bots: 29 deaths in 16 games.",
+       "images": [
+        {
+         "src": "img/stage35-r1/B.jpg",
+         "label": "storm"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "keys",
+   "title": "Theme song: the keyboard sound",
+   "rounds": [
+    {
+     "id": "r1",
+     "date": "2026-11-11",
+     "status": "decided",
+     "question": "Same song, same notes, same band: only the keyboard that plays the tune and the left hand changes. Which sound? (You can pick one, or mix: say which in the note, e.g. one sound for the tune and another for the left hand.)",
+     "found": "The first 48 seconds of the song each (the intro and the first strain twice), recorded from the game's own synth, loudness-matched so none sounds better just by being louder. Picked: the marimba (G) while you play, the honky-tonk piano as it is on the menus and the pause menu. In the game from build 199.",
+     "options": [
+      {
+       "id": "Now",
+       "title": "As it is: honky-tonk",
+       "note": "The ragtime piano in the game now: a bright, buzzy synth piano playing both hands.",
+       "audio": "img/keys-r1/Now.mp3"
+      },
+      {
+       "id": "B",
+       "title": "Upright piano",
+       "note": "Rounder and warmer: a soft hammer, notes ring a little longer and darken as they fade. The most like a real parlor piano.",
+       "audio": "img/keys-r1/B.mp3"
+      },
+      {
+       "id": "C",
+       "title": "Tack piano (saloon)",
+       "note": "The old saloon sound: three strings tuned a little apart for the honky-tonk wobble, bright, with a tack on each hammer.",
+       "audio": "img/keys-r1/C.mp3"
+      },
+      {
+       "id": "D",
+       "title": "Electric piano",
+       "note": "A Rhodes-style tine: soft and round, a little bell on each note that melts away, and a slow shimmer. Smooth and cool, more lounge than saloon.",
+       "audio": "img/keys-r1/D.mp3"
+      },
+      {
+       "id": "E",
+       "title": "Clavinet",
+       "note": "A funky plucked string: bright and snappy, each note closing fast. Gives the rag a bouncier, 70s feel.",
+       "audio": "img/keys-r1/E.mp3"
+      },
+      {
+       "id": "F",
+       "title": "Chiptune",
+       "note": "Old game console: the tune on a square-ish pulse, the left hand on the triangle bass. Very retro arcade.",
+       "audio": "img/keys-r1/F.mp3"
+      },
+      {
+       "id": "G",
+       "title": "Marimba",
+       "note": "Warm wooden bars: a soft knock and a quick ring, the left hand deep and round. Light and playful.",
+       "audio": "img/keys-r1/G.mp3"
+      }
+     ],
+     "chosen": "G"
+    }
+   ]
+  },
+  {
+   "id": "rushend",
+   "title": "POWER RUSH running out: 3, 2, 1",
+   "rounds": [
+    {
+     "id": "r1",
+     "date": "2026-11-11",
+     "status": "decided",
+     "question": "The last three seconds of POWER RUSH counted down in big numbers, so you know it's ending. Which look?",
+     "found": "Each clip is the end of a rush on 1-2 (with sound: every option has the same beep on each number and a lower double beep when the rush ends, so only the look differs; tell me if you want the sound changed too). The play copies start on 1-2 and give you a POWER RUSH at the start of every stage. Picked: C, the badge, with a rising whoosh under it that cuts off the moment the rush ends. In the game from build 202.",
+     "options": [
+      {
+       "id": "A",
+       "title": "Over Buck",
+       "note": "A big number riding just above his hat, landing big and settling each second: yellow 3 and 2, pink 1.",
+       "images": [
+        {
+         "src": "img/rushend-r1/A.mp4",
+         "label": "The last seconds of a rush"
+        }
+       ],
+       "sound": true
+      },
+      {
+       "id": "B",
+       "title": "Centre stage",
+       "note": "A huge see-through number in the middle of the field, pulsing each second; you can still play under it.",
+       "images": [
+        {
+         "src": "img/rushend-r1/B.mp4",
+         "label": "The last seconds of a rush"
+        }
+       ],
+       "sound": true
+      },
+      {
+       "id": "C",
+       "title": "Badge over Buck",
+       "note": "The number in a round badge above his hat, with a yellow ring around it draining through each second.",
+       "images": [
+        {
+         "src": "img/rushend-r1/C.mp4",
+         "label": "The last seconds of a rush"
+        }
+       ],
+       "sound": true
+      },
+      {
+       "id": "D",
+       "title": "Over Buck + RUSH OVER",
+       "note": "As A, then RUSH OVER pops up over him when it ends, so you know you can be caught again.",
+       "images": [
+        {
+         "src": "img/rushend-r1/D.mp4",
+         "label": "The last seconds of a rush"
+        }
+       ],
+       "sound": true
+      }
+     ],
+     "chosen": "C"
+    }
+   ]
+  },
+  {
+   "id": "rider",
+   "title": "Rider ready: showing who would ride a container down",
+   "rounds": [
+    {
+     "id": "r1",
+     "date": "2026-11-11",
+     "status": "decided",
+     "question": "When an enemy is standing where he'd ride a container down if it dropped now, the container shows it. Which look?",
+     "found": "It uses exactly the game's rider rule, so it only lights up when dropping the container now really would take them with it (it also lights for an enemy climbing a ladder just above it, since he'd ride too). Each clip has the same scene on 1-1, with the game's sounds: two Pratts walk onto a container, Buck horns them, then walks it and sends both down as riders. The play copies are the normal game with that option on. Picked: B, the rider pips. In the game from build 209.",
+     "options": [
+      {
+       "id": "A",
+       "title": "Rim glow",
+       "note": "The container's outline glows pink and pulses while anyone's on it. More riders make a thicker rim.",
+       "images": [
+        {
+         "src": "img/rider-r1/A.mp4",
+         "label": "Two Pratts ride a container down"
+        }
+       ],
+       "sound": true
+      },
+      {
+       "id": "B",
+       "title": "Rider pips",
+       "note": "A small pink tag on the container's top corner with one dot per enemy who'd ride (up to four).",
+       "images": [
+        {
+         "src": "img/rider-r1/B.mp4",
+         "label": "Two Pratts ride a container down"
+        }
+       ],
+       "sound": true
+      },
+      {
+       "id": "C",
+       "title": "Down arrows",
+       "note": "Pink chevrons run downward under the container, below the catwalk, saying it'll take them down.",
+       "images": [
+        {
+         "src": "img/rider-r1/C.mp4",
+         "label": "Two Pratts ride a container down"
+        }
+       ],
+       "sound": true
+      },
+      {
+       "id": "D",
+       "title": "What it's worth",
+       "note": "The rider bonus it would pay floats above everyone's heads: RIDER +300 for one, +1,500 for two (before the combo).",
+       "images": [
+        {
+         "src": "img/rider-r1/D.mp4",
+         "label": "Two Pratts ride a container down"
+        }
+       ],
+       "sound": true
+      },
+      {
+       "id": "E",
+       "title": "Pink lamps",
+       "note": "The work lamps on top of the container glow and flash pink while anyone's on it.",
+       "images": [
+        {
+         "src": "img/rider-r1/E.mp4",
+         "label": "Two Pratts ride a container down"
+        }
+       ],
+       "sound": true
+      }
+     ]
+    },
+    {
+     "id": "r2",
+     "date": "2026-11-11",
+     "status": "decided",
+     "question": "The rider pips move down onto the catwalk under the container so they don't cover the play area, and the other end shows, in blue, who it would squash if it dropped now. Which way?",
+     "found": "Riders count exactly as the game does. Squashes count anyone in its path from here down to where it would stop (one catwalk, plus one more per rider). That one is a forecast: an enemy can still walk out from under it while it falls. In the clip the yellow container has two stunned Pratts on it (pink, 2) and one under it (blue, 1); the pink one above shows blue 2 because it would squash the two stunned ones. Same scene and sounds in each clip; the play copies are the game with that option on. Picked: A, tags on the catwalk; past four it's four dots and a plus at the growing end (left for pink, right for blue). In the game from build 210.",
+     "options": [
+      {
+       "id": "A",
+       "title": "Tags on the catwalk",
+       "note": "The same little tags, lying on the yellow catwalk under the container's ends: pink on the right for riders, blue on the left for squashes, one cream dot per enemy.",
+       "images": [
+        {
+         "src": "img/rider-r2/A.mp4",
+         "label": "Riders and a squash"
+        }
+       ],
+       "sound": true
+      },
+      {
+       "id": "B",
+       "title": "Lit rivets",
+       "note": "No tag: the catwalk's own rivets under the container light up, one per enemy, glowing pink from the right end (riders) and blue from the left end (squashes).",
+       "images": [
+        {
+         "src": "img/rider-r2/B.mp4",
+         "label": "Riders and a squash"
+        }
+       ],
+       "sound": true
+      },
+      {
+       "id": "C",
+       "title": "Tags under the catwalk",
+       "note": "The tags hang just below the yellow beam under the container's ends, like labels clipped to it: pink right for riders, blue left for squashes.",
+       "images": [
+        {
+         "src": "img/rider-r2/C.mp4",
+         "label": "Riders and a squash"
+        }
+       ],
+       "sound": true
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "best",
+   "title": "New best and on the board, without the stamp",
+   "rounds": [
+    {
+     "id": "r1",
+     "date": "2026-11-11",
+     "status": "decided",
+     "question": "How should the game-over card say you got a new best score, or made the board?",
+     "found": "Each clip shows the card twice, with sound: first a new best (1,234,560), then the same score making the board in third place. Every option comes in with a ding once the score has finished counting up, and none of them sits over the score. Picked: C, the ribbon turns over. In the game from build 216.",
+     "options": [
+      {
+       "id": "Now",
+       "title": "Now: the stamp",
+       "note": "The tilted rubber stamp at the card's top right, as it is (it runs into the score in the millions).",
+       "images": [
+        {
+         "src": "img/best-r1/Now.mp4",
+         "label": "New best, then on the board"
+        }
+       ],
+       "sound": true
+      },
+      {
+       "id": "A",
+       "title": "A tag on the rule",
+       "note": "A yellow tag pops onto the dotted line under the score: NEW BEST! or ON THE BOARD!, with a shine running across it now and then.",
+       "images": [
+        {
+         "src": "img/best-r1/A.mp4",
+         "label": "New best, then on the board"
+        }
+       ],
+       "sound": true
+      },
+      {
+       "id": "B",
+       "title": "The label changes",
+       "note": "Once the score has counted up, FINAL SCORE above it flips to NEW BEST! (or ON THE BOARD!) in pink, with little sparkles either side.",
+       "images": [
+        {
+         "src": "img/best-r1/B.mp4",
+         "label": "New best, then on the board"
+        }
+       ],
+       "sound": true
+      },
+      {
+       "id": "C",
+       "title": "The ribbon turns over",
+       "note": "The pink GAME OVER ribbon flips like a sign to a yellow NEW BEST! (or ON THE BOARD!) ribbon.",
+       "images": [
+        {
+         "src": "img/best-r1/C.mp4",
+         "label": "New best, then on the board"
+        }
+       ],
+       "sound": true
+      },
+      {
+       "id": "D",
+       "title": "Where you placed",
+       "note": "A tag on the rule under the score: NEW BEST! with a little crown for first, or which place you made: 2ND ON THE BOARD, 3RD...",
+       "images": [
+        {
+         "src": "img/best-r1/D.mp4",
+         "label": "New best, then on the board"
+        }
+       ],
+       "sound": true
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "stars",
+   "title": "Dizzy stars that move",
+   "rounds": [
+    {
+     "id": "r1",
+     "date": "2026-11-11",
+     "status": "decided",
+     "question": "When an enemy is stunned, how should his stars (and the gull's feathers) move?",
+     "found": "A to E move the real stars lifted out of each dizzy picture (Pratt, the Watchman and the Forklift have them; the Captain has none; the gull has feathers). F draws new stars like the title's Captain. Left to right in each clip: Pratt, the Watchman, the Captain, the Forklift, the gull, all stunned on 3-1. No sound in these clips. Picked: E. In the game from build 219.",
+     "options": [
+      {
+       "id": "Now",
+       "title": "Now",
+       "note": "The stars sit still in each dizzy picture (the gull's feathers too); only the figure wobbles.",
+       "images": [
+        {
+         "src": "img/stars-r1/Now.mp4",
+         "label": "Five stunned enemies"
+        }
+       ],
+       "play": "play/stars-r1-Now.html"
+      },
+      {
+       "id": "A",
+       "title": "They circle",
+       "note": "The picture's own stars ride round a ring over his head, passing behind it at the back. The gull's feathers circle him the same way.",
+       "images": [
+        {
+         "src": "img/stars-r1/A.mp4",
+         "label": "Five stunned enemies"
+        }
+       ],
+       "play": "play/stars-r1-A.html"
+      },
+      {
+       "id": "B",
+       "title": "They twinkle",
+       "note": "The picture's own stars stay put but each bobs, swells and tilts in turn. The gull's feathers sway.",
+       "images": [
+        {
+         "src": "img/stars-r1/B.mp4",
+         "label": "Five stunned enemies"
+        }
+       ],
+       "play": "play/stars-r1-B.html"
+      },
+      {
+       "id": "C",
+       "title": "They spin",
+       "note": "The picture's own stars spin on the spot, each at its own pace, with a little bob. The gull's feathers tumble.",
+       "images": [
+        {
+         "src": "img/stars-r1/C.mp4",
+         "label": "Five stunned enemies"
+        }
+       ],
+       "play": "play/stars-r1-C.html"
+      },
+      {
+       "id": "D",
+       "title": "They hop in turn",
+       "note": "The picture's own stars hop up and pop one after another, left to right, round and round. The feathers too.",
+       "images": [
+        {
+         "src": "img/stars-r1/D.mp4",
+         "label": "Five stunned enemies"
+        }
+       ],
+       "play": "play/stars-r1-D.html"
+      },
+      {
+       "id": "E",
+       "title": "Circle, stars for all",
+       "note": "Like A, and the Captain (who has no stars in his picture) gets three drawn stars circling his cap.",
+       "images": [
+        {
+         "src": "img/stars-r1/E.mp4",
+         "label": "Five stunned enemies"
+        }
+       ],
+       "play": "play/stars-r1-E.html"
+      },
+      {
+       "id": "F",
+       "title": "Drawn stars, like the title",
+       "note": "The pictures' stars go; every stunned enemy gets the three drawn stars circling his head that the Captain has after he bonks into the container in the title. The gull's feathers circle.",
+       "images": [
+        {
+         "src": "img/stars-r1/F.mp4",
+         "label": "Five stunned enemies"
+        }
+       ],
+       "play": "play/stars-r1-F.html"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

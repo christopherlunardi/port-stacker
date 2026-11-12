@@ -1,0 +1,93 @@
+// Option A: CUTE ROUND MASCOTS. Each pest is a plump ball with one big eye: a white gull with a yellow beak, a round pink crab
+// with eyes on stalks, and a violet (pink+blue) mouse-rat with big round ears and a pink nose. Soft, toy-like, friendly.
+// Stun: they go paper-white with pink stars and a little "zzz"-ish wobble; spawn blink and ride wobble kept.
+C.vio = [255, 150, 0]; C.vioL = [255, 60, 0]; // violet and a lighter tint: pink over blue
+SLET.v = 'vio'; SLET.V = 'vioL';
+SPRITES.gull0 = [
+  '.....bbbbb......',
+  '...bbwwwwwbb....',
+  '..bwwwwwwwwwb...',
+  '.bwwwwwwbbwwb...',
+  '.bwwwwwwbbbwbyyy',
+  'bwwwwwwwbwbwbyy.',
+  'bwBBwwwwwbbwwb..',
+  'bwBBBwwwwwwwwb..',
+  'bwBBBBwwwwwwb...',
+  '.bwBBBwwwwwb....',
+  '..bbbbbbbbb.....',
+  '....b...b.......',
+  '...yyy.yyy......',
+];
+SPRITES.gull1 = [
+  '.....bbbbb......',
+  '...bbwwwwwbb....',
+  '..bwwwwwwwwwb...',
+  'bbbwwwwwbbwwb...',
+  'bBBbwwwwbbbwbyyy',
+  'bBBBbwwwbwbwbyy.',
+  '.bBBBwwwwbbwwb..',
+  '.bwBBwwwwwwwwb..',
+  'bwwwwwwwwwwwb...',
+  '.bwwwwwwwwwb....',
+  '..bbbbbbbbb.....',
+  '.....b.b........',
+  '....yyyyyy......',
+];
+SPRITES.crab0 = [
+  '.bbbb.....bbbb..',
+  'bwwwwb...bwwwwb.',
+  'bwbbwb...bwbbwb.',
+  'bwbbwb...bwbbwb.',
+  '.bbbb.....bbbb..',
+  'bbpbbpppppbbpbb.',
+  'bppbpppppppbbppb',
+  'bLpbpppppppppppb',
+  '.bbbppbpppbpppb.',
+  '...bpppbbbpppb..',
+  '....bbbbbbbbb...',
+  '...b.b.b.b.b.b..',
+];
+SPRITES.crab1 = [
+  '.bbbb.....bbbb..',
+  'bwwwwb...bwwwwb.',
+  'bwbbwb...bwbbwb.',
+  'bwbbwb...bwbbwb.',
+  '.bbbb.....bbbb..',
+  '.bpbbpppppbbpbb.',
+  'bppbpppppppbbppb',
+  'bLpbpppppppppppb',
+  '.bbbppbpppbpppb.',
+  '...bpppbbbpppb..',
+  '....bbbbbbbbb...',
+  '..b.b.b.b.b.b.b.',
+];
+SPRITES.rat0 = [
+  '....bbb...bbb...',
+  '...bvVvb.bvVvb..',
+  '...bvVvbbbvVvb..',
+  '....bvvvvvvvb...',
+  '....bvvvvbbbvbb.',
+  '...bvvvvvbwwbvpb',
+  '..bvvvvvvbwbbvpb',
+  '.bvvvvvvvvbbbvb.',
+  'bpbvvvwwwvvvvb..',
+  'bpbvvwwwwwvvb...',
+  '.bbvvwwwwwvb....',
+  '...bbbbbbbb.....',
+  '...bpb..bpb.....',
+];
+SPRITES.rat1 = [
+  '....bbb...bbb...',
+  '...bvVvb.bvVvb..',
+  '...bvVvbbbvVvb..',
+  '....bvvvvvvvb...',
+  '....bvvvvbbbvbb.',
+  '...bvvvvvbwwbvpb',
+  '..bvvvvvvbwbbvpb',
+  'bbbvvvvvvvbbbvb.',
+  'bpbvvvwwwvvvvb..',
+  '.bbvvwwwwwvvb...',
+  '..bvvwwwwwvb....',
+  '...bbbbbbbb.....',
+  '....bpbbpb......',
+];

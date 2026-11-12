@@ -1,0 +1,210 @@
+<title>Port Stacker Workshop</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Oswald:wght@500;700&family=Work+Sans:wght@400;500;600&display=swap">
+<style>
+:root { --paper: #f7ecde; --card: #fffaf2; --ink: #2a1b7a; --soft: #5a4d98; --pink: #ff48b0; --pinkL: #ffd3ea; --blue: #2656c4; --sky: #5ec3ec;
+  --yel: #ffe200; --rule: #e3d3bf; --shade: rgba(42, 27, 122, .18); --onpink: #fff; color-scheme: light; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --paper: #17113f; --card: #211a55; --ink: #f7ecde; --soft: #b9b0e6; --pink: #ff6cc0; --pinkL: #4a2160;
+  --blue: #7fa4ff; --sky: #5ec3ec; --yel: #ffe200; --rule: #392f7a; --shade: rgba(0, 0, 0, .45); --onpink: #17113f; color-scheme: dark; } }
+:root[data-theme="dark"] { --paper: #17113f; --card: #211a55; --ink: #f7ecde; --soft: #b9b0e6; --pink: #ff6cc0; --pinkL: #4a2160;
+  --blue: #7fa4ff; --sky: #5ec3ec; --yel: #ffe200; --rule: #392f7a; --shade: rgba(0, 0, 0, .45); --onpink: #17113f; color-scheme: dark; }
+* { box-sizing: border-box; }
+body { background: var(--paper); color: var(--ink); font: 400 16px/1.5 "Work Sans", system-ui, sans-serif;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 0 80px; }
+.wrap { max-width: 1100px; margin: 0 auto; }
+header { padding-block: 26px 10px; display: flex; flex-wrap: wrap; align-items: flex-end; gap: 6px 18px; }
+h1 { font: 400 clamp(30px, 6vw, 48px)/1 "Alfa Slab One", Georgia, serif; margin: 0; letter-spacing: .01em; color: var(--pink); text-shadow: 3px 3px 0 var(--blue); }
+.sub { font: 500 13px "Oswald", sans-serif; letter-spacing: .18em; text-transform: uppercase; color: var(--soft); padding-bottom: 4px; }
+nav { display: flex; flex-wrap: wrap; gap: 8px; padding-block: 14px; border-bottom: 3px solid var(--ink); margin-bottom: 20px; }
+nav button { font: 700 14px "Oswald", sans-serif; letter-spacing: .08em; text-transform: uppercase; color: var(--ink); background: var(--card);
+  border: 2px solid var(--ink); border-radius: 999px; padding: 6px 14px; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; }
+nav button[aria-current="true"] { background: var(--ink); color: var(--paper); }
+.dot { width: 9px; height: 9px; border-radius: 50%; background: var(--pink); flex: none; }
+.dot.sent { background: var(--sky); } .dot.decided { background: var(--soft); opacity: .5; }
+.rounds { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 10px; }
+.rounds button { font: 600 13px "Work Sans", sans-serif; background: none; border: 1px solid var(--rule); color: var(--soft); border-radius: 6px; padding: 3px 10px; cursor: pointer; }
+.rounds button[aria-current="true"] { border-color: var(--ink); color: var(--ink); }
+.q { font: 400 clamp(19px, 3vw, 24px)/1.35 "Alfa Slab One", Georgia, serif; margin: 4px 0 10px; text-wrap: balance; max-width: 60ch; }
+.found { color: var(--soft); max-width: 70ch; margin: 0 0 18px; }
+.banner { display: inline-block; font: 700 13px "Oswald", sans-serif; letter-spacing: .14em; text-transform: uppercase; background: var(--yel); color: #2a1b7a; padding: 4px 12px; border-radius: 4px; margin-bottom: 14px; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 420px), 1fr)); gap: 18px; }
+.opt { background: var(--card); border: 2px solid var(--ink); border-radius: 10px; box-shadow: 5px 5px 0 var(--shade); display: flex; flex-direction: column; min-width: 0; overflow: hidden; }
+.opt.picked { border-color: var(--pink); box-shadow: 5px 5px 0 var(--pink); }
+.opt.chosen { border-color: var(--yel); box-shadow: 5px 5px 0 var(--yel); }
+.ohead { display: flex; gap: 12px; align-items: center; padding: 12px 14px 4px; }
+.letter { font: 400 22px/1 "Alfa Slab One", serif; width: 40px; height: 40px; flex: none; display: grid; place-items: center; background: var(--pink); color: var(--onpink); border-radius: 6px; }
+.otitle { font: 700 19px/1.2 "Oswald", sans-serif; letter-spacing: .03em; text-transform: uppercase; margin: 0; }
+.note { padding: 2px 14px 10px; color: var(--soft); margin: 0; font-size: 15px; }
+.media { padding: 0 14px; display: grid; gap: 8px; }
+.views { display: flex; gap: 4px; flex-wrap: wrap; }
+.views button { font: 600 12px "Work Sans", sans-serif; border: 1px solid var(--rule); background: none; color: var(--soft); border-radius: 4px; padding: 2px 8px; cursor: pointer; }
+.views button[aria-pressed="true"] { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.shot { display: block; width: 100%; padding: 0; border: 1px solid var(--rule); border-radius: 6px; overflow: hidden; background: #000; cursor: zoom-in; }
+.soundbtn { margin-top: 6px; width: 100%; }
+.shot img, .shot video { display: block; width: 100%; height: auto; image-rendering: auto; }
+.player { display: grid; grid-template-columns: auto 1fr auto; gap: 10px; align-items: center; background: var(--paper); border: 1px solid var(--rule); border-radius: 8px; padding: 8px 10px; }
+.pbtn { width: 44px; height: 44px; border-radius: 50%; border: 2px solid var(--ink); background: var(--yel); color: #2a1b7a; font-size: 18px; cursor: pointer; display: grid; place-items: center; }
+.bar { height: 12px; border-radius: 6px; background: var(--rule); position: relative; cursor: pointer; touch-action: none; }
+.bar i { position: absolute; inset: 0 auto 0 0; width: 0; background: var(--pink); border-radius: 6px; }
+.time { font: 500 13px "Oswald", sans-serif; color: var(--soft); min-width: 74px; text-align: right; font-variant-numeric: tabular-nums; }
+.acts { display: flex; flex-wrap: wrap; gap: 8px; padding: 12px 14px 4px; }
+.btn { font: 700 14px "Oswald", sans-serif; letter-spacing: .06em; text-transform: uppercase; border: 2px solid var(--ink); background: var(--card); color: var(--ink); border-radius: 6px; padding: 8px 14px; cursor: pointer; }
+.btn.pick[aria-pressed="true"] { background: var(--pink); border-color: var(--pink); color: var(--onpink); }
+.btn.go { background: var(--blue); border-color: var(--blue); color: #fff; }
+textarea { width: 100%; min-height: 64px; resize: vertical; font: 400 15px/1.4 "Work Sans", sans-serif; color: var(--ink); background: var(--paper); border: 1px solid var(--rule); border-radius: 6px; padding: 8px 10px; }
+.onote { padding: 8px 14px 14px; margin-top: auto; }
+.general { margin-top: 24px; background: var(--card); border: 2px solid var(--ink); border-radius: 10px; padding: 14px; display: grid; gap: 10px; }
+.general label, .onote label { font: 700 12px "Oswald", sans-serif; letter-spacing: .12em; text-transform: uppercase; color: var(--soft); }
+.sendrow { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+.status { color: var(--soft); font-size: 14px; }
+.btn.send { background: var(--pink); border-color: var(--pink); color: var(--onpink); font-size: 16px; padding: 10px 18px; }
+.btn.send.done { background: var(--sky); border-color: var(--sky); color: #17113f; }
+dialog { border: 0; padding: 0; background: transparent; max-width: none; max-height: none; width: 100vw; height: 100dvh; margin: 0; }
+dialog::backdrop { background: rgba(10, 6, 30, .96); }
+dialog[open] { background: rgba(10, 6, 30, .96); }
+.dl { width: 100%; height: 100%; display: flex; flex-direction: column; color: #f7ecde; padding: env(safe-area-inset-top, 0px) max(10px, env(safe-area-inset-right, 0px)) env(safe-area-inset-bottom, 0px) max(10px, env(safe-area-inset-left, 0px)); }
+.dtop { display: flex; gap: 10px; align-items: center; padding-block: 10px; flex-wrap: wrap; }
+.dcap { font: 700 16px "Oswald", sans-serif; letter-spacing: .06em; text-transform: uppercase; flex: 1; min-width: 0; }
+.dl .btn { background: #211a55; color: #f7ecde; border-color: #f7ecde; }
+.dl a.btn { text-decoration: none; }
+.dstage { flex: 1; min-height: 0; display: grid; place-items: center; overflow: hidden; touch-action: pan-y; }
+.dstage img, .dstage video { max-width: 100%; max-height: 100%; object-fit: contain; image-rendering: pixelated; }
+.dstage iframe { width: 100%; height: 100%; border: 0; border-radius: 8px; background: #17113f; }
+.dnav { display: flex; gap: 10px; align-items: center; justify-content: center; padding-block: 10px; flex-wrap: wrap; }
+.dl .views button { color: #cfc6ff; border-color: #4a3f8f; } .dl .views button[aria-pressed="true"] { background: #f7ecde; color: #17113f; }
+.empty { color: var(--soft); padding: 40px 0; }
+</style>
+
+<div class="wrap">
+  <header><h1>Port Stacker Workshop</h1><span class="sub">options to look at, hear and play &middot; pick one, leave notes</span></header>
+  <nav id="topics" aria-label="Topics"></nav>
+  <main id="main"><p class="empty">Loading the options&hellip;</p></main>
+</div>
+
+<dialog id="big" aria-label="Big view"><div class="dl">
+  <div class="dtop"><span class="dcap" id="bigCap"></span><button class="btn" id="bigClose">Close</button></div>
+  <div class="dstage" id="bigStage"><img id="bigImg" alt=""></div>
+  <div class="dnav"><button class="btn" id="bigPrev" aria-label="Previous option">&larr;</button><div class="views" id="bigViews"></div><button class="btn" id="bigNext" aria-label="Next option">&rarr;</button></div>
+</div></dialog>
+
+<dialog id="game" aria-label="Play it"><div class="dl">
+  <div class="dtop"><span class="dcap" id="gameCap"></span><a class="btn" id="gameTab" target="_blank" rel="noopener">Own tab</a><button class="btn" id="gameClose">Close</button></div>
+  <div class="dstage"><iframe id="gameFrame" title="The game with this option" allow="autoplay; fullscreen; gamepad"></iframe></div>
+</div></dialog>
+
+<script>
+const $ = s => document.querySelector(s);
+const h = (tag, attrs = {}, ...kids) => { const e = document.createElement(tag);
+  for (const [k, v] of Object.entries(attrs)) { if (k === 'class') e.className = v; else if (k === 'muted') { e.muted = !!v; e.defaultMuted = !!v; if (v) e.setAttribute('muted', ''); } else if (k.startsWith('on')) e.addEventListener(k.slice(2), v); else if (v !== false && v != null) e.setAttribute(k, v === true ? '' : v); }
+  for (const k of kids.flat()) if (k != null) e.append(k.nodeType ? k : document.createTextNode(k)); return e; };
+const store = { get(k, d) { try { const v = localStorage.getItem('psw.' + k); return v == null ? d : JSON.parse(v); } catch (e) { return d; } }, set(k, v) { try { localStorage.setItem('psw.' + k, JSON.stringify(v)); } catch (e) {} } };
+let WS = null, db = null, cur = { topic: null, round: null }, view = {}; // view: roundKey -> image index shown
+const fb = {}; const subs = {}; const keyOf = (t, r) => t + '-' + r;
+
+// ---------- sound: each file is fetched whole, then played with an <audio> element (plays with an iPhone's silent switch on) ----------
+const SND = { el: null, ui: null };
+function stopSound() { if (SND.el) SND.el.pause(); if (SND.ui) SND.ui.set(false); SND.ui = null; }
+function player(url) {
+  const btn = h('button', { class: 'pbtn', type: 'button', 'aria-label': 'Play' }, '▶'), fill = h('i'), bar = h('div', { class: 'bar', role: 'slider', 'aria-label': 'Position', tabindex: 0 }, fill), time = h('span', { class: 'time' }, '0:00');
+  let blobUrl = null, dur = 0; const ready = fetch(url).then(r => { if (!r.ok) throw 0; return r.blob(); }).then(b => (blobUrl = URL.createObjectURL(b))).catch(() => null);
+  const fmt = s => Math.floor(s / 60) + ':' + String(Math.floor(s % 60)).padStart(2, '0');
+  const ui = { set(on) { btn.textContent = on ? '■' : '▶'; btn.setAttribute('aria-label', on ? 'Stop' : 'Play'); }, tick() { const el = SND.el; if (!el || SND.ui !== ui) return; dur = el.duration || dur; fill.style.width = (dur ? el.currentTime / dur * 100 : 0) + '%'; time.textContent = fmt(el.currentTime) + ' / ' + fmt(dur); } };
+  async function start(at) {
+    const el = SND.el || (SND.el = new Audio()); if (SND.ui && SND.ui !== ui) SND.ui.set(false); SND.ui = ui; ui.set(true);
+    el.ontimeupdate = () => SND.ui && SND.ui.tick(); el.onended = () => { if (SND.ui === ui) { ui.set(false); SND.ui = null; } };
+    if (!blobUrl) { btn.textContent = '…'; el.play().catch(() => {}); await ready; if (SND.ui !== ui) return; if (!blobUrl) { time.textContent = 'could not load'; ui.set(false); SND.ui = null; return; } }
+    if (el.src !== blobUrl) el.src = blobUrl; el.onloadedmetadata = () => { dur = el.duration; if (at != null) el.currentTime = at * dur; };
+    if (at != null && el.duration) el.currentTime = at * el.duration; el.play().then(() => ui.set(true)).catch(() => { ui.set(false); time.textContent = 'tap again'; SND.ui = null; }); }
+  btn.addEventListener('click', () => { if (SND.ui === ui && SND.el && !SND.el.paused) stopSound(); else start(null); });
+  const seek = e => { const r = bar.getBoundingClientRect(); const f = Math.max(0, Math.min(1, (e.clientX - r.left) / r.width)); if (SND.ui === ui && SND.el && SND.el.duration) SND.el.currentTime = f * SND.el.duration; else start(f); };
+  bar.addEventListener('pointerdown', e => { bar.setPointerCapture(e.pointerId); seek(e); }); bar.addEventListener('pointermove', e => { if (e.buttons) seek(e); });
+  bar.addEventListener('keydown', e => { if (!SND.el || SND.ui !== ui) return; if (e.key === 'ArrowRight') SND.el.currentTime += 5; if (e.key === 'ArrowLeft') SND.el.currentTime -= 5; });
+  return h('div', { class: 'player' }, btn, bar, time);
+}
+
+// ---------- feedback: one doc per round in the page's database, collection 'feedback' (Claude reads it) ----------
+let saveT = 0; const dirty = {}; // rounds with edits not yet saved: the server's copy must not overwrite them
+const status = t => { const s = $('#status'); if (s) s.textContent = t; };
+function saveSoon(key) { clearTimeout(saveT); status('Saving…'); saveT = setTimeout(() => save(key), 700); }
+async function save(key) {
+  const f = fb[key]; store.set('fb.' + key, f); const mine = dirty[key];
+  if (!db) { status('Saved on this device only (not signed in to claude.ai)'); return; }
+  try { await db.doc('feedback/' + key).set({ pick: f.pick || null, notes: f.notes || {}, general: f.general || '', submitted: !!f.submitted, submittedAt: f.submittedAt || null, updatedAt: new Date().toISOString() });
+    if (dirty[key] === mine) delete dirty[key]; status(f.submitted ? 'Sent to Claude' : 'Draft saved — press Send when you’re done'); } catch (e) { status('Could not save: ' + (e.message || e.code || e)); }
+}
+function edited(key) { const f = fb[key]; dirty[key] = (dirty[key] || 0) + 1; if (f.submitted) { f.submitted = false; const b = $('#send'); if (b) { b.classList.remove('done'); b.textContent = 'Send to Claude'; } } saveSoon(key); }
+function watch(key) {
+  if (!db || subs[key]) return;
+  try { subs[key] = db.doc('feedback/' + key).onSnapshot(snap => { const d = snap && (snap.data ? snap.data() : snap); if (!d) return;
+    if (dirty[key] || (document.activeElement && document.activeElement.tagName === 'TEXTAREA')) return; // don't overwrite what's being typed
+    fb[key] = { pick: d.pick || null, notes: d.notes || {}, general: d.general || '', submitted: !!d.submitted, submittedAt: d.submittedAt || null }; renderNav(); if (keyOf(cur.topic, cur.round) === key) renderRound(); }, () => {}); } catch (e) {}
+}
+
+// ---------- page ----------
+function topicState(t) { const r = t.rounds[t.rounds.length - 1]; if (r.status === 'decided') return 'decided'; const f = fb[keyOf(t.id, r.id)]; return f && f.submitted ? 'sent' : 'open'; }
+function renderNav() {
+  const nav = $('#topics'); nav.replaceChildren(...WS.topics.map(t => h('button', { type: 'button', 'aria-current': String(t.id === cur.topic), onclick: () => go(t.id) },
+    h('span', { class: 'dot ' + topicState(t), title: topicState(t) }), t.title)));
+}
+function go(topic, round) { const t = WS.topics.find(x => x.id === topic) || WS.topics[0]; cur.topic = t.id; cur.round = round || t.rounds[t.rounds.length - 1].id;
+  stopSound(); try { history.replaceState(null, '', '#' + cur.topic); } catch (e) {} store.set('topic', cur.topic); renderNav(); renderRound(); watch(keyOf(cur.topic, cur.round)); }
+function renderRound() {
+  const t = WS.topics.find(x => x.id === cur.topic), r = t.rounds.find(x => x.id === cur.round), key = keyOf(t.id, r.id);
+  const f = fb[key] || (fb[key] = store.get('fb.' + key, null) || { pick: null, notes: {}, general: '' });
+  const decided = r.status === 'decided', main = $('#main');
+  const roundsBar = t.rounds.length > 1 ? h('div', { class: 'rounds' }, t.rounds.map(x => h('button', { type: 'button', 'aria-current': String(x.id === r.id), onclick: () => go(t.id, x.id) }, 'Round ' + x.id.replace(/^r/, '') + (x.status === 'decided' ? ' ✓' : '')))) : null;
+  const cards = r.options.map((o, oi) => {
+    const pickBtn = decided ? null : h('button', { type: 'button', class: 'btn pick', 'aria-pressed': String(f.pick === o.id), onclick: () => { f.pick = f.pick === o.id ? null : o.id; edited(key); renderRound(); } }, f.pick === o.id ? '★ My pick' : 'Pick this');
+    const playBtn = o.play ? h('button', { type: 'button', class: 'btn go', onclick: () => openGame(o, r) }, '▶ Play in game') : null;
+    let media = null;
+    if (o.images && o.images.length) {
+      const vi = Math.min(view[key] || 0, o.images.length - 1), im = o.images[vi];
+      const tabs = o.images.length > 1 ? h('div', { class: 'views' }, o.images.map((x, i) => h('button', { type: 'button', 'aria-pressed': String(i === vi), onclick: () => { view[key] = i; renderRound(); } }, x.label))) : null;
+      media = h('div', { class: 'media' }, tabs, h('button', { type: 'button', class: 'shot', 'aria-label': 'Look closer at ' + o.title, onclick: () => openBig(oi) }, (/\.(mp4|webm)$/.test(im.src) ? h('video', { src: im.src, autoplay: true, loop: true, muted: true, playsinline: true, 'aria-label': o.title + ', ' + im.label }) : h('img', { src: im.src, alt: o.title + ', ' + im.label, loading: 'lazy' }))));
+    }
+    if (o.sound && media) { const vidEl = media.querySelector('video');
+      if (vidEl) media.append(h('button', { type: 'button', class: 'btn soundbtn', onclick: () => { document.querySelectorAll('video').forEach(v => { if (v !== vidEl) { v.muted = true; } }); vidEl.muted = false; vidEl.currentTime = 0; vidEl.play().catch(() => {}); } }, 'Play with sound')); } // only this one plays its sound (videos are muted otherwise)
+    if (o.audio) media = h('div', { class: 'media' }, media, player(o.audio));
+    const ta = decided ? null : h('textarea', { 'data-oid': o.id, 'aria-label': 'Notes on ' + o.title, onchange: e => { f.notes[o.id] = e.target.value; edited(key); }, placeholder: 'What works, what doesn’t…', oninput: e => { f.notes[o.id] = e.target.value; edited(key); } }); if (ta) ta.value = (f.notes || {})[o.id] || '';
+    return h('article', { class: 'opt' + (f.pick === o.id ? ' picked' : '') + (decided && r.chosen === o.id ? ' chosen' : '') },
+      h('div', { class: 'ohead' }, h('span', { class: 'letter' }, o.id.length > 2 ? '•' : o.id), h('h3', { class: 'otitle' }, o.title + (decided && r.chosen === o.id ? ' — chosen' : ''))),
+      h('p', { class: 'note' }, o.note || ''), media, (pickBtn || playBtn) ? h('div', { class: 'acts' }, pickBtn, playBtn) : null,
+      ta ? h('div', { class: 'onote' }, h('label', {}, 'Notes'), ta) : h('div', { class: 'onote' }));
+  });
+  let general = null;
+  if (!decided) { const g = h('textarea', { 'aria-label': 'Anything else', onchange: e => { f.general = e.target.value; edited(key); }, placeholder: 'Mix them? Something else entirely?', oninput: e => { f.general = e.target.value; edited(key); } }); g.value = f.general || '';
+    const send = h('button', { type: 'button', id: 'send', class: 'btn send' + (f.submitted ? ' done' : ''), onclick: () => { document.querySelectorAll('textarea[data-oid]').forEach(t => { f.notes[t.dataset.oid] = t.value; }); const gt = $('#gen'); if (gt) f.general = gt.value; f.submitted = true; f.submittedAt = new Date().toISOString(); clearTimeout(saveT); save(key); send.classList.add('done'); send.textContent = 'Sent ✓'; renderNav(); } }, f.submitted ? 'Sent ✓' : 'Send to Claude');
+    general = h('section', { class: 'general' }, h('label', { for: 'gen' }, 'Anything else'), g, h('div', { class: 'sendrow' }, send, h('span', { class: 'status', id: 'status' }, f.submitted ? 'Sent to Claude' : (f.pick ? 'Draft — press Send when you’re done' : 'Pick one, add notes, then Send')))); g.id = 'gen'; }
+  main.replaceChildren(...[roundsBar, decided ? h('div', { class: 'banner' }, 'Decided — ' + (r.options.find(o => o.id === r.chosen) || {}).title) : null,
+    h('h2', { class: 'q' }, r.question), r.found ? h('p', { class: 'found' }, r.found) : null, h('div', { class: 'grid' }, cards), general].filter(Boolean));
+}
+
+// ---------- big view: flip between options at the same view (← → keys, swipe) ----------
+let big = { i: 0 };
+function bigOpts() { const r = WS.topics.find(x => x.id === cur.topic).rounds.find(x => x.id === cur.round); return r.options.filter(o => o.images && o.images.length); }
+function showBig() { const os = bigOpts(), o = os[big.i], key = keyOf(cur.topic, cur.round), vi = Math.min(view[key] || 0, o.images.length - 1);
+  const src = o.images[vi].src, vid = /\.(mp4|webm)$/.test(src), st = $('#bigStage'); let el = st.firstElementChild;
+  if (vid !== (el.tagName === 'VIDEO')) { el = vid ? h('video', { autoplay: true, loop: true, muted: true, playsinline: true }) : h('img', { alt: '' }); el.id = 'bigImg'; st.replaceChildren(el); }
+  el.src = src; if (!vid) el.alt = o.title; else { document.querySelectorAll('.grid video').forEach(v => { v.muted = true; }); el.muted = !o.sound; el.play && el.play().catch(() => {}); } $('#bigCap').textContent = (o.id.length > 2 ? '' : o.id + ' · ') + o.title + (o.images.length > 1 ? ' · ' + o.images[vi].label : '') + '   (' + (big.i + 1) + '/' + os.length + ')';
+  $('#bigViews').replaceChildren(...(o.images.length > 1 ? o.images.map((x, i) => h('button', { type: 'button', 'aria-pressed': String(i === vi), onclick: () => { view[key] = i; showBig(); renderRound(); } }, x.label)) : [])); }
+function openBig(oi) { const r = WS.topics.find(x => x.id === cur.topic).rounds.find(x => x.id === cur.round); big.i = Math.max(0, bigOpts().indexOf(r.options[oi])); showBig(); $('#big').showModal(); }
+const step = d => { const n = bigOpts().length; big.i = (big.i + d + n) % n; showBig(); };
+$('#bigPrev').onclick = () => step(-1); $('#bigNext').onclick = () => step(1); $('#bigClose').onclick = () => $('#big').close(); $('#big').addEventListener('close', () => { const v = $('#bigStage video'); if (v) v.muted = true; });
+$('#big').addEventListener('keydown', e => { if (e.key === 'ArrowLeft') step(-1); if (e.key === 'ArrowRight') step(1); });
+{ let sx = null; const st = $('#bigStage'); st.addEventListener('pointerdown', e => { sx = e.clientX; }); st.addEventListener('pointerup', e => { if (sx != null && Math.abs(e.clientX - sx) > 40) step(e.clientX < sx ? 1 : -1); else if (sx != null && Math.abs(e.clientX - sx) < 6) step(1); sx = null; }); }
+
+// ---------- play in game ----------
+function openGame(o, r) { stopSound(); $('#gameCap').textContent = 'Playing: ' + o.title; $('#gameTab').href = o.play; $('#gameFrame').src = o.play; $('#game').showModal(); }
+$('#gameClose').onclick = () => $('#game').close();
+$('#game').addEventListener('close', () => { $('#gameFrame').src = 'about:blank'; });
+
+// ---------- start ----------
+(async () => {
+  try { WS = await (await fetch('workshop.json', { cache: 'no-store' })).json(); } catch (e) { $('#main').replaceChildren(h('p', { class: 'empty' }, 'Couldn’t load the options.')); return; }
+  const want = (location.hash || '').slice(1) || store.get('topic', null);
+  go(WS.topics.some(t => t.id === want) ? want : WS.topics[0].id);
+  window.addEventListener('hashchange', () => { const id = location.hash.slice(1); if (id && id !== cur.topic && WS.topics.some(t => t.id === id)) go(id); });
+  try { if (window.claude && claude.use) { db = await claude.use('db'); if (db) { WS.topics.forEach(t => t.rounds.forEach(r => { if (r.status !== 'decided') watch(keyOf(t.id, r.id)); })); } } } catch (e) { db = null; }
+})();
+</script>

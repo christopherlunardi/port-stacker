@@ -1,0 +1,13 @@
+// The Stack Style launcher for Android (the Retroid Pocket 2S and Pocket 6, from Daijisho or the home screen). Built by GitHub
+// (.github/workflows/android.yml) and put on the "launcher" release. The game itself updates over the air (MainActivity); this app
+// only needs reinstalling when MainActivity changes.
+plugins { id 'com.android.application' }
+android {
+  namespace 'com.ghostjail.stackstyle'
+  compileSdk 34
+  defaultConfig { applicationId 'com.ghostjail.stackstyle'; minSdk 24; targetSdk 34
+    versionCode((System.getenv('VERSION_CODE') ?: '1') as Integer); versionName '1.' + (System.getenv('VERSION_CODE') ?: '0') }
+  signingConfigs { sideload { storeFile file('../stackstyle-sideload.jks'); storePassword 'stackstyle'; keyAlias 'ss'; keyPassword 'stackstyle' } } // a fixed key, so each new build installs over the last (sideloading only)
+  buildTypes { release { minifyEnabled false; signingConfig signingConfigs.sideload } }
+  compileOptions { sourceCompatibility JavaVersion.VERSION_17; targetCompatibility JavaVersion.VERSION_17 }
+}

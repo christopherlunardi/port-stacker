@@ -1,0 +1,22 @@
+/* R3 Sticker sheet: a flood of the game's blue ink for paper, and the screen and every control is a die-cut sticker with a white edge,
+   each stuck on a touch crooked */
+:root{--paper:#2656c4;--shell:#2656c4;--shell-hi:#1f469f;--muted:#cdd9ff;--ink:#fff6ea;--edge-w:#fffaf0;--bz:3px;--off:0px}
+body{background-color:var(--paper);background-image:radial-gradient(rgba(16,32,96,.3) 1.3px,transparent 1.6px),radial-gradient(rgba(255,255,255,.07) 1.1px,transparent 1.3px);background-size:8px 8px,11px 11px;background-position:0 0,3px 5px}
+@media (pointer:coarse){
+  § #screenWrap{box-shadow:0 0 0 3px var(--edge-w),0 2px 0 3px rgba(8,16,60,.35)}
+  § .top,§ .top b{color:var(--yel);text-shadow:1.2px 1px 0 rgba(255,72,176,.9)}
+  § .dpad{filter:drop-shadow(2.5px 0 0 var(--edge-w)) drop-shadow(-2.5px 0 0 var(--edge-w)) drop-shadow(0 2.5px 0 var(--edge-w)) drop-shadow(0 -2.5px 0 var(--edge-w)) drop-shadow(1px 3px 0 rgba(8,16,60,.4));transform:rotate(-2deg)}
+  § .dpad span{background:var(--yel);border-radius:5px;box-shadow:none}
+  § .dpad .up{border-bottom-color:var(--blue)} § .dpad .dn{border-top-color:var(--blue)} § .dpad .lf{border-right-color:var(--blue)} § .dpad .rt{border-left-color:var(--blue)}
+  § .btn{background:var(--pink);color:#fffaf0;box-shadow:0 0 0 3px var(--edge-w),1px 3px 0 3px rgba(8,16,60,.4);transform:rotate(-7deg)}
+  § .btn.b{background:#fffaf0;color:var(--blue);transform:rotate(5deg)}
+  § .btn.b small{color:var(--pink);opacity:1}
+  § .btn.on{transform:rotate(-7deg) translateY(2px)} § .btn.b.on{transform:rotate(5deg) translateY(2px)}
+  § .pill .cap{background:var(--yel);color:var(--blue);border-radius:5px;box-shadow:0 0 0 2.5px var(--edge-w),1px 2.5px 0 2.5px rgba(8,16,60,.4);transform:rotate(-4deg);width:58px}
+  § #btnStart .cap{transform:rotate(3deg);background:var(--pink);color:#fffaf0}
+}
+@media (pointer:coarse) and (orientation:portrait){
+  § #console::after{content:'PORT \2605  STACKER';grid-area:foot;align-self:end;justify-self:center;margin-bottom:16px;padding:5px 12px;font:700 10px var(--ui);letter-spacing:.14em;white-space:nowrap;
+    background:var(--pink);color:#fffaf0;border-radius:14px;box-shadow:0 0 0 3px var(--edge-w),1px 3px 0 3px rgba(8,16,60,.4);transform:rotate(-5deg)}
+}
+@media (pointer:coarse) and (orientation:landscape){ §{--dp:calc(var(--col) - 10px);--bt:calc((var(--col) - 20px) / 2)} }

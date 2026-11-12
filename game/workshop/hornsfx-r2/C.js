@@ -1,0 +1,2 @@
+// C: ARCADE BWOMP. A punchy chiptune blast: a pulse that drops an octave fast with a noise burst, like an old arcade cabinet.
+SFX.horn = function () { horn2({ f: 440, dur: 0.24, vol: 0.2, type: 'square', voices: 2, detune: 8, drive: 2.5, formant: 1300, q: 1.5, scoop: 1.6, scoopT: 0.02, endBend: 0.5, breath: 0.12 }); horn2({ f: 220, dur: 0.24, vol: 0.12, type: 'triangle', voices: 1, drive: 1.5, formant: 600, scoop: 1.6, scoopT: 0.02, endBend: 0.5, breath: 0 }); };

@@ -1,0 +1,14 @@
+// the comping hand stacked in order from a note near the middle, every note at least a minor third above the last, so the chord never
+// smudges into notes a step apart, and nothing is dropped (Workshop chords round 1, 2026-11-08)
+voiceChord = function (ch, prev) {
+  const centre = prev ? prev[0] : 57;
+  const out = [];
+  ch.voice.forEach((iv, i) => {
+    const pc = (ch.root + iv) % 12;
+    let n;
+    if (!i) { n = pc + 12 * Math.round((centre - pc) / 12); while (n < 53) n += 12; while (n > 61) n -= 12; }
+    else { n = pc; while (n <= out[i - 1] + 2) n += 12; while (n > out[i - 1] + 12) n -= 12; if (n <= out[i - 1] + 2) n += 12; }
+    out.push(n);
+  });
+  return out;
+};

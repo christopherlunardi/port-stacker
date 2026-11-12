@@ -1,0 +1,59 @@
+/* shell round 2, shared layout (phones only). "§ " = the page when the on-screen pad is showing (not padmode / inapp).
+   Upright: screen edge to edge at the very top, a thin name strip, then the pad a third of the way down the free space (not at the
+   bottom), Select/Start in their own row under it. Sideways: 4:3 screen in the middle, d-pad + Select left, A/§ + Start right.
+   Every piece has its own grid cell, so nothing can sit over anything else. Safe areas come in through --st/--sr/--sb/--sl. */
+:root{--st:env(safe-area-inset-top,0px);--sr:env(safe-area-inset-right,0px);--sb:env(safe-area-inset-bottom,0px);--sl:env(safe-area-inset-left,0px);
+  --m:2px;--bz:4px;--chin:13px;--bezel:#333;--vh:100vh}
+@supports (height:1dvh){ :root{--vh:100dvh} }
+@media (pointer:coarse){
+  §{padding:0}
+  § #console{gap:0;max-width:none;margin:0;height:100%;box-sizing:border-box;position:relative;
+    padding:max(var(--m),var(--st)) max(var(--m),var(--sr)) max(var(--m),var(--sb)) max(var(--m),var(--sl))}
+  § .pad,§ .pills{display:contents;zoom:1}
+  § .top{grid-area:top;box-sizing:border-box;margin:0;position:relative;justify-content:center;align-items:center;gap:6px;line-height:1;white-space:nowrap}
+  § .top #buildTag:empty{display:none}
+  § .top #devBtn{position:absolute;right:6px;top:50%;transform:translateY(-50%);font-size:7px!important;line-height:1!important;padding:1px 5px!important;margin:0!important;min-height:0!important;height:auto!important;border-radius:3px!important}
+  § #screenWrap{grid-area:screen;max-width:none;margin:var(--bz);box-shadow:0 0 0 var(--bz) var(--bezel);border-radius:3px}
+  § .dpad{grid-area:dpad;width:var(--dp);height:var(--dp);zoom:1}
+  § .dpad .h{left:0;top:33.3%;width:100%;height:33.4%}
+  § .dpad .v{left:33.3%;top:0;width:33.4%;height:100%}
+  § .dpad i{border-width:6px}
+  § .dpad .up{left:calc(50% - 6px);top:5%;bottom:auto}
+  § .dpad .dn{left:calc(50% - 6px);bottom:5%;top:auto}
+  § .dpad .lf{top:calc(50% - 6px);left:5%;right:auto}
+  § .dpad .rt{top:calc(50% - 6px);right:5%;left:auto}
+  § .btns{grid-area:btns;transform:none;display:block;position:relative;gap:0;zoom:1;width:calc(var(--bt) * 2 + var(--bgap));height:calc(var(--bt) + var(--bdy))}
+  § .btn{position:absolute;width:var(--bt);height:var(--bt);margin:0;padding:0;line-height:1.05}
+  § .btn.a{right:0;top:0}
+  § .btn.b{left:0;bottom:0}
+  § .pill{width:76px;height:44px;background:none;box-shadow:none;border-radius:0;display:grid;place-items:center;transform:none;filter:none;overflow:visible}
+  § .pill .cap{display:block;width:60px;height:20px;line-height:20px;border-radius:10px;text-align:center;pointer-events:none;font:700 8px/20px var(--ui);letter-spacing:.1em}
+  § .pill.on .cap{filter:brightness(1.25)}
+  § #btnSel{grid-area:sel}
+  § #btnStart{grid-area:start}
+}
+@media (pointer:coarse) and (orientation:portrait){
+  §{--dp:138px;--bt:66px;--bgap:14px;--bdy:40px;--edge:14px;
+    --cap:calc((var(--vh) - max(var(--m),var(--st)) - max(var(--m),var(--sb)) - 262px) * 4 / 3)}
+  § #console{grid-template-columns:1fr 1fr;grid-template-rows:auto auto minmax(10px,1fr) auto auto minmax(10px,2fr);
+    grid-template-areas:"screen screen" "top top" ". ." "dpad btns" "sel start" "foot foot";justify-items:center;align-items:center;align-content:stretch}
+  § #screenWrap{width:min(100% - 2 * var(--bz), var(--cap));aspect-ratio:4/3}
+  § .top{width:min(100%, var(--cap) + 2 * var(--bz));height:var(--chin)}
+  § .dpad{justify-self:start;margin-left:var(--edge)}
+  § .btns{justify-self:end;margin-right:var(--edge)}
+  § #btnSel{justify-self:end;margin:8px 3px 0 0}
+  § #btnStart{justify-self:start;margin:8px 0 0 3px}
+}
+@media (pointer:coarse) and (orientation:portrait) and (max-width:340px){ §{--dp:120px;--bt:58px;--bgap:10px;--edge:10px} }
+@media (pointer:coarse) and (orientation:landscape){
+  §{--col:clamp(108px,14vw,124px);--cg:8px;--dp:var(--col);--bt:calc((var(--col) - 6px) / 2);--bgap:6px;--bdy:40px;
+    --sh:min(var(--vh) - max(var(--m),var(--st)) - max(var(--m),var(--sb)) - 2 * var(--bz),
+             (100vw - max(var(--m),var(--sl)) - max(var(--m),var(--sr)) - 2 * var(--col) - 2 * var(--cg) - 2 * var(--bz)) * 3 / 4)}
+  § #console{grid-template-columns:minmax(var(--col),1fr) auto minmax(var(--col),1fr);grid-template-rows:minmax(0,auto) 1fr auto;column-gap:var(--cg);
+    grid-template-areas:"top screen ." "dpad screen btns" "sel screen start";justify-items:center;align-items:center;align-content:stretch}
+  § #screenWrap{height:var(--sh);width:calc(var(--sh) * 4 / 3);aspect-ratio:auto;align-self:center}
+  § .top{display:flex;width:var(--col);white-space:normal;text-align:center;font-size:7px;letter-spacing:.1em;line-height:1.3;align-self:start;padding-top:4px;background:none}
+  § .top b{letter-spacing:.1em}
+  § .top #devBtn{position:static;transform:none}
+  § .dpad,§ .btns{zoom:1}
+}

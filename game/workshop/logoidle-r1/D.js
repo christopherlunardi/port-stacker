@@ -1,0 +1,1 @@
+LOGO_IDLE = 'swing';

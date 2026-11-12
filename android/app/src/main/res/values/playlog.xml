@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Overwritten when GitHub builds the app: the key comes from the repo secret PLAYLOG_TOKEN (never committed). Empty = no upload. -->
+<resources>
+  <string name="playlog_key" translatable="false"></string>
+  <string name="playlog_issue" translatable="false">1</string>
+</resources>

@@ -1,0 +1,12 @@
+/* shared by every option in this round: sideways on a phone the game is 4:3 with the controller on its sides (Chris 2026-11-10: the
+   16:9 sideways screen was for checking the Pocket 6 layout; that can be checked on desktop instead) */
+@media (pointer:coarse) and (orientation:landscape){
+  #console{grid-template-columns:1fr auto 1fr;grid-template-rows:1fr auto;grid-template-areas:"dpadA screen btnA" "selA screen startA";align-items:center;justify-items:center;gap:6px 14px;padding-block:max(10px, env(safe-area-inset-top, 0px)) max(10px, env(safe-area-inset-bottom, 0px));max-width:none}
+  .top{display:none}
+  .pad{display:contents}
+  .pills{display:contents}
+  #btnSel{grid-area:selA;align-self:start}
+  #btnStart{grid-area:startA;align-self:start}
+  #screenWrap{aspect-ratio:4/3;width:auto;max-width:none;height:min(calc(100dvh - 20px), calc((100vw - 330px) * 3 / 4));height:min(calc(100vh - 20px), calc((100vw - 330px) * 3 / 4))}
+  .dpad,.btns{zoom:.86}
+}

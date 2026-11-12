@@ -1,0 +1,180 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Port Stacker Deluxe</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="color-scheme" content="dark light">
+<style>
+/* One handheld console, like Hereafter Man: the screen on top, d-pad and buttons below (beside it in landscape on phones).
+   With a controller (padmode) or inside the Android app (inapp) it's just the screen, as big as it goes. */
+:root{
+  --shell:#17203b; --shell-hi:#243058; --ink:#f7ecde; --muted:#a3b1d6; --accent:#ffe200;
+  --button:#2b3866; --button-a:#ff48b0; --button-b:#2656c4;
+  --ui:"Bungee","Arial Black",Impact,sans-serif; /* the game font (loaded by the game: addFont), for the page round the screen too (2026-11-08) */
+  color-scheme:dark;
+}
+/* Phone browsers with a "dark mode for websites" switch (Samsung Internet, Chrome's auto dark) repaint pages they think have no dark
+   theme of their own, which turned the cream handheld brown and its buttons maroon (a friend's Android, 2026-11-11). This rule and the
+   color-scheme meta tell them the page already handles dark mode, so they leave its colours alone. */
+@media (prefers-color-scheme:dark){ :root{color-scheme:dark} }
+html,body{height:100%;margin:0}
+body{background:var(--shell);color:var(--ink);font-family:var(--ui);overflow:hidden;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));box-sizing:border-box}
+#console{height:100%;display:grid;grid-template-columns:1fr;grid-template-rows:auto minmax(0,auto) auto 1fr;
+  grid-template-areas:"top" "screen" "pad" "foot";justify-items:center;align-content:start;gap:12px;padding-block:12px;box-sizing:border-box;max-width:980px;margin:0 auto}
+.top{grid-area:top;display:flex;align-items:baseline;gap:10px;width:100%;justify-content:space-between;font-size:11px;letter-spacing:.12em;color:var(--muted);text-transform:uppercase}
+.top b{color:var(--accent);font-weight:700;letter-spacing:.18em}
+#screenWrap{grid-area:screen;width:100%;max-width:calc((100vh - 290px) * 4 / 3);max-width:calc((100dvh - 290px) * 4 / 3);min-width:0;aspect-ratio:4/3;background:#000;border-radius:6px;
+  box-shadow:0 0 0 3px var(--shell-hi),0 0 0 4px #000,0 18px 40px rgba(0,0,0,.55);overflow:hidden;position:relative}
+#screen{width:100%;height:100%;display:block;image-rendering:pixelated;touch-action:none}
+.pad{grid-area:pad;display:flex;justify-content:space-between;align-items:center;width:100%;max-width:520px;user-select:none;-webkit-user-select:none;touch-action:none;position:relative}
+.dpad{position:relative;width:132px;height:132px;flex:none}
+.dpad span{position:absolute;background:var(--button);border-radius:5px;box-shadow:inset 0 -3px 0 rgba(0,0,0,.35)}
+.dpad .h{left:0;top:44px;width:132px;height:44px}.dpad .v{left:44px;top:0;width:44px;height:132px}
+.dpad i{position:absolute;width:0;height:0;border:7px solid transparent;opacity:.55}
+.dpad .up{left:59px;top:10px;border-bottom-color:var(--ink)}.dpad .dn{left:59px;bottom:10px;border-top-color:var(--ink)}
+.dpad .lf{top:59px;left:10px;border-right-color:var(--ink)}.dpad .rt{top:59px;right:10px;border-left-color:var(--ink)}
+.dpad.on-up .v,.dpad.on-dn .v,.dpad.on-lf .h,.dpad.on-rt .h{filter:brightness(1.3)}
+.btns{display:flex;gap:16px;align-items:center;transform:rotate(-14deg)}
+.btn{width:64px;height:64px;border-radius:50%;border:0;color:var(--ink);font:700 18px var(--ui);background:var(--button-a);box-shadow:inset 0 -4px 0 rgba(0,0,0,.35),0 2px 0 #000;touch-action:none}
+.btn.b{background:var(--button-b);margin-top:34px}
+.btn small{display:block;font-size:8px;letter-spacing:.08em;opacity:.75;margin-top:-2px}
+.btn.on,.pill.on{filter:brightness(1.3);transform:translateY(2px)}
+.pills{position:absolute;left:50%;bottom:-6px;transform:translateX(-50%);display:flex;gap:14px}
+.pill{width:54px;height:18px;border-radius:9px;border:0;background:var(--button);color:var(--muted);font:700 8px var(--ui);letter-spacing:.12em;box-shadow:inset 0 -2px 0 rgba(0,0,0,.35);touch-action:none;padding:0}
+.foot{grid-area:foot;font-size:10px;letter-spacing:.1em;color:var(--muted);text-align:center;line-height:1.7;max-width:60ch}
+.foot kbd{font-family:var(--ui);color:var(--ink);background:var(--shell-hi);padding:1px 5px;border-radius:3px}
+#console,#console *{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;-webkit-tap-highlight-color:transparent}
+@media (pointer:fine){ .pad{display:none} }
+@media (pointer:coarse) and (orientation:portrait) and (max-width:330px){ .pad{zoom:.8} } /* (2026-11-10) very narrow phones (a folding phone's cover screen): the pad needs 276px plus the page's padding, so it shrinks to fit */
+@media (pointer:coarse){ .foot{display:none} }
+@media (pointer:coarse) and (orientation:landscape){
+  #console{grid-template-columns:auto 1fr auto;grid-template-rows:auto 1fr;grid-template-areas:"top top top" "dpadA screen btnA";align-items:center;gap:10px}
+  .pad{display:contents}
+  .dpad{grid-area:dpadA}.btns{grid-area:btnA}
+  .pills{position:fixed;left:50%;bottom:6px}
+  /* sideways the screen is 16:9, the same shape as the Pocket 6, so the side panels can be worked on here (Chris 2026-11-07) */
+  #screenWrap{aspect-ratio:16/9;max-width:calc((100vh - 60px) * 16 / 9);max-width:calc((100dvh - 60px) * 16 / 9)}
+  .dpad,.btns{zoom:.86}
+  .foot{display:none}
+}
+/* a controller is in use, or the Android app: no on-screen buttons, the screen takes the whole window in any shape */
+body.padmode .pad,body.padmode .foot,body.inapp .pad,body.inapp .foot{display:none!important}
+body.padmode #console,body.inapp #console{display:block;height:100%;padding:0;max-width:none}
+body.padmode .top{position:fixed;top:4px;left:12px;right:12px;width:auto;z-index:2;opacity:.6}
+body.inapp{padding:0}body.inapp .top{display:none!important}
+body.padmode #screenWrap,body.inapp #screenWrap{position:fixed;top:0;right:0;bottom:0;left:0;width:auto;height:auto;max-width:none;aspect-ratio:auto;border-radius:0;box-shadow:none}
+/* (browsers before aspect-ratio, like the Retroid 2S's Chrome 80: on a phone page a height; the launcher and a controller fill the screen,
+   hence height:auto above: without it the 2S's intro sat in the top 60%, white under it, 2026-11-10) */
+@supports not (aspect-ratio:1/1){ #screenWrap{height:60vw} }
+@media (prefers-reduced-motion:reduce){ .btn.on,.pill.on{transform:none} }
+/* ---- the phone page: the cream classic handheld (Chris picked H1 on the Workshop, shell round 2, made by Fable; build 180). Touch
+   screens only: desktop keeps the look above. Upright the screen is edge to edge at the top, sideways it is 4:3 with the controller on
+   its sides; every piece has its own grid cell, so nothing overlaps. ---- */
+/* shell round 2, shared layout (phones only). "body:not(.padmode):not(.inapp) " = the page when the on-screen pad is showing (not padmode / inapp).
+   Upright: screen edge to edge at the very top, a thin name strip, then the pad a third of the way down the free space (not at the
+   bottom), Select/Start in their own row under it. Sideways: 4:3 screen in the middle, d-pad + Select left, A/B + Start right.
+   Every piece has its own grid cell, so nothing can sit over anything else. Safe areas come in through --st/--sr/--sb/--sl. */
+:root{--st:env(safe-area-inset-top,0px);--sr:env(safe-area-inset-right,0px);--sb:env(safe-area-inset-bottom,0px);--sl:env(safe-area-inset-left,0px);
+  --m:2px;--bz:4px;--chin:13px;--bezel:#333;--vh:100vh}
+@supports (height:1dvh){ :root{--vh:100dvh} }
+@media (pointer:coarse){
+  body:not(.padmode):not(.inapp){padding:0}
+  body:not(.padmode):not(.inapp) #console{gap:0;max-width:none;margin:0;height:100%;box-sizing:border-box;position:relative;
+    padding:max(var(--m),var(--st)) max(var(--m),var(--sr)) max(var(--m),var(--sb)) max(var(--m),var(--sl))}
+  body:not(.padmode):not(.inapp) .pad,body:not(.padmode):not(.inapp) .pills{display:contents;zoom:1}
+  body:not(.padmode):not(.inapp) .top{grid-area:top;box-sizing:border-box;margin:0;position:relative;justify-content:center;align-items:center;gap:6px;line-height:1;white-space:nowrap}
+  body:not(.padmode):not(.inapp) .top #buildTag:empty{display:none}
+  body:not(.padmode):not(.inapp) .top #devBtn{position:absolute;right:6px;top:50%;transform:translateY(-50%);font-size:7px!important;line-height:1!important;padding:1px 5px!important;margin:0!important;min-height:0!important;height:auto!important;border-radius:3px!important}
+  body:not(.padmode):not(.inapp) #screenWrap{grid-area:screen;max-width:none;margin:var(--bz);box-shadow:0 0 0 var(--bz) var(--bezel);border-radius:3px}
+  body:not(.padmode):not(.inapp) .dpad{grid-area:dpad;width:var(--dp);height:var(--dp);zoom:1}
+  body:not(.padmode):not(.inapp) .dpad .h{left:0;top:33.3%;width:100%;height:33.4%}
+  body:not(.padmode):not(.inapp) .dpad .v{left:33.3%;top:0;width:33.4%;height:100%}
+  body:not(.padmode):not(.inapp) .dpad i{border-width:6px}
+  body:not(.padmode):not(.inapp) .dpad .up{left:calc(50% - 6px);top:5%;bottom:auto}
+  body:not(.padmode):not(.inapp) .dpad .dn{left:calc(50% - 6px);bottom:5%;top:auto}
+  body:not(.padmode):not(.inapp) .dpad .lf{top:calc(50% - 6px);left:5%;right:auto}
+  body:not(.padmode):not(.inapp) .dpad .rt{top:calc(50% - 6px);right:5%;left:auto}
+  body:not(.padmode):not(.inapp) .btns{grid-area:btns;transform:none;display:block;position:relative;gap:0;zoom:1;width:calc(var(--bt) * 2 + var(--bgap));height:calc(var(--bt) + var(--bdy))}
+  body:not(.padmode):not(.inapp) .btn{position:absolute;width:var(--bt);height:var(--bt);margin:0;padding:0;line-height:1.05}
+  body:not(.padmode):not(.inapp) .btn.a{right:0;top:0}
+  body:not(.padmode):not(.inapp) .btn.b{left:0;bottom:0}
+  body:not(.padmode):not(.inapp) .pill{width:76px;height:44px;background:none;box-shadow:none;border-radius:0;display:grid;place-items:center;transform:none;filter:none;overflow:visible}
+  body:not(.padmode):not(.inapp) .pill .cap{display:block;width:60px;height:20px;line-height:20px;border-radius:10px;text-align:center;pointer-events:none;font:700 8px/20px var(--ui);letter-spacing:.1em}
+  body:not(.padmode):not(.inapp) .pill.on .cap{filter:brightness(1.25)}
+  body:not(.padmode):not(.inapp) #btnSel{grid-area:sel}
+  body:not(.padmode):not(.inapp) #btnStart{grid-area:start}
+}
+@media (pointer:coarse) and (orientation:portrait){
+  body:not(.padmode):not(.inapp){--dp:138px;--bt:66px;--bgap:14px;--bdy:40px;--edge:14px;
+    --cap:calc((var(--vh) - max(var(--m),var(--st)) - max(var(--m),var(--sb)) - 262px) * 4 / 3)}
+  body:not(.padmode):not(.inapp) #console{grid-template-columns:1fr 1fr;grid-template-rows:auto auto minmax(10px,1fr) auto auto minmax(10px,2fr);
+    grid-template-areas:"screen screen" "top top" ". ." "dpad btns" "sel start" "foot foot";justify-items:center;align-items:center;align-content:stretch}
+  body:not(.padmode):not(.inapp) #screenWrap{width:min(100% - 2 * var(--bz), var(--cap));aspect-ratio:4/3}
+  body:not(.padmode):not(.inapp) .top{width:min(100%, var(--cap) + 2 * var(--bz));height:var(--chin)}
+  body:not(.padmode):not(.inapp) .dpad{justify-self:start;margin-left:var(--edge)}
+  body:not(.padmode):not(.inapp) .btns{justify-self:end;margin-right:var(--edge)}
+  body:not(.padmode):not(.inapp) #btnSel{justify-self:end;margin:8px 3px 0 0}
+  body:not(.padmode):not(.inapp) #btnStart{justify-self:start;margin:8px 0 0 3px}
+}
+@media (pointer:coarse) and (orientation:portrait) and (max-width:340px){ body:not(.padmode):not(.inapp){--dp:120px;--bt:58px;--bgap:10px;--edge:10px} }
+@media (pointer:coarse) and (orientation:landscape){
+  body:not(.padmode):not(.inapp){--col:clamp(108px,14vw,124px);--cg:8px;--dp:var(--col);--bt:calc((var(--col) - 6px) / 2);--bgap:6px;--bdy:40px;
+    --sh:min(var(--vh) - max(var(--m),var(--st)) - max(var(--m),var(--sb)) - 2 * var(--bz),
+             (100vw - max(var(--m),var(--sl)) - max(var(--m),var(--sr)) - 2 * var(--col) - 2 * var(--cg) - 2 * var(--bz)) * 3 / 4)}
+  body:not(.padmode):not(.inapp) #console{grid-template-columns:minmax(var(--col),1fr) auto minmax(var(--col),1fr);grid-template-rows:minmax(0,auto) 1fr auto;column-gap:var(--cg);
+    grid-template-areas:"top screen ." "dpad screen btns" "sel screen start";justify-items:center;align-items:center;align-content:stretch}
+  body:not(.padmode):not(.inapp) #screenWrap{height:var(--sh);width:calc(var(--sh) * 4 / 3);aspect-ratio:auto;align-self:center}
+  body:not(.padmode):not(.inapp) .top{display:flex;width:var(--col);white-space:normal;text-align:center;font-size:7px;letter-spacing:.1em;line-height:1.3;align-self:start;padding-top:4px;background:none}
+  body:not(.padmode):not(.inapp) .top b{letter-spacing:.1em}
+  body:not(.padmode):not(.inapp) .top #devBtn{position:static;transform:none}
+  body:not(.padmode):not(.inapp) .dpad,body:not(.padmode):not(.inapp) .btns{zoom:1}
+}
+
+/* handhelds: a plastic body, a dark bezel round the screen whose chin carries the name and the power light */
+@media (pointer:coarse){ :root{--body:#e6dfcf;--body2:#d6cdb8;--bezel:#3b3d4a;--lbl:#a7a3b8;--lblhi:#ff8fc8;--dpadc:#2f2e38;--ab:#b3245e;--abtx:#f6e6ee;--pillc:#9a95a6;--pilltx:#34323e;
+  --emb:rgba(60,56,70,.6);--slot:rgba(60,56,70,.34);--led:#ff3b5c;
+  --shell:var(--body);--shell-hi:var(--body2);--ink:#2a2733;--muted:#6f6a7c;--button:var(--dpadc);--button-a:var(--ab);--button-b:var(--ab)} body{background:linear-gradient(180deg,var(--body),var(--body2))} }
+@media (pointer:coarse){
+  body:not(.padmode):not(.inapp) #screenWrap{border-radius:0}
+  body:not(.padmode):not(.inapp) .top{color:var(--lbl);font-size:7px;letter-spacing:.2em}
+  body:not(.padmode):not(.inapp) .top b{color:var(--lbl);letter-spacing:.2em;font-weight:700}
+  body:not(.padmode):not(.inapp) .dpad span{background:var(--dpadc);border-radius:6px;box-shadow:inset 0 -3px 0 rgba(0,0,0,.4),0 2px 0 rgba(0,0,0,.25)}
+  body:not(.padmode):not(.inapp) .dpad::after{content:'';position:absolute;left:50%;top:50%;width:20%;height:20%;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle at 50% 35%,rgba(0,0,0,.4),rgba(255,255,255,.07))}
+  body:not(.padmode):not(.inapp) .dpad i{opacity:.32}
+  body:not(.padmode):not(.inapp) .btn{background:var(--ab);color:var(--abtx);box-shadow:inset 0 -4px 0 rgba(0,0,0,.28),inset 0 2px 0 rgba(255,255,255,.2),0 3px 0 rgba(0,0,0,.3)}
+  body:not(.padmode):not(.inapp) .btn small{color:var(--abtx);opacity:.85}
+  body:not(.padmode):not(.inapp) .pill .cap{background:var(--pillc);color:var(--pilltx);transform:rotate(-24deg);box-shadow:inset 0 -2px 0 rgba(0,0,0,.25),0 1px 0 rgba(255,255,255,.3)}
+  body:not(.padmode):not(.inapp) .top::before{content:'';flex:none;width:5px;height:5px;border-radius:50%;background:var(--led);box-shadow:0 0 6px var(--led)}
+}
+@media (pointer:coarse) and (orientation:portrait){
+  body:not(.padmode):not(.inapp) .top{background:var(--bezel);border-radius:0 0 22px 9px;margin-top:calc(-1 * var(--bz));padding-top:var(--bz);height:calc(var(--chin) + var(--bz));box-shadow:0 2px 0 rgba(0,0,0,.22)}
+  body:not(.padmode):not(.inapp) .top::before{position:absolute;left:11px;bottom:calc(var(--chin) / 2 - 2.5px)}
+  body:not(.padmode):not(.inapp) .top #devBtn{top:auto;bottom:1.5px;transform:none;right:26px}
+  body:not(.padmode):not(.inapp) #console::after{content:'';grid-area:foot;justify-self:end;align-self:end;margin:0 20px 18px 0;width:72px;height:46px;max-height:55%;border-radius:6px;
+    background:repeating-linear-gradient(-62deg,transparent 0 7px,var(--slot) 7px 11px)}
+}
+@media (pointer:coarse) and (orientation:landscape){
+  body:not(.padmode):not(.inapp) .top,body:not(.padmode):not(.inapp) .top b{color:var(--emb)}
+  body:not(.padmode):not(.inapp) .top{flex-wrap:wrap;gap:3px 5px}
+}
+
+/* H1 Cream classic: round 1's handheld, tightened */
+@media (pointer:coarse){
+  body:not(.padmode):not(.inapp) .top b::before,body:not(.padmode):not(.inapp) .top b::after{content:'\25A0';color:var(--lblhi);margin:0 .6em;font-size:.8em}
+}
+@media (pointer:coarse) and (orientation:landscape){ body:not(.padmode):not(.inapp) .top b::before,body:not(.padmode):not(.inapp) .top b::after{content:none} }
+
+</style>
+<div id="console">
+  <div class="top"><b>Port Stacker Deluxe</b><span id="buildTag">build</span></div>
+  <div id="screenWrap"><canvas id="screen" width="640" height="480" aria-label="Game screen"></canvas></div>
+  <div class="pad" id="pad">
+    <div class="dpad" id="dpad" aria-label="Direction pad"><span class="h"></span><span class="v"></span><i class="up"></i><i class="dn"></i><i class="lf"></i><i class="rt"></i></div>
+    <div class="btns"><button class="btn b" id="btnB" aria-label="B button, dash">B<small>DASH</small></button><button class="btn a" id="btnA" aria-label="A button, air horn">A<small>HORN</small></button></div>
+    <div class="pills"><button class="pill" id="btnSel" aria-label="Select"><span class="cap">SELECT</span></button><button class="pill" id="btnStart" aria-label="Start, pause"><span class="cap">START</span></button></div>
+  </div>
+  <p class="foot">Move <kbd>Arrows</kbd>/<kbd>WASD</kbd> · Air horn <kbd>Z</kbd> <kbd>Space</kbd> · Dash <kbd>X</kbd> <kbd>Shift</kbd> · Pause <kbd>Enter</kbd> <kbd>Esc</kbd> · Select <kbd>Tab</kbd></p>
+</div>
+<script>
+__GAME_JS__
+</script>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+  <uses-permission android:name="android.permission.INTERNET" />
+  <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+  <application android:label="Port Stacker" android:icon="@mipmap/ic_launcher" android:roundIcon="@mipmap/ic_launcher_round" android:theme="@style/Full" android:hardwareAccelerated="true" android:isGame="true">
+    <provider android:name=".ApkProvider" android:authorities="com.ghostjail.stackstyle.apk" android:exported="false" android:grantUriPermissions="true" />
+    <activity android:name=".MainActivity" android:exported="true" android:screenOrientation="sensorLandscape" android:launchMode="singleTask"
+      android:configChanges="orientation|screenSize|smallestScreenSize|keyboard|keyboardHidden|navigation|screenLayout|uiMode">
+      <intent-filter>
+        <action android:name="android.intent.action.MAIN" />
+        <category android:name="android.intent.category.LAUNCHER" />
+        <category android:name="android.intent.category.GAME" />
+      </intent-filter>
+    </activity>
+  </application>
+</manifest>
