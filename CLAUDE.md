@@ -19,7 +19,8 @@ characters or names, and never name other games in the code, docs, store text or
 - `dist/` is what the Retroid launcher downloads from GitHub (main). Only release.py writes it.
 - `game/tools/fasttest.js` fast tests; `game/tools/shots.py` screenshots on every target screen.
 - `android/` the launcher (Java, no libraries); `.github/workflows/android.yml` builds it onto the `launcher` release.
-- `game/workshop/`: the Workshop's source. Rounds before the move to this repo (2026-11-11) keep their pictures and play copies only on
-  the published Workshop artifact (img/ and play/ weren't copied); a republish keeps them there.
+- `game/workshop/`: the Workshop's source, with every round's pictures in img/ (copied over from the old repo on 2026-11-11, minus the
+  clips' .cues.json files). Play copies (play/) aren't kept in git: the old rounds' copies are only on the published Workshop artifact
+  (they were old builds), and a republish keeps them there.
 
 - How to Play and the Encyclopedia (title menu, `game/src/js/09b-howto.js`) must always match the game: any change to a mechanic, number, control or enemy updates its Encyclopedia topic (HOWTO) text and demo in the same build, and How to Play's short cards (BASICS) when it touches the basics; How to Play stays short and simple, the detail goes in the Encyclopedia (Chris 2026-11-11) (see the skill).
