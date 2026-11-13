@@ -55,12 +55,34 @@ docs, Workshop text, store text or commit messages (the repo is public). release
    features such as roundRect; it plays title, start, stage card, pause, INFO, board, initials with them removed and fails on any error).
    New canvas features need a fallback in 00-setup.js.
 5. Release: `python3 -I game/tools/release.py` (bumps the build, builds, and writes a squashed copy to `dist/` with `version.json`: comments stripped, code minified, nothing mentioning Chris; it fails if anything does). Run the fast tests and oldwebview.py on `dist/stack-style.html`.
-6. Publish the artifact (`file_path` `dist/stack-style.html`), commit with the attribution lines, `git push`. The push is what the Retroids
-   pick up: next launch (or pause menu → CHECK FOR UPDATE) downloads it.
+6. Publish the artifact (`file_path` `dist/stack-style.html`), commit (with `web/`) with the attribution lines, `git push`. The push is what the Retroids
+   pick up: the launcher app on next launch (or pause menu → CHECK FOR UPDATE), the web app at its next title screen once Pages has deployed.
 7. If `android/` changed: check the Actions run (`curl -s https://api.github.com/repos/christopherlunardi/port-stacker/actions/runs?per_page=3`),
    and tell Chris to reinstall the APK from the link above. Otherwise he doesn't need to touch anything.
 8. Copy changed files to the PC folder when the computer is connected.
 9. Reply with a short summary of what changed and the build number. Leave out the link and the steps you took.
+
+## Web app for the Retroids (2026-11-12)
+- The Retroids are moving from the Android launcher to an installed web app: https://christopherlunardi.github.io/port-stacker/
+  (GitHub Pages, source "GitHub Actions"). It's for the Retroids only; the phone link stays the main game. Keep the Android app and
+  `android/` working until Chris says to retire it.
+- `release.py` ends by running `game/tools/web.py`, which builds `web/` from `dist/stack-style.html`: index.html (adds the manifest
+  link, icons and the `body.pwa` CSS), manifest.webmanifest (fullscreen, landscape), pwa.js, sw.js (cache `portstacker-<build>`),
+  icons/, version.json, .nojekyll. Commit `web/` with the release; the push to main runs `.github/workflows/pages.yml`, which deploys it.
+- PWA code lives only in `game/tools/web.py` and `game/tools/web/` (pwa.js, sw.js). The page gets the `pwa` class only when it runs
+  installed (display-mode fullscreen/standalone): no on-screen pad, the screen fills the window. In a normal tab nothing changes.
+- Test it before pushing: `python3 -I game/tools/webtest.py` (manifest, service worker, offline boot with sound, update swap, screenshots
+  as installed app and as a normal tab).
+- Updates: the installed app checks at start and every 15 minutes; a new build downloads in the background and swaps in (page reload)
+  only when the game is on the title screen, never mid-game.
+- Retroid install (with adb from Chris's PC: `%LOCALAPPDATA%\Microsoft\WinGet\Packages\Google.PlatformTools_Microsoft.Winget.Source_8wekyb3d8bbwe\platform-tools\adb.exe`):
+  1. Ask Chris to set Settings > Apps > Default apps > Home app to Quickstep (never change device settings yourself).
+  2. Force-stop Chrome, open the site in Chrome.
+  3. ⋮ menu > "Install and create shortcut" > Install > Install.
+  4. Check `adb shell pm list packages | grep webapk` shows a new org.chromium.webapk... package.
+  5. Ask Chris to set Home back to Daijisho.
+- On the device: never press Esc/Back over adb to pause (Android closes the app); use Start or the game's buttons. Frame check:
+  `dumpsys gfxinfo <package> reset`, play ~15 s, `dumpsys gfxinfo <package>`. Chris tests offline himself.
 
 ## Engine facts that matter
 - The field is 384x288 game pixels (48x33 tiles of 8px under a 22px score bar; zoomed out from 320x240 on 2026-11-07). Screens laid out
