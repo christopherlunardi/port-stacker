@@ -30,3 +30,5 @@ html = page.encode()
 (ROOT / 'dist/version.json').write_text(json.dumps({'build': build, 'bytes': len(html), 'sha256': hashlib.sha256(html).hexdigest(),
   'made': datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%dT%H:%MZ')}, indent=1) + '\n')
 print('released build', build)
+# the installable web app in web/ (GitHub Pages) is made from this same build
+subprocess.run([sys.executable, '-I', str(ROOT / 'game/tools/web.py')], check=True)
