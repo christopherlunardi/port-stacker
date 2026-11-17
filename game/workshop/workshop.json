@@ -4455,6 +4455,86 @@
      ]
     }
    ]
+  },
+  {
+   "id": "sides",
+   "title": "The sides on wide screens",
+   "rounds": [
+    {
+     "id": "r1",
+     "date": "2026-11-17",
+     "status": "open",
+     "question": "On the Pocket 6 (and any wide screen), what should fill the room beside the stage, now that lives and horns move off the bottom?",
+     "found": "Each clip is the real game on a 16:9 screen, 10 seconds of the 1-1 demo with sound: Buck blows his horn a few times and earns an extra life near the end, so you see the counts change and pop. In every option lives and horns leave the bottom corners (the combo stays at the bottom), the score is only in the top bar (nothing shown twice), and the near water now runs to the screen's edges so the stage doesn't look cut off. On the Retroid 2S and phones (no room at the sides) the bottom badges stay as they are. Play in game: open it on the Pocket 6 to see it at full size.",
+     "options": [
+      {
+       "id": "Now",
+       "title": "Now",
+       "note": "The harbor painting at full strength on both sides, a card on the right repeating SCORE, HORN and LIVES; lives and horns also in the bottom corners.",
+       "images": [
+        {
+         "src": "img/sides-r1/Now.mp4",
+         "label": "Pocket 6 (16:9)"
+        }
+       ],
+       "sound": true,
+       "play": "play/sides-r1-Now.html"
+      },
+      {
+       "id": "A",
+       "title": "Icon columns",
+       "note": "The painting stays. Lives hang down the left on a rope tag, one Buck each, the next-life bar under them; horns down the right, one horn each. Up to six, then +N.",
+       "images": [
+        {
+         "src": "img/sides-r1/A.mp4",
+         "label": "Pocket 6 (16:9)"
+        }
+       ],
+       "sound": true,
+       "play": "play/sides-r1-A.html"
+      },
+      {
+       "id": "B",
+       "title": "Side boards",
+       "note": "Tall rope-edged boards fill both sides: LIVES on the left (a Buck per life, two to a row, the next-life bar at the foot), HORNS on the right (two to a row). Up to ten, then +N.",
+       "images": [
+        {
+         "src": "img/sides-r1/B.mp4",
+         "label": "Pocket 6 (16:9)"
+        }
+       ],
+       "sound": true,
+       "play": "play/sides-r1-B.html"
+      },
+      {
+       "id": "C",
+       "title": "Steel towers",
+       "note": "The painting at the sides is washed pale and a pink steel tower like the stage's frame stands in each, down into the water. Lives hang on the left tower in round yellow plates, horns on the right; the next-life bar on a plate lower down.",
+       "images": [
+        {
+         "src": "img/sides-r1/C.mp4",
+         "label": "Pocket 6 (16:9)"
+        }
+       ],
+       "sound": true,
+       "play": "play/sides-r1-C.html"
+      },
+      {
+       "id": "D",
+       "title": "The badges move up",
+       "note": "The painting at the sides is washed pale; the two badges from the bottom corners (Buck x3 with the life bar, horn x3) move to the middle of each side, a bit bigger.",
+       "images": [
+        {
+         "src": "img/sides-r1/D.mp4",
+         "label": "Pocket 6 (16:9)"
+        }
+       ],
+       "sound": true,
+       "play": "play/sides-r1-D.html"
+      }
+     ]
+    }
+   ]
   }
  ]
 }

@@ -174,6 +174,21 @@ function drawPanels() {
     art('buck.stand', L0, oy + 200, { scale: Math.min(1.8, ox / 40) });
   }
 }
+function drawSides() {
+  // the room beside the field on wide screens: a stats card on the right
+  const { ox, oy } = LAY,
+    R = ox + PW + ox / 2,
+    bw = Math.min(ox - 10, 70);
+  rrect(R - bw / 2, oy + 24, bw, 150, 6, C.cream, C.indigo, 1.5);
+  for (const [lab, v, y] of [
+    ['SCORE', fmtNum(G.score), 40],
+    ['HORN', String(G.p.horns), 88],
+    ['LIVES', String(Math.max(0, G.lives)), 136]
+  ]) {
+    text(lab, R, oy + y, 7, C.blue, 'center', null, { maxW: bw - 8 });
+    text(v, R, oy + y + 17, v.length > 4 ? 12 : 20, C.pink, 'center', C.indigo, { maxW: bw - 8 });
+  }
+}
 // mist: long thin streaks of fog drifting slowly across the harbor, between the painting and the stage (Chris 2026-11-08: not round blobs).
 // One fog strip is made once (many very stretched soft ellipses, wrapping round so it tiles) and drawn as a few bands at different heights and speeds.
 function infoLines() {

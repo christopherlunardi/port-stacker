@@ -4,3 +4,4 @@ android/build/
 android/app/build/
 *.apk
 __pycache__/
+game/workshop/play/
