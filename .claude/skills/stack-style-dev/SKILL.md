@@ -71,7 +71,7 @@ docs, Workshop text, store text or commit messages (the repo is public). release
   icons/, version.json, .nojekyll. Commit `web/` with the release; the push to main runs `.github/workflows/pages.yml`, which deploys it.
 - PWA code lives only in `game/tools/web.py` and `game/tools/web/` (pwa.js, sw.js). The page gets the `pwa` class only when it runs
   installed (display-mode fullscreen/standalone): no on-screen pad, the screen fills the window. In a normal tab nothing changes.
-- Test it before pushing: `python3 -I game/tools/webtest.py` (manifest, service worker, offline boot with sound, update swap, screenshots
+- Test it before pushing: `python3 -I game/tools/webtest.py OUTDIR` (manifest, service worker, offline boot with sound, update swap, screenshots
   as installed app and as a normal tab).
 - Updates: the installed app checks at start and every 15 minutes; a new build downloads in the background and swaps in (page reload)
   only when the game is on the title screen, never mid-game.

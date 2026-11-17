@@ -182,7 +182,7 @@ body.padmode #screenWrap,body.inapp #screenWrap{position:fixed;top:0;right:0;bot
 // ---------- setup ----------
 // Port Stacker Deluxe: a container-stacking arcade game. One HTML page; played in a browser, on a phone (the artifact link) and on the
 // Retroid handhelds (the launcher app in android/ downloads the newest build and plays the last one it has when offline).
-const BUILD = 223; // set by assemble.py; the launcher compares it with dist/version.json
+const BUILD = 224; // set by assemble.py; the launcher compares it with dist/version.json
 const PW = 384,
   PH = 288,
   TK = PH / 240; // TK: screens laid out for the old 320x240 field (title, cards, menus, boards) draw at TK in their old coordinates           // the playfield in game pixels; the screen around it grows to fit any shape (10-render)
@@ -4427,7 +4427,7 @@ const HOWTO = [
   {
     name: 'OVERVIEW',
     title: 'LOAD THE SHIP',
-    text: "Your job: load the ship. Walk across a container to knock it down to the catwalk below, and keep knocking it down until it lands in the ship's bay underneath its column. Fill every bay and the ship sails: stage clear. The dock pests try to catch you: touch a walking one and you lose a life (but once the last container is on its way down, you're safe). You have 3 spare lives (bottom left). After losing one you blink for a moment and can't be caught. A stunned enemy, or one riding a container, can't hurt you. When the ship is loaded, a card shows how the stage went; press A for the next one. Stages come in shifts, numbered shift-stage: shift 1 is three stages, shift 2 replays them at night and adds Pier 9 (2-4), and shift 3, the storm shift, adds the finale, Last Call (3-5).",
+    text: "Your job: load the ship. Walk across a container to knock it down to the catwalk below, and keep knocking it down until it lands in the ship's bay underneath its column. Fill every bay and the ship sails: stage clear. The dock pests try to catch you: touch a walking one and you lose a life (but once the last container is on its way down, you're safe). You have 3 spare lives (bottom left, or at the left on a wide screen). After losing one you blink for a moment and can't be caught. A stunned enemy, or one riding a container, can't hurt you. When the ship is loaded, a card shows how the stage went; press A for the next one. Stages come in shifts, numbered shift-stage: shift 1 is three stages, shift 2 replays them at night and adds Pier 9 (2-4), and shift 3, the storm shift, adds the finale, Last Call (3-5).",
     setup() {
       onlyPieces(pc => pc.c === 20 && pc.row === 19);
       Object.assign(G.p, { x: 146, y: rowY(19), face: 1 });
@@ -4466,7 +4466,7 @@ const HOWTO = [
   {
     name: 'THE HORN',
     title: 'THE AIR HORN',
-    text: "Press A to blow the air horn. It blasts the way you face, most of a container's width, and a little way behind you too: it catches anyone in front of you, even a guy climbing up onto your catwalk. Hold up or down (on its own) to blast at the catwalk above or below instead; on a ladder it blasts up or down. An enemy it hits is stunned for about two and a half seconds: he can't hurt you, so walk through him or across his container. Horn him again and it starts over. Every stage starts you with at least 5 horns (count bottom right; you keep any extra). During a stage, the only way to get more is to fill a bay: one more horn each. Horns you still have when the ship is loaded are worth a big bonus on the SHIP LOADED card: 2,000 each, times the shift number (see WHAT'S IT WORTH). Each enemy it stuns counts toward your combo.",
+    text: "Press A to blow the air horn. It blasts the way you face, most of a container's width, and a little way behind you too: it catches anyone in front of you, even a guy climbing up onto your catwalk. Hold up or down (on its own) to blast at the catwalk above or below instead; on a ladder it blasts up or down. An enemy it hits is stunned for about two and a half seconds: he can't hurt you, so walk through him or across his container. Horn him again and it starts over. Every stage starts you with at least 5 horns (you keep any extra). During a stage, the only way to get more is to fill a bay: one more horn each. Horns you still have when the ship is loaded are worth a big bonus on the SHIP LOADED card: 2,000 each, times the shift number (see WHAT'S IT WORTH). Each enemy it stuns counts toward your combo.",
     setup() {
       G.pieces = [];
       Object.assign(G.p, { x: 196, y: rowY(19), face: 1 });
@@ -4553,7 +4553,7 @@ const HOWTO = [
   {
     name: 'COMBOS',
     title: 'COMBOS',
-    text: "Every move you make adds to your combo: each container landing, each knock-on in a chain, each rider, each enemy squashed, each enemy your horn stuns, and each CLOSE CALL (an enemy within a hair of you, and you get away: 200). Keep making moves and the COMBO count at the bottom, between your lives and horns, climbs (squash two and that's 2; send two riders down and squash two more on the way and it's higher still). Above it, a bar drains: make another move before it empties or the combo ends. Getting caught ends it too. The bar gets shorter as the combo grows (2.5 seconds down to 1). Your points are multiplied as it grows: x2 from the 3rd move, x3 from the 5th, x4 from the 7th, and on with no limit. Bonuses (bay full, ship loaded, time, horns left, no misses) aren't moves: they don't add to the combo and aren't multiplied.",
+    text: "Every move you make adds to your combo: each container landing, each knock-on in a chain, each rider, each enemy squashed, each enemy your horn stuns, and each CLOSE CALL (an enemy within a hair of you, and you get away: 200). Keep making moves and the COMBO count at the bottom of the screen climbs (squash two and that's 2; send two riders down and squash two more on the way and it's higher still). Above it, a bar drains: make another move before it empties or the combo ends. Getting caught ends it too. The bar gets shorter as the combo grows (2.5 seconds down to 1). Your points are multiplied as it grows: x2 from the 3rd move, x3 from the 5th, x4 from the 7th, and on with no limit. Bonuses (bay full, ship loaded, time, horns left, no misses) aren't moves: they don't add to the combo and aren't multiplied.",
     setup() {
       onlyPieces(pc => pc.c === 20);
       Object.assign(G.p, { x: 146, y: rowY(4), face: 1 });
@@ -4595,7 +4595,7 @@ const HOWTO = [
   {
     name: 'PAR TIME',
     title: 'PAR TIME AND SCORING',
-    text: "The clock at the top of the screen is the stage's par time: a minute and a half, counting down while you play. Every second left when the ship is loaded is a time bonus: 50 points, times the shift number (overtime keeps counting: OT1's shifts are 4, 5 and 6). Take longer and the clock turns to OVER PAR and counts up, and every second over comes off that stage's points instead (never more than you scored on it). The SHIP LOADED card adds the time bonus, 2,000 for each horn left and 5,000 for NO MISSES if you lost no life on the stage (2,000 for ONE MISS), all times the shift number. Loading the ship is worth 1,000 times the shift number. Extra lives come at 30,000 points, then 80,000, 150,000, 240,000..., each a bit further on: the thin bar under your lives (bottom left) fills up as you get close to the next one.",
+    text: "The clock at the top of the screen is the stage's par time: a minute and a half, counting down while you play. Every second left when the ship is loaded is a time bonus: 50 points, times the shift number (overtime keeps counting: OT1's shifts are 4, 5 and 6). Take longer and the clock turns to OVER PAR and counts up, and every second over comes off that stage's points instead (never more than you scored on it). The SHIP LOADED card adds the time bonus, 2,000 for each horn left and 5,000 for NO MISSES if you lost no life on the stage (2,000 for ONE MISS), all times the shift number. Loading the ship is worth 1,000 times the shift number. Extra lives come at 30,000 points, then 80,000, 150,000, 240,000..., each a bit further on: the thin bar under your lives count fills up as you get close to the next one.",
     setup() {
       onlyPieces(pc => pc.c === 20 && pc.row === 9);
       Object.assign(G.p, { x: 146, y: rowY(9), face: 1 });
@@ -9093,7 +9093,7 @@ function drawBand() {
   cell(PW - 12, 'STAGE', stageLabel(), C.pink, 'right');
   if (otNum()) otBand();
   if (G.combo >= 2 && G.comboT > 0 && (G.state === 'play' || (G.state === 'howto' && G.howView !== 'list'))) drawComboHud(); // only while playing (Chris 2026-11-09: it froze over the SHIP LOADED card)
-  if (G.p && G.state !== 'howto') drawCornerBadges(Math.max(0, G.lives), G.p.horns, hudPop());
+  if (G.p && G.state !== 'howto' && !sidesWide()) drawCornerBadges(Math.max(0, G.lives), G.p.horns, hudPop());
 }
 function scoreParts(v) {
   // 412350 -> ['00,', '412,350']: the zeros (and their commas) in front, then the number itself
@@ -9246,21 +9246,6 @@ function drawPanels() {
     rrect(L0 - 28, oy + 72, 56, 13, 3, C.yel, C.indigo, 1.2);
     text('DELUXE', L0, oy + 78.5, 8, C.indigo, 'center');
     art('buck.stand', L0, oy + 200, { scale: Math.min(1.8, ox / 40) });
-  }
-}
-function drawSides() {
-  // the room beside the field on wide screens: a stats card on the right
-  const { ox, oy } = LAY,
-    R = ox + PW + ox / 2,
-    bw = Math.min(ox - 10, 70);
-  rrect(R - bw / 2, oy + 24, bw, 150, 6, C.cream, C.indigo, 1.5);
-  for (const [lab, v, y] of [
-    ['SCORE', fmtNum(G.score), 40],
-    ['HORN', String(G.p.horns), 88],
-    ['LIVES', String(Math.max(0, G.lives)), 136]
-  ]) {
-    text(lab, R, oy + y, 7, C.blue, 'center', null, { maxW: bw - 8 });
-    text(v, R, oy + y + 17, v.length > 4 ? 12 : 20, C.pink, 'center', C.indigo, { maxW: bw - 8 });
   }
 }
 // mist: long thin streaks of fog drifting slowly across the harbor, between the painting and the stage (Chris 2026-11-08: not round blobs).
@@ -10007,6 +9992,223 @@ art = function (name, x, y, o = {}) {
   _dizc(name, x, y, o);
   for (let k = 0; k < 3; k++) { const [sx, sy, z] = st(k); if (z >= -0.2) glyphStar(sx, sy, 2.6 * (0.82 + 0.18 * z), C.yel); }
 };
+
+// ===== 10k-sides.js =====
+// ---------- the sides on wide screens (the Pocket 6, 16:9 and wider): stacks of containers (Chris's pick, Workshop sides round 2, D,
+// designed by Fable, 2026-11-17). Four big containers end-on at each side, standing on a quay; one on each side has its doors open with
+// Buck (left) or the horn (right) inside, and the count is stenciled on the container below (the next-life bar under Buck's count). The
+// top ones carry the dock's name. Lives and horns leave the bottom corners when the sides are on; the score stays in the top bar only.
+// With no room at the sides (the Retroid 2S, phones) nothing changes: the corner badges stay. ----------
+const SIDES_MIN = 48; // the side room (in game px) it takes
+const sidesWide = () => LAY.ox >= SIDES_MIN;
+function drawSides() {
+  if (!sidesWide()) return;
+  drawStacks(hudPop());
+  // at night and in the storm the stacks are dimmed a little like the backdrop behind them (the stage itself stays bright)
+  const dim = NIGHT() ? [NIGHT_SKY, 0.3] : STORM() ? [STORM_DIM, STORM_DIM_A * 0.6] : null;
+  if (dim) {
+    pg.save();
+    pg.globalAlpha = dim[1];
+    for (const [x0, x1] of sideStrips()) rect(x0, LAY.oy, x1 - x0, PH - 4, dim[0]);
+    pg.restore();
+  }
+}
+// the two strips: [x0, x1, the edge that touches the field, which way is away from the field (-1 left, 1 right)]
+const sideStrips = () => [
+  [0, LAY.ox, LAY.ox, -1],
+  [LAY.ox + PW, LAY.LW, LAY.ox + PW, 1]
+];
+// the near water strip runs on to the screen's edges (it used to stop at the field's), in step with the field's own waves
+function sideWater() {
+  const { ox, oy } = LAY,
+    y = oy + PH;
+  for (const [x0, x1] of sideStrips()) {
+    pg.save();
+    pg.beginPath();
+    pg.rect(x0, y - 4, x1 - x0, 5);
+    pg.clip();
+    rect(x0, y - 3, x1 - x0, 3, C.blue);
+    pg.strokeStyle = ink(C.cream);
+    pg.lineWidth = 0.8;
+    pg.beginPath();
+    const ph = ox + ((G.frame * 0.2) % 12) - 12;
+    for (let x = ph - 12 * Math.ceil((ph - x0 + 12) / 12); x < x1; x += 12) {
+      pg.moveTo(x, y - 1.5);
+      pg.quadraticCurveTo(x + 3, y - 3, x + 6, y - 1.5);
+    }
+    pg.stroke();
+    pg.restore();
+  }
+}
+// the life bar on its own, centered at x, y, w wide (lifeBar() draws at -16..16, 4.6)
+function lifeBarAt(x, y, w) {
+  pg.save();
+  pg.translate(x, y);
+  pg.scale(w / 32, w / 32);
+  pg.translate(0, -6.1);
+  lifeBar();
+  pg.restore();
+}
+// draw something scaled about a point (the pop of a count that changed)
+function popAt(x, y, s, fn) {
+  pg.save();
+  pg.translate(x, y);
+  pg.scale(s, s);
+  pg.translate(-x, -y);
+  fn();
+  pg.restore();
+}
+const livesNow = () => Math.max(0, G.lives);
+const hornsNow = () => (G.p ? G.p.horns : 0);
+
+const STK = {
+  pink: [
+    [150, 0, 0],
+    [205, 30, 0]
+  ],
+  blue: [
+    [0, 150, 0],
+    [40, 215, 0]
+  ],
+  yel: [
+    [0, 0, 170],
+    [50, 0, 235]
+  ],
+  orange: [
+    [95, 0, 175],
+    [150, 20, 235]
+  ]
+};
+function boxEnd(x, y, w, h, kind, open) {
+  const [col, dk] = STK[kind];
+  rrect(x, y, w, h, 1.5, col, C.indigo, 1.2);
+  rect(x + 0.6, y + 0.6, w - 1.2, 3, dk);
+  rect(x + 0.6, y + h - 3.6, w - 1.2, 3, dk);
+  for (const [cx, cy] of [
+    [x, y],
+    [x + w - 5, y],
+    [x, y + h - 4],
+    [x + w - 5, y + h - 4]
+  ])
+    rrect(cx, cy, 5, 4, 0.8, dk, C.indigo, 0.7); // corner castings
+  const ix = x + 5,
+    iy = y + 5.5,
+    iw = w - 10,
+    ih = h - 11;
+  if (open) {
+    // doors swung wide: the dark inside with a lit floor, and the two doors edge-on at the sides
+    rrect(ix, iy, iw, ih, 1, C.indigo, C.indigo, 0.8);
+    rect(ix + 1.2, iy + 1.2, iw - 2.4, ih - 2.4, [120, 190, 0]);
+    pg.fillStyle = ink(C.indigo);
+    for (let k = 1; k < 6; k++) pg.fillRect(ix + (iw * k) / 6 - 0.3, iy + 1.2, 0.6, ih - 2.4);
+    glowAt(x + w / 2, y + h / 2 + 2, iw * 0.62, C.cream, 0.95);
+    rect(ix + 1.2, iy + ih - 5, iw - 2.4, 3.8, C.yel);
+    rect(ix + 1.2, iy + ih - 5.4, iw - 2.4, 0.7, C.indigo);
+    rrect(x + 1, iy - 0.5, 4, ih + 1, 0.8, dk, C.indigo, 0.8);
+    rrect(x + w - 5, iy - 0.5, 4, ih + 1, 0.8, dk, C.indigo, 0.8);
+    return;
+  }
+  // closed doors: ribs, the seam, two lock rods a door with their handles
+  pg.fillStyle = ink(dk);
+  for (let ry = iy + 3; ry < iy + ih - 1; ry += 5) pg.fillRect(ix, ry, iw, 1.1);
+  rrect(ix, iy, iw, ih, 0.8, null, C.indigo, 0.7);
+  rect(x + w / 2 - 0.4, iy, 0.8, ih, C.indigo);
+  for (const f of [0.16, 0.36, 0.64, 0.84]) {
+    const rx = ix + iw * f;
+    rect(rx - 0.45, iy + 1, 0.9, ih - 2, C.indigo);
+    rect(rx - 1.1, iy + 2, 2.2, 1.4, C.indigo);
+    rect(rx - 1.1, iy + ih - 3.4, 2.2, 1.4, C.indigo);
+    rrect(rx - (f < 0.5 ? 0 : 4), iy + ih * 0.56, 4, 1.5, 0.6, C.cream, C.indigo, 0.5);
+  }
+}
+// lettering painted on a container: a flat panel of its darker color over the ribs and rods, then the words
+function paintPanel(cx, cy, pw, ph, kind) {
+  rrect(cx - pw / 2, cy - ph / 2, pw, ph, 2.5, STK[kind][1], C.indigo, 0.9);
+}
+function stencil(s, x, y, size, o) {
+  textF(FONT_MAIN, s, x, y, size, C.cream, 'center', null, o);
+}
+function upArrows(cx, y) {
+  for (const d of [-7, 7]) {
+    pg.beginPath();
+    pg.moveTo(cx + d, y - 6);
+    pg.lineTo(cx + d + 5, y);
+    pg.lineTo(cx + d + 2, y);
+    pg.lineTo(cx + d + 2, y + 6);
+    pg.lineTo(cx + d - 2, y + 6);
+    pg.lineTo(cx + d - 2, y);
+    pg.lineTo(cx + d - 5, y);
+    pg.closePath();
+    pg.fillStyle = ink(C.cream);
+    pg.fill();
+  }
+}
+function drawStacks(pop) {
+  const { ox, oy } = LAY,
+    w = Math.min(ox - 7, 66),
+    H = 61,
+    base = oy + 250,
+    name = L.def.name.split(' ');
+  const stack = (cx, kinds, jog, fill) => {
+    // the quay under them, in the water
+    const qx = cx - w / 2 - 3;
+    rrect(qx, base, w + 6, 6, 1, C.cream, C.indigo, 1.1);
+    rect(qx + 1.5, base + 6, w + 3, PH - (base - oy) - 6, [70, 150, 0]);
+    pg.fillStyle = ink(C.indigo);
+    for (let x = qx + 6; x < qx + w + 2; x += 9) pg.fillRect(x, base + 6, 0.8, 40);
+    rect(qx + 1.5, base + 6, w + 3, 0.9, C.indigo);
+    for (let i = 3; i >= 0; i--) {
+      const x = cx - w / 2 + jog[i],
+        y = base - (4 - i) * H;
+      if (i < 3) rect(x + 2, y + H - 1.2, w - 4, 1.6, C.indigo); // the gap's shadow
+      boxEnd(x, y, w, H, kinds[i], i === 1);
+      fill(i, cx + jog[i], y);
+    }
+  };
+  // (Chris 2026-11-17: Buck and the horn were too big, and the horn's pop went past the container) smaller, and kept inside the open doors
+  const inside = (cx, y, f) => {
+    pg.save();
+    pg.beginPath();
+    pg.rect(cx - w / 2 + 5, y + 5.5, w - 10, H - 11);
+    pg.clip();
+    f();
+    pg.restore();
+  };
+  const tag = (cx, y, kind) => {
+    paintPanel(cx, y + 30, w - 18, 30, kind);
+    stencil(name[0] || '', cx, y + 24, 8, { maxW: w - 24, track: 0.5 });
+    stencil(name.slice(1).join(' ') || 'DOCK', cx, y + 35.5, 8, { maxW: w - 24, track: 0.5 });
+  };
+  const count = (cx, cy, n, s, kind) => {
+    paintPanel(cx, cy, w - 18, 28, kind);
+    popAt(cx, cy, s, () => textF(FONT_MAIN, 'x' + n, cx, cy + 0.5, 22, C.cream, 'center', C.indigo, { maxW: w - 26 }));
+  };
+  stack(ox - 3.5 - w / 2, ['yel', 'blue', 'pink', 'orange'], [1.5, -1, 0.5, -1.5], (i, cx, y) => {
+    if (i === 0) {
+      paintPanel(cx, y + 30, w - 18, 30, 'yel');
+      upArrows(cx, y + 25);
+      stencil('THIS WAY UP', cx, y + 39, 4.6, { maxW: w - 24 });
+    }
+    if (i === 1) inside(cx, y, () => popAt(cx, y + 34, pop.l, () => art('buck.stand', cx, y + H - 11, { scale: 1.05 })));
+    if (i === 2) {
+      count(cx, y + 24, livesNow(), pop.l, 'pink');
+      rrect(cx - 23, y + 43, 46, 9, 3, C.cream, C.indigo, 1);
+      lifeBarAt(cx, y + 47.5, 38);
+    }
+    if (i === 3) tag(cx, y, 'orange');
+  });
+  stack(ox + PW + 3.5 + w / 2, ['orange', 'pink', 'blue', 'yel'], [-1.5, 1, -0.5, 1.5], (i, cx, y) => {
+    if (i === 0) tag(cx, y, 'orange');
+    if (i === 1) inside(cx, y, () => popAt(cx, y + 30, pop.h, () => hornIcon(cx + 4, y + 30, 2.5)));
+    if (i === 2) count(cx, y + 30.5, hornsNow(), pop.h, 'blue');
+    if (i === 3) {
+      paintPanel(cx, y + 30, w - 18, 30, 'yel');
+      upArrows(cx, y + 25);
+      stencil('THIS WAY UP', cx, y + 39, 4.6, { maxW: w - 24 });
+    }
+  });
+  sideWater();
+}
 
 // ===== 12-dev.js =====
 // ---------- dev mode (owner only), the same ways in as Hereafter Man ----------
