@@ -4463,9 +4463,9 @@
     {
      "id": "r1",
      "date": "2026-11-17",
-     "status": "open",
+     "status": "decided",
      "question": "On the Pocket 6 (and any wide screen), what should fill the room beside the stage, now that lives and horns move off the bottom?",
-     "found": "Each clip is the real game on a 16:9 screen, 10 seconds of the 1-1 demo with sound: Buck blows his horn a few times and earns an extra life near the end, so you see the counts change and pop. In every option lives and horns leave the bottom corners (the combo stays at the bottom), the score is only in the top bar (nothing shown twice), and the near water now runs to the screen's edges so the stage doesn't look cut off. On the Retroid 2S and phones (no room at the sides) the bottom badges stay as they are. Play in game: open it on the Pocket 6 to see it at full size.",
+     "found": "Each clip is the real game on a 16:9 screen, 10 seconds of the 1-1 demo with sound: Buck blows his horn a few times and earns an extra life near the end, so you see the counts change and pop. In every option lives and horns leave the bottom corners (the combo stays at the bottom), the score is only in the top bar (nothing shown twice), and the near water now runs to the screen's edges so the stage doesn't look cut off. On the Retroid 2S and phones (no room at the sides) the bottom badges stay as they are. Play in game: open it on the Pocket 6 to see it at full size. Not picked: none of these (Chris 2026-11-17); round 2 tries again from scratch.",
      "options": [
       {
        "id": "Now",
@@ -4531,6 +4531,80 @@
        ],
        "sound": true,
        "play": "play/sides-r1-D.html"
+      }
+     ]
+    },
+    {
+     "id": "r2",
+     "date": "2026-11-17",
+     "status": "open",
+     "question": "Round 2, ideas by Fable: on the Pocket 6 (and any wide screen), what should the sides of the stage be?",
+     "found": "Four different answers to the same three problems: the sides were empty, the stage just stopped at a line, and the right-hand card repeated what the screen already shows. Each clip is the real game on a 16:9 screen, 10 seconds of the 1-1 demo with sound: Buck blows his horn a few times and earns an extra life near the end, so you see the counts change. In all four, lives and horns leave the bottom corners (the combo plate stays there), the score is only in the top bar, and nothing changes on the Retroid 2S or phones, where there is no side room. All four were also checked on a wider 20:9 screen, on the night shift, and with lots of lives and horns (A switches to +N, the others show the count). One thing to know: the sides are printed at full brightness on the night and storm shifts too; whichever you pick can be dimmed to match when it goes in the game. Play in game: open it on the Pocket 6 to see it at full size. (In C, NEXT LIFE AT reads 400 only because the clip forces an early extra life.)",
+     "options": [
+      {
+       "id": "Now",
+       "title": "Now",
+       "note": "The harbor painting at full strength on both sides, a card on the right repeating SCORE, HORN and LIVES; lives and horns also in the bottom corners.",
+       "images": [
+        {
+         "src": "img/sides-r2/Now.mp4",
+         "label": "Pocket 6 (16:9)"
+        }
+       ],
+       "sound": true,
+       "play": "play/sides-r2-Now.html"
+      },
+      {
+       "id": "A",
+       "title": "Dockside",
+       "note": "The lightest touch: the painting stays and the dock carries on past the stage. A small pier stands in the water on each side, built from the same catwalk and posts as the stage. The crew shelter on the left holds one Buck per life, waiting his turn, with the next-life bar hung under the pier; the horn locker on the right holds one horn per horn. A line of flags runs from each pier's mast up to the stage's doors, so the three read as one place. Up to five Bucks or six horns, then +N.",
+       "images": [
+        {
+         "src": "img/sides-r2/A.mp4",
+         "label": "Pocket 6 (16:9)"
+        }
+       ],
+       "sound": true,
+       "play": "play/sides-r2-A.html"
+      },
+      {
+       "id": "B",
+       "title": "Poster panels",
+       "note": "The loudest: each side is a printed poster with one huge icon in a slowly turning sunburst. Buck on a yellow disc on the left with his count and the next-life bar, the horn on the right with its count. The same two icons as the bottom badges, just big enough to own the space. A thick rule and a shadow put the stage in front.",
+       "images": [
+        {
+         "src": "img/sides-r2/B.mp4",
+         "label": "Pocket 6 (16:9)"
+        }
+       ],
+       "sound": true,
+       "play": "play/sides-r2-B.html"
+      },
+      {
+       "id": "C",
+       "title": "One frame",
+       "note": "The score bar grows down both sides into a single cream frame, so the stage sits in a window instead of stopping at a line. This is the right-hand card you said looked better, done on both sides and with nothing repeated: lives with the score the next life comes at, the high score (not shown anywhere during play today), the dock's name and shift, horns, how much cargo is on the ship (a small container lights up for each one loaded), and who is on the prowl this stage.",
+       "images": [
+        {
+         "src": "img/sides-r2/C.mp4",
+         "label": "Pocket 6 (16:9)"
+        }
+       ],
+       "sound": true,
+       "play": "play/sides-r2-C.html"
+      },
+      {
+       "id": "D",
+       "title": "Container stacks",
+       "note": "A game about stacking containers gets stacks of them: four big containers end-on at each side, standing on the quay in the water, printed lighter than the stage's so they stay behind it. One on each side has its doors open: Buck stands in the left one, the horn sits in the right one, and the count is painted big on the container underneath (the next-life bar bolted on below Buck's). The others carry the dock's name, which changes with the stage.",
+       "images": [
+        {
+         "src": "img/sides-r2/D.mp4",
+         "label": "Pocket 6 (16:9)"
+        }
+       ],
+       "sound": true,
+       "play": "play/sides-r2-D.html"
       }
      ]
     }
