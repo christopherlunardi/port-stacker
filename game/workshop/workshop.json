@@ -4584,7 +4584,7 @@
       {
        "id": "D",
        "title": "Container stacks",
-       "note": "A game about stacking containers gets stacks of them: four big containers end-on at each side, standing on the quay in the water, printed lighter than the stage's so they stay behind it. One on each side has its doors open: Buck stands in the left one, the horn sits in the right one, and the count is painted big on the container underneath (the next-life bar bolted on below Buck's). The others carry the dock's name, which changes with the stage.",
+       "note": "A game about stacking containers gets stacks of them: four big containers end-on at each side, standing on the quay in the water, printed lighter than the stage's so they stay behind it. One on each side has its doors open: Buck stands in the left one, the horn sits in the right one, and the count is painted big on the container underneath (the next-life bar bolted on below Buck's). The others carry the dock's name, which changes with the stage. (Tweaked 2026-11-17: Buck and the horn smaller, and they stay inside their container when they pop.)",
        "images": [
         {
          "src": "img/sides-r2/D.mp4",

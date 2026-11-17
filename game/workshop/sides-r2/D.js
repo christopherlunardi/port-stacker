@@ -94,6 +94,15 @@ SIDES.draw = pop => {
       fill(i, cx + jog[i], y);
     }
   };
+  // (Chris 2026-11-17: Buck and the horn were too big, and the horn's pop went past the container) smaller, and kept inside the open doors
+  const inside = (cx, y, f) => {
+    pg.save();
+    pg.beginPath();
+    pg.rect(cx - w / 2 + 5, y + 5.5, w - 10, H - 11);
+    pg.clip();
+    f();
+    pg.restore();
+  };
   const tag = (cx, y, kind) => {
     paintPanel(cx, y + 30, w - 18, 30, kind);
     stencil(name[0] || '', cx, y + 24, 8, { maxW: w - 24, track: 0.5 });
@@ -109,7 +118,7 @@ SIDES.draw = pop => {
       upArrows(cx, y + 25);
       stencil('THIS WAY UP', cx, y + 39, 4.6, { maxW: w - 24 });
     }
-    if (i === 1) popAt(cx, y + 32, pop.l, () => art('buck.stand', cx, y + H - 9.6, { scale: 1.45 }));
+    if (i === 1) inside(cx, y, () => popAt(cx, y + 34, pop.l, () => art('buck.stand', cx, y + H - 11, { scale: 1.05 })));
     if (i === 2) {
       count(cx, y + 24, livesNow(), pop.l, 'pink');
       rrect(cx - 23, y + 43, 46, 9, 3, C.cream, C.indigo, 1);
@@ -119,7 +128,7 @@ SIDES.draw = pop => {
   });
   stack(ox + PW + 3.5 + w / 2, ['orange', 'pink', 'blue', 'yel'], [-1.5, 1, -0.5, 1.5], (i, cx, y) => {
     if (i === 0) tag(cx, y, 'orange');
-    if (i === 1) popAt(cx, y + 30, pop.h, () => hornIcon(cx + 5.5, y + 30, 3.5));
+    if (i === 1) inside(cx, y, () => popAt(cx, y + 30, pop.h, () => hornIcon(cx + 4, y + 30, 2.5)));
     if (i === 2) count(cx, y + 30.5, hornsNow(), pop.h, 'blue');
     if (i === 3) {
       paintPanel(cx, y + 30, w - 18, 30, 'yel');
