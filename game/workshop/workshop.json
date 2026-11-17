@@ -4377,8 +4377,7 @@
          "src": "img/stars-r1/Now.mp4",
          "label": "Five stunned enemies"
         }
-       ],
-       "play": "play/stars-r1-Now.html"
+       ]
       },
       {
        "id": "A",
@@ -4389,8 +4388,7 @@
          "src": "img/stars-r1/A.mp4",
          "label": "Five stunned enemies"
         }
-       ],
-       "play": "play/stars-r1-A.html"
+       ]
       },
       {
        "id": "B",
@@ -4401,8 +4399,7 @@
          "src": "img/stars-r1/B.mp4",
          "label": "Five stunned enemies"
         }
-       ],
-       "play": "play/stars-r1-B.html"
+       ]
       },
       {
        "id": "C",
@@ -4413,8 +4410,7 @@
          "src": "img/stars-r1/C.mp4",
          "label": "Five stunned enemies"
         }
-       ],
-       "play": "play/stars-r1-C.html"
+       ]
       },
       {
        "id": "D",
@@ -4425,8 +4421,7 @@
          "src": "img/stars-r1/D.mp4",
          "label": "Five stunned enemies"
         }
-       ],
-       "play": "play/stars-r1-D.html"
+       ]
       },
       {
        "id": "E",
@@ -4437,8 +4432,7 @@
          "src": "img/stars-r1/E.mp4",
          "label": "Five stunned enemies"
         }
-       ],
-       "play": "play/stars-r1-E.html"
+       ]
       },
       {
        "id": "F",
@@ -4449,8 +4443,7 @@
          "src": "img/stars-r1/F.mp4",
          "label": "Five stunned enemies"
         }
-       ],
-       "play": "play/stars-r1-F.html"
+       ]
       }
      ]
     }
@@ -4477,8 +4470,7 @@
          "label": "Pocket 6 (16:9)"
         }
        ],
-       "sound": true,
-       "play": "play/sides-r1-Now.html"
+       "sound": true
       },
       {
        "id": "A",
@@ -4490,8 +4482,7 @@
          "label": "Pocket 6 (16:9)"
         }
        ],
-       "sound": true,
-       "play": "play/sides-r1-A.html"
+       "sound": true
       },
       {
        "id": "B",
@@ -4503,8 +4494,7 @@
          "label": "Pocket 6 (16:9)"
         }
        ],
-       "sound": true,
-       "play": "play/sides-r1-B.html"
+       "sound": true
       },
       {
        "id": "C",
@@ -4516,8 +4506,7 @@
          "label": "Pocket 6 (16:9)"
         }
        ],
-       "sound": true,
-       "play": "play/sides-r1-C.html"
+       "sound": true
       },
       {
        "id": "D",
@@ -4529,8 +4518,7 @@
          "label": "Pocket 6 (16:9)"
         }
        ],
-       "sound": true,
-       "play": "play/sides-r1-D.html"
+       "sound": true
       }
      ]
     },
