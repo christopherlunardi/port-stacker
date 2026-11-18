@@ -182,7 +182,7 @@ body.padmode #screenWrap,body.inapp #screenWrap{position:fixed;top:0;right:0;bot
 // ---------- setup ----------
 // Port Stacker Deluxe: a container-stacking arcade game. One HTML page; played in a browser, on a phone (the artifact link) and on the
 // Retroid handhelds (the launcher app in android/ downloads the newest build and plays the last one it has when offline).
-const BUILD = 224; // set by assemble.py; the launcher compares it with dist/version.json
+const BUILD = 225; // set by assemble.py; the launcher compares it with dist/version.json
 const PW = 384,
   PH = 288,
   TK = PH / 240; // TK: screens laid out for the old 320x240 field (title, cards, menus, boards) draw at TK in their old coordinates           // the playfield in game pixels; the screen around it grows to fit any shape (10-render)
@@ -3760,12 +3760,22 @@ function payHorns() {
 // extra lives (Chris 2026-11-08: with bigger scores, every 20,000 came too often). Chris 2026-11-09: the first a little later, then
 // growing slower than doubling, so a player dying a lot can still grind on into overtime: at 30,000, then each gap 20,000 longer than
 // the last: 30,000, 80,000, 150,000, 240,000, 350,000, 480,000, 630,000, 800,000, 990,000, 1,200,000...
+// Chris 2026-11-17: deep in overtime that still gave about a life a stage forever (points per stage grow with the shift number as fast
+// as the gaps do). Past LIFE_OT (about where the main game ends) the gaps' growth itself grows by LIFE_OT_K for each life: OT1 hardly
+// changes, OT2 gives a life or two fewer a shift, OT3 and on about two a shift and slowly fewer, never none.
 const LIFE_FIRST = 30000,
-  LIFE_GROW = 20000;
+  LIFE_GROW = 20000,
+  LIFE_OT = 2000000,
+  LIFE_OT_K = 1.08;
 function nextLifeAfter(v) {
   let at = LIFE_FIRST,
-    gap = LIFE_FIRST;
-  while (at <= v) at += gap += LIFE_GROW;
+    gap = LIFE_FIRST,
+    grow = LIFE_GROW;
+  while (at <= v) {
+    if (at > LIFE_OT) grow *= LIFE_OT_K;
+    gap = Math.round((gap + grow) / 50) * 50; // whole 50s, so the score it shows is the score it takes
+    at += gap;
+  }
   return at;
 }
 function comboWindow(m) {
@@ -4595,7 +4605,7 @@ const HOWTO = [
   {
     name: 'PAR TIME',
     title: 'PAR TIME AND SCORING',
-    text: "The clock at the top of the screen is the stage's par time: a minute and a half, counting down while you play. Every second left when the ship is loaded is a time bonus: 50 points, times the shift number (overtime keeps counting: OT1's shifts are 4, 5 and 6). Take longer and the clock turns to OVER PAR and counts up, and every second over comes off that stage's points instead (never more than you scored on it). The SHIP LOADED card adds the time bonus, 2,000 for each horn left and 5,000 for NO MISSES if you lost no life on the stage (2,000 for ONE MISS), all times the shift number. Loading the ship is worth 1,000 times the shift number. Extra lives come at 30,000 points, then 80,000, 150,000, 240,000..., each a bit further on: the thin bar under your lives count fills up as you get close to the next one.",
+    text: "The clock at the top of the screen is the stage's par time: a minute and a half, counting down while you play. Every second left when the ship is loaded is a time bonus: 50 points, times the shift number (overtime keeps counting: OT1's shifts are 4, 5 and 6). Take longer and the clock turns to OVER PAR and counts up, and every second over comes off that stage's points instead (never more than you scored on it). The SHIP LOADED card adds the time bonus, 2,000 for each horn left and 5,000 for NO MISSES if you lost no life on the stage (2,000 for ONE MISS), all times the shift number. Loading the ship is worth 1,000 times the shift number. Extra lives come at 30,000 points, then 80,000, 150,000, 240,000..., each further on (more so past 2 million): the thin bar under your lives count fills up as you get close to the next one.",
     setup() {
       onlyPieces(pc => pc.c === 20 && pc.row === 9);
       Object.assign(G.p, { x: 146, y: rowY(9), face: 1 });

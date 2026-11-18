@@ -1,7 +1,7 @@
 // Port Stacker Deluxe's service worker (made by game/tools/web.py): keeps every file of one build in its own cache so the game plays
 // offline. A newer build installs in the background and waits; the page tells it to take over on the next title screen (message
 // "skip"), then the old build's cache is deleted.
-const BUILD = 224,
+const BUILD = 225,
   CACHE = 'portstacker-' + BUILD,
   FILES = ["./", "icons/icon-192.png", "icons/icon-512.png", "icons/icon-maskable-512.png", "index.html", "manifest.webmanifest", "pwa.js"];
 self.addEventListener('install', e => {

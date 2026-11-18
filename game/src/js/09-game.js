@@ -153,12 +153,22 @@ function payHorns() {
 // extra lives (Chris 2026-11-08: with bigger scores, every 20,000 came too often). Chris 2026-11-09: the first a little later, then
 // growing slower than doubling, so a player dying a lot can still grind on into overtime: at 30,000, then each gap 20,000 longer than
 // the last: 30,000, 80,000, 150,000, 240,000, 350,000, 480,000, 630,000, 800,000, 990,000, 1,200,000...
+// Chris 2026-11-17: deep in overtime that still gave about a life a stage forever (points per stage grow with the shift number as fast
+// as the gaps do). Past LIFE_OT (about where the main game ends) the gaps' growth itself grows by LIFE_OT_K for each life: OT1 hardly
+// changes, OT2 gives a life or two fewer a shift, OT3 and on about two a shift and slowly fewer, never none.
 const LIFE_FIRST = 30000,
-  LIFE_GROW = 20000;
+  LIFE_GROW = 20000,
+  LIFE_OT = 2000000,
+  LIFE_OT_K = 1.08;
 function nextLifeAfter(v) {
   let at = LIFE_FIRST,
-    gap = LIFE_FIRST;
-  while (at <= v) at += gap += LIFE_GROW;
+    gap = LIFE_FIRST,
+    grow = LIFE_GROW;
+  while (at <= v) {
+    if (at > LIFE_OT) grow *= LIFE_OT_K;
+    gap = Math.round((gap + grow) / 50) * 50; // whole 50s, so the score it shows is the score it takes
+    at += gap;
+  }
   return at;
 }
 function comboWindow(m) {
