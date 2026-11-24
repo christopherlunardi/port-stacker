@@ -98,6 +98,8 @@ function ropeRect(x, y, w, h, r, thick = 3.4) {
 }
 function ribbon(cx, y, w, h, col, label, fam, size, tcol = C.cream) {
   // a banner with swallowtail ends folded behind
+  // (Chris 2026-11-23: words right up against the ends looked terrible) at least the banner's height of room either side of the words
+  if (label) w = Math.max(w, textW(fam, label, size) + 2 * h);
   const x = cx - w / 2,
     tail = h * 0.9,
     f = h * 0.35;

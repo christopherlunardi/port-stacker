@@ -52,7 +52,7 @@ const HOWTO = [
   {
     name: 'CONTROLS',
     title: 'CONTROLS',
-    text: "D-PAD: walk left and right along the catwalks. At a ladder, press up or down to climb, and step off at any catwalk the ladder crosses. A: blow the air horn the way you face (hold up or down on its own to blast up or down). B: dash, a short burst of speed the way you're moving. It's ready again in about two-thirds of a second. START: pause (resume, restart the game from 1-1, sound, music, print look, info, quit; restarting or quitting asks you to press A again).",
+    text: "D-PAD: walk left and right along the catwalks. At a ladder, press up or down to climb, and step off at any catwalk the ladder crosses. A: blow the air horn the way you face (hold up or down on its own to blast up or down). B: dash, a short burst of speed the way you're moving. It's ready again in about two-thirds of a second. START: pause (resume, info, options for sound, music, print look and sending play data, restart the game from 1-1, quit; restarting or quitting asks you to press A again).",
     setup() {
       G.pieces = [];
       Object.assign(G.p, { x: 210, y: rowY(19), face: 1 });

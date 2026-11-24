@@ -182,7 +182,7 @@ body.padmode #screenWrap,body.inapp #screenWrap{position:fixed;top:0;right:0;bot
 // ---------- setup ----------
 // Port Stacker Deluxe: a container-stacking arcade game. One HTML page; played in a browser, on a phone (the artifact link) and on the
 // Retroid handhelds (the launcher app in android/ downloads the newest build and plays the last one it has when offline).
-const BUILD = 225; // set by assemble.py; the launcher compares it with dist/version.json
+const BUILD = 226; // set by assemble.py; the launcher compares it with dist/version.json
 const PW = 384,
   PH = 288,
   TK = PH / 240; // TK: screens laid out for the old 320x240 field (title, cards, menus, boards) draw at TK in their old coordinates           // the playfield in game pixels; the screen around it grows to fit any shape (10-render)
@@ -4033,6 +4033,7 @@ function update(inp) {
         if (inp.pressed.start || inp.pressed.a) G.t = Math.max(G.t, TI.logoAt - 16);
         break;
       } // a press skips the intro to the logo landing
+      if (askTitle(inp)) break; // the first time: may we send play data? (12b-share.js)
       if (attractTitle(inp)) break; // left alone long enough: a demo (09e-attract.js)
       if (inp.pressed.up || inp.pressed.down) {
         G.titleSel = ((G.titleSel || 0) + (inp.pressed.up ? TITLE_MENU.length - 1 : 1)) % TITLE_MENU.length;
@@ -4175,6 +4176,7 @@ function pauseGame() {
   G.sure = null;
   if (G.st) G.st.pauses = (G.st.pauses || 0) + 1;
   G.state = 'pause';
+  G.pauseSub = null;
   G.menu = 0;
   SFX.pause();
 }
@@ -4194,41 +4196,40 @@ function sure(key, label, fn) {
     key
   ];
 }
+// (Chris 2026-11-23, like Lexicon Signal's: the simple things up front, sound, music, print look and play data in OPTIONS, the lines that
+// end the game at the bottom)
 function pauseItems() {
+  if (G.pauseSub === 'opt')
+    return [
+      [
+        'SOUND: ' + (muted ? 'OFF' : 'ON'),
+        () => {
+          muted = !muted;
+          store.set('mute', muted);
+        }
+      ],
+      [
+        'MUSIC: ' + (musicOn ? 'ON' : 'OFF'),
+        () => {
+          musicOn = !musicOn;
+          store.set('music', musicOn);
+        }
+      ],
+      [
+        'PRINT: ' + (typeof PRINT_MODES !== 'undefined' ? PRINT_MODES[printMode][0] : ''),
+        () => {
+          printMode = (printMode + 1) % PRINT_MODES.length;
+          store.set('print2', printMode);
+        }
+      ],
+      ['SEND PLAY DATA: ' + (SHARE === 'yes' ? 'ON' : 'OFF'), () => shareSet(SHARE === 'yes' ? 'no' : 'yes')],
+      ['BACK', () => pauseSub(null)]
+    ];
   const items = [
     [
       'RESUME',
       () => {
         G.state = 'play';
-      }
-    ],
-    // (Chris 2026-11-10) no restarting a stage (it kept the points: a free do-over); RESTART GAME starts the whole run again from 1-1,
-    // asked twice so it can't happen by accident
-    sure('restart', 'RESTART GAME', () => {
-      teleQuit();
-      saveHi();
-      newGame();
-      startLevel(0);
-    }),
-    [
-      'SOUND: ' + (muted ? 'OFF' : 'ON'),
-      () => {
-        muted = !muted;
-        store.set('mute', muted);
-      }
-    ],
-    [
-      'MUSIC: ' + (musicOn ? 'ON' : 'OFF'),
-      () => {
-        musicOn = !musicOn;
-        store.set('music', musicOn);
-      }
-    ],
-    [
-      'PRINT: ' + (typeof PRINT_MODES !== 'undefined' ? PRINT_MODES[printMode][0] : ''),
-      () => {
-        printMode = (printMode + 1) % PRINT_MODES.length;
-        store.set('print2', printMode);
       }
     ],
     [
@@ -4237,11 +4238,7 @@ function pauseItems() {
         G.info = true;
       }
     ],
-    sure('title', 'QUIT TO TITLE', () => {
-      teleQuit();
-      saveHi();
-      toTitleFresh();
-    })
+    ['OPTIONS', () => pauseSub('opt')]
   ];
   if (NATIVE()) {
     if (G.updateReady) items.push(sure('reload', 'LOAD NEW BUILD ' + G.updateReady, () => (saveHi(), NATIVE().reload())));
@@ -4258,10 +4255,31 @@ function pauseItems() {
       au = NATIVE().appUpdate ? NATIVE().appUpdate() : 0;
     } catch (e) {}
     if (au) items.push(sure('app', 'UPDATE APP (NEW VERSION)', () => (saveHi(), NATIVE().installApp())));
-    items.push(sure('exit', 'EXIT GAME', () => (teleQuit(), saveHi(), NATIVE().quit())));
   }
+  // (Chris 2026-11-10) no restarting a stage (it kept the points: a free do-over); RESTART GAME starts the whole run again from 1-1,
+  // asked twice so it can't happen by accident
+  items.push(
+    sure('restart', 'RESTART GAME', () => {
+      teleQuit();
+      saveHi();
+      newGame();
+      startLevel(0);
+    }),
+    sure('title', 'QUIT TO TITLE', () => {
+      teleQuit();
+      saveHi();
+      toTitleFresh();
+    })
+  );
+  if (NATIVE()) items.push(sure('exit', 'EXIT GAME', () => (teleQuit(), saveHi(), NATIVE().quit())));
   // (no DEV lines here: the pause menu is the same for everyone; dev options are in the DEV panel, Chris 2026-11-08)
   return items;
+}
+// OPTIONS opens in place of the main list; BACK (or B) returns to it, on the OPTIONS line
+function pauseSub(v) {
+  G.pauseSub = v;
+  G.menu = v ? 0 : 2;
+  G.sure = null;
 }
 function updatePause(inp) {
   if (G.info) {
@@ -4282,8 +4300,14 @@ function updatePause(inp) {
   }
   G.menu = Math.min(G.menu, items.length - 1);
   if (G.sure && items[G.menu][2] !== G.sure) G.sure = null; // moved off the line: not armed any more
+  if (inp.pressed.b && G.pauseSub) {
+    pauseSub(null);
+    SFX.move();
+    return;
+  }
   if (inp.pressed.b || inp.pressed.start) {
     G.sure = null;
+    G.pauseSub = null;
     G.state = 'play';
     return;
   }
@@ -4447,7 +4471,7 @@ const HOWTO = [
   {
     name: 'CONTROLS',
     title: 'CONTROLS',
-    text: "D-PAD: walk left and right along the catwalks. At a ladder, press up or down to climb, and step off at any catwalk the ladder crosses. A: blow the air horn the way you face (hold up or down on its own to blast up or down). B: dash, a short burst of speed the way you're moving. It's ready again in about two-thirds of a second. START: pause (resume, restart the game from 1-1, sound, music, print look, info, quit; restarting or quitting asks you to press A again).",
+    text: "D-PAD: walk left and right along the catwalks. At a ladder, press up or down to climb, and step off at any catwalk the ladder crosses. A: blow the air horn the way you face (hold up or down on its own to blast up or down). B: dash, a short burst of speed the way you're moving. It's ready again in about two-thirds of a second. START: pause (resume, info, options for sound, music, print look and sending play data, restart the game from 1-1, quit; restarting or quitting asks you to press A again).",
     setup() {
       G.pieces = [];
       Object.assign(G.p, { x: 210, y: rowY(19), face: 1 });
@@ -6477,8 +6501,10 @@ function render() {
   else pg.rect(0, 0, PW, PH);
   pg.clip(); // the title and boards fill the whole screen (16:9 too)
   if (G.state === 'splash' || G.state === 'studio') drawSplash();
-  else if (G.state === 'title') drawTitle();
-  else if (G.state === 'board') drawBoard();
+  else if (G.state === 'title') {
+    drawTitle();
+    if (ASK.on) oldField(drawAskBody); // the first time: may we send play data? (12b-share.js)
+  } else if (G.state === 'board') drawBoard();
   else if (G.state === 'initials') drawInitials();
   else {
     const sx = shipOffset();
@@ -6596,7 +6622,15 @@ function render() {
 // the squashed: flat as a pancake for a moment, blinking out (40 frames). The Captain, the Forklift and the gull have their own squash
 // pictures, Pratt and the Watchman too since 2026-11-11 (ChatGPT; they used to just vanish under the container)
 function flatArt(type) {
-  return type === 'fork' ? 'forklift.squash' : type === 'gull' ? 'gull.squash' : type === 'pratt' ? 'pratt.squash' : type === 'watch' ? 'watch.squash' : 'crab.squash';
+  return type === 'fork'
+    ? 'forklift.squash'
+    : type === 'gull'
+      ? 'gull.squash'
+      : type === 'pratt'
+        ? 'pratt.squash'
+        : type === 'watch'
+          ? 'watch.squash'
+          : 'crab.squash';
 }
 function drawFlat(type, x, y, t, flip, scale) {
   if (!(t > 12 || (t >> 1) & 1)) return;
@@ -7526,6 +7560,8 @@ function ropeRect(x, y, w, h, r, thick = 3.4) {
 }
 function ribbon(cx, y, w, h, col, label, fam, size, tcol = C.cream) {
   // a banner with swallowtail ends folded behind
+  // (Chris 2026-11-23: words right up against the ends looked terrible) at least the banner's height of room either side of the words
+  if (label) w = Math.max(w, textW(fam, label, size) + 2 * h);
   const x = cx - w / 2,
     tail = h * 0.9,
     f = h * 0.35;
@@ -7705,7 +7741,8 @@ function cardBody(a, b, o = {}) {
     pg.stroke();
   }
   ropePanel(-w / 2, top, w, h);
-  if (o.ribbon) o.ribbon(top); // a card can draw its own ribbon (the game-over card's turns over for a new best)
+  if (o.ribbon)
+    o.ribbon(top); // a card can draw its own ribbon (the game-over card's turns over for a new best)
   else ribbon(0, top - 7, 110, 16, C.pink, a, FONT_MAIN, 10);
   if (o.draw) o.draw(top, w, h);
   else {
@@ -7741,7 +7778,17 @@ function overCard() {
       pg.save();
       pg.translate(0, top - 7);
       pg.scale(1, Math.max(0.04, Math.abs(Math.cos(f * Math.PI))));
-      ribbon(0, 0, 110, 16, after ? C.yel : C.pink, after ? (G.newBest ? 'NEW BEST!' : 'ON THE BOARD!') : 'GAME OVER', FONT_MAIN, 10, after ? C.pink : C.cream);
+      ribbon(
+        0,
+        0,
+        110,
+        16,
+        after ? C.yel : C.pink,
+        after ? (G.newBest ? 'NEW BEST!' : 'ON THE BOARD!') : 'GAME OVER',
+        FONT_MAIN,
+        10,
+        after ? C.pink : C.cream
+      );
       pg.restore();
     },
     draw: top => {
@@ -7878,7 +7925,16 @@ function clearCard() {
         } else if (t < T.mf1) {
           const f = (t - T.mf0) / (T.mf1 - T.mf0),
             e = f * f;
-          textF(FONT_MAIN, '+' + fmtNum(cb), R0 + (L0 - R0) * e, top + 124 + (113 - 124) * e - Math.sin(f * Math.PI) * 14, 8.5 + f * 2, C.yel, 'center', C.indigo);
+          textF(
+            FONT_MAIN,
+            '+' + fmtNum(cb),
+            R0 + (L0 - R0) * e,
+            top + 124 + (113 - 124) * e - Math.sin(f * Math.PI) * 14,
+            8.5 + f * 2,
+            C.yel,
+            'center',
+            C.indigo
+          );
         } else textF(FONT_MAIN, (one ? 'ONE MISS +' : 'NO MISSES +') + fmtNum(cb), R0, top + 124, 6, C.skyD, 'center'); // what it was worth, once it's landed
       } else if (t >= T.hn0) {
         // the horns left: a row of horns that pop off one at a time into the bonus, which then flies onto the points
@@ -7969,7 +8025,7 @@ function menuBody() {
     x = (PW - w) / 2,
     y = Math.max(18, (PH - h) / 2);
   ropePanel(x, y, w, h);
-  ribbon(PW / 2, y - 8, 96, 16, C.pink, 'PAUSED', FONT_MAIN, 10);
+  ribbon(PW / 2, y - 8, 96, 16, C.pink, G.pauseSub ? 'OPTIONS' : 'PAUSED', FONT_MAIN, 10);
   items.forEach((it, i) => {
     const sel = i === G.menu,
       ry = y + 22 + i * 11.5;
@@ -10604,6 +10660,163 @@ async function devCheck() {
   } catch (e) {}
 }
 
+// ===== 12b-share.js =====
+// ---------- sending play data to the studio (Chris 2026-11-23: collect everyone's play data, wherever they play, like Lexicon Signal) ----------
+// The first time a player reaches the title menu, a notice asks (SHARE: 'yes' / 'no', kept as stackstyle.share; Pause, Options
+// switches it). With 'yes', every play log event (14-telemetry.js) goes to the studio site: SHARE_URL is api/stacker.js in the
+// idleloopingwebsite repo, which saves each event as a row in the table stacker_events of the site's database (the same one as
+// Lexicon Signal's, its own table). Events wait in stackstyle.shareq (the newest 2000) and go in batches of up to 100: soon after
+// start, a few seconds after each event, when the device comes back online, and every 2 minutes; a failed post leaves them for the
+// next try. Anonymous: a random player id (stackstyle.pid), no name or account. owner: this device has the dev code (Chris's own).
+// On the claude.ai link the events go to the artifact's own database instead (14-telemetry.js), and only if not switched off.
+// Events from before the player answered wait too, and go if they say yes; 'no' drops them. The Retroid app also still posts the
+// log to the repo's issue #1 (until Chris retires that).
+const SHARE_URL = 'https://idlelooping.com/api/stacker/',
+  SHARE_MAX = 2000,
+  SHARE_BATCH = 100;
+let SHARE = HEADLESS ? 'no' : store.get('share', null);
+const ASK = { on: false, sel: 0 };
+function playerId() {
+  let id = store.get('pid', '');
+  if (!/^[a-z0-9]{12}$/.test(id)) {
+    id = '';
+    for (let i = 0; i < 12; i++) id += 'abcdefghijklmnopqrstuvwxyz0123456789'[Math.floor(Math.random() * 36)];
+    store.set('pid', id);
+  }
+  return id;
+}
+function eventId() {
+  let s = '';
+  for (let i = 0; i < 12; i++) s += 'abcdefghijklmnopqrstuvwxyz0123456789'[Math.floor(Math.random() * 36)];
+  return s;
+}
+// where the game is running: the claude.ai link, the Retroid app, the installed web app, or a browser tab
+function playPlace() {
+  if (HEADLESS) return 'test';
+  if (window.claude) return 'link';
+  if (window.StackNative) return 'app';
+  try {
+    if (matchMedia('(display-mode: fullscreen)').matches || matchMedia('(display-mode: standalone)').matches) return 'webapp';
+  } catch (e) {}
+  return 'web';
+}
+function shareOwner() {
+  try {
+    return !!(DEV.on || localStorage.getItem('stackstyle.devkey'));
+  } catch (e) {
+    return false;
+  }
+}
+function shareCan() {
+  return !HEADLESS && !window.claude && location.protocol !== 'file:';
+}
+// tele() hands every event here
+function shareQueue(ev) {
+  if (!shareCan() || SHARE === 'no') return;
+  const q = store.get('shareq', []);
+  q.push(ev);
+  store.set('shareq', q.slice(-SHARE_MAX));
+  clearTimeout(shareQueue.t);
+  shareQueue.t = setTimeout(shareFlush, 4000);
+}
+let shareBusy = false;
+function shareFlush() {
+  if (SHARE !== 'yes' || shareBusy || !shareCan() || navigator.onLine === false) return;
+  const q = store.get('shareq', []);
+  if (!q.length) return;
+  const batch = q.slice(0, SHARE_BATCH);
+  shareBusy = true;
+  fetch(SHARE_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'text/plain' },
+    body: JSON.stringify({ v: 1, pid: playerId(), owner: shareOwner(), events: batch })
+  })
+    .then(r => (r.ok ? r.json() : null))
+    .then(j => {
+      if (!j || !j.ok) return;
+      // saved or turned away as bad (too big, no id): either way done with them
+      const done = new Set(batch.map(e => e.id));
+      store.set(
+        'shareq',
+        store.get('shareq', []).filter(e => !done.has(e.id))
+      );
+      if (batch.length === SHARE_BATCH) setTimeout(shareFlush, 1500); // more waiting
+    })
+    .catch(() => {})
+    .finally(() => {
+      shareBusy = false;
+    });
+}
+if (!HEADLESS) {
+  setTimeout(shareFlush, 8000);
+  addEventListener('online', () => setTimeout(shareFlush, 2000));
+  setInterval(shareFlush, 120000);
+}
+function shareSet(v) {
+  SHARE = v;
+  store.set('share', v);
+  ASK.on = false;
+  G.idleFrom = G.t; // (the title's demo waits its usual while again)
+  if (v === 'no') store.set('shareq', []);
+  else setTimeout(shareFlush, 500);
+  G.banner = { text: v === 'yes' ? 'PLAY DATA ON. THANKS!' : 'PLAY DATA OFF', t: 150 };
+}
+// the title menu asks once (09-game.js calls this on the title before anything else): true while the notice is up and has the buttons
+function askTitle(inp) {
+  if (SHARE == null && (shareCan() || window.claude) && !G.attract) ASK.on = true; // (not in copies opened from a file: our test tools)
+  if (!ASK.on) return false;
+  if (inp.pressed.left || inp.pressed.right || inp.pressed.up || inp.pressed.down) {
+    ASK.sel = 1 - ASK.sel;
+    SFX.move();
+  }
+  if (inp.pressed.a || inp.pressed.start) {
+    SFX.pause();
+    shareSet(ASK.sel ? 'no' : 'yes');
+  }
+  return true;
+}
+// the notice: a rope-edged card over the title, in the old 320x240 field (drawn by 10-render.js through oldField). (This file comes before 13-main so all of it is set up before boot() logs the session.)
+function drawAskBody() {
+  const PW = 320,
+    PH = 240,
+    w = 236,
+    x = (PW - w) / 2,
+    size = 6.6,
+    lh = 9.4,
+    body = wrapText(
+      'Port Stacker Deluxe can send what happens in your games (stages, scores, deaths, where Buck went) to Idle Looping Studios, so we can tune and balance the game. It is anonymous: no name, no account, nothing else from your device.',
+      w - 28,
+      size
+    ),
+    foot = wrapText('Offline? It waits and sends later. Switch it off any time under Pause, Options.', w - 28, size),
+    h = 30 + body.length * lh + 6 + foot.length * lh + 30,
+    y = Math.max(16, (PH - h) / 2);
+  pg.save();
+  pg.globalAlpha = 0.45;
+  rect(-LAY.ox / TK, -LAY.oy / TK, LAY.LW / TK, LAY.LH / TK, C.indigo); // (the whole screen, wide ones too)
+  pg.restore();
+  ropePanel(x, y, w, h);
+  ribbon(PW / 2, y - 8, 150, 18, C.pink, 'HELP TUNE THE DOCK', FONT_MAIN, 10);
+  let ty = y + 20;
+  for (const l of body) {
+    textF(FONT_MAIN, l, x + 14, ty, size, C.indigo);
+    ty += lh;
+  }
+  ty += 6;
+  for (const l of foot) {
+    textF(FONT_MAIN, l, x + 14, ty, size, C.blue);
+    ty += lh;
+  }
+  ty += 8;
+  const bw = (w - 28 - 10) / 2;
+  ['SURE, SEND IT', 'NO THANKS'].forEach((lab, i) => {
+    const bx = x + 14 + i * (bw + 10),
+      on = ASK.sel === i;
+    rrect(bx, ty - 7, bw, 14, 5, on ? C.pink : C.cream, on ? C.indigo : C.blue, on ? 1.4 : 0.8);
+    textF(FONT_MAIN, lab, bx + bw / 2, ty + 0.5, 7, on ? C.cream : C.indigo, 'center');
+  });
+}
+
 // ===== 13-main.js =====
 // ---------- screen fitting, printing, and the main loop ----------
 // The canvas is sized to the real pixels of its box. The 320x240 field is scaled to fit (any amount: the art is drawn, not pixels), and
@@ -11035,6 +11248,7 @@ if (!HEADLESS) {
 // Where they go: on the claude.ai link, the artifact's own database (collection 'telemetry', only the owner can read it; Claude reads it
 // with ArtifactData). In the Retroid app (outside claude.ai) the app posts them in batches as comments on the repo's issue #1 "Play log"
 // (read with: gh api repos/christopherlunardi/port-stacker/issues/1/comments); the device also keeps the last 200 in localStorage.
+// Since 2026-11-23, wherever the game runs outside claude.ai, players who say yes also send them to the studio site (12b-share.js).
 const TELE = {
   q: [],
   db: null,
@@ -11061,7 +11275,9 @@ function tele(kind, data) {
   const ev = Object.assign(
     {
       kind,
+      id: eventId(), // (each event's own id, so one sent twice is kept once: 12b-share.js)
       at: Date.now(),
+      place: playPlace(),
       sid: TELE.sid,
       build: BUILD,
       device: teleDevice(),
@@ -11079,6 +11295,8 @@ function tele(kind, data) {
   try {
     if (window.StackNative && StackNative.log) StackNative.log(JSON.stringify(ev));
   } catch (e) {} // the Retroid app posts these to the repo's Play log issue
+  shareQueue(ev); // to the studio site, if the player said yes (12b-share.js)
+  if (SHARE === 'no') return; // (switched off: not to the claude.ai link's database either)
   TELE.q.push(ev);
   teleFlush();
 }

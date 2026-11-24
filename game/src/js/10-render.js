@@ -245,8 +245,10 @@ function render() {
   else pg.rect(0, 0, PW, PH);
   pg.clip(); // the title and boards fill the whole screen (16:9 too)
   if (G.state === 'splash' || G.state === 'studio') drawSplash();
-  else if (G.state === 'title') drawTitle();
-  else if (G.state === 'board') drawBoard();
+  else if (G.state === 'title') {
+    drawTitle();
+    if (ASK.on) oldField(drawAskBody); // the first time: may we send play data? (12b-share.js)
+  } else if (G.state === 'board') drawBoard();
   else if (G.state === 'initials') drawInitials();
   else {
     const sx = shipOffset();
@@ -364,7 +366,15 @@ function render() {
 // the squashed: flat as a pancake for a moment, blinking out (40 frames). The Captain, the Forklift and the gull have their own squash
 // pictures, Pratt and the Watchman too since 2026-11-11 (ChatGPT; they used to just vanish under the container)
 function flatArt(type) {
-  return type === 'fork' ? 'forklift.squash' : type === 'gull' ? 'gull.squash' : type === 'pratt' ? 'pratt.squash' : type === 'watch' ? 'watch.squash' : 'crab.squash';
+  return type === 'fork'
+    ? 'forklift.squash'
+    : type === 'gull'
+      ? 'gull.squash'
+      : type === 'pratt'
+        ? 'pratt.squash'
+        : type === 'watch'
+          ? 'watch.squash'
+          : 'crab.squash';
 }
 function drawFlat(type, x, y, t, flip, scale) {
   if (!(t > 12 || (t >> 1) & 1)) return;

@@ -7,6 +7,7 @@
 // Where they go: on the claude.ai link, the artifact's own database (collection 'telemetry', only the owner can read it; Claude reads it
 // with ArtifactData). In the Retroid app (outside claude.ai) the app posts them in batches as comments on the repo's issue #1 "Play log"
 // (read with: gh api repos/christopherlunardi/port-stacker/issues/1/comments); the device also keeps the last 200 in localStorage.
+// Since 2026-11-23, wherever the game runs outside claude.ai, players who say yes also send them to the studio site (12b-share.js).
 const TELE = {
   q: [],
   db: null,
@@ -33,7 +34,9 @@ function tele(kind, data) {
   const ev = Object.assign(
     {
       kind,
+      id: eventId(), // (each event's own id, so one sent twice is kept once: 12b-share.js)
       at: Date.now(),
+      place: playPlace(),
       sid: TELE.sid,
       build: BUILD,
       device: teleDevice(),
@@ -51,6 +54,8 @@ function tele(kind, data) {
   try {
     if (window.StackNative && StackNative.log) StackNative.log(JSON.stringify(ev));
   } catch (e) {} // the Retroid app posts these to the repo's Play log issue
+  shareQueue(ev); // to the studio site, if the player said yes (12b-share.js)
+  if (SHARE === 'no') return; // (switched off: not to the claude.ai link's database either)
   TELE.q.push(ev);
   teleFlush();
 }

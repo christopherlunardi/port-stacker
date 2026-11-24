@@ -63,7 +63,8 @@ function cardBody(a, b, o = {}) {
     pg.stroke();
   }
   ropePanel(-w / 2, top, w, h);
-  if (o.ribbon) o.ribbon(top); // a card can draw its own ribbon (the game-over card's turns over for a new best)
+  if (o.ribbon)
+    o.ribbon(top); // a card can draw its own ribbon (the game-over card's turns over for a new best)
   else ribbon(0, top - 7, 110, 16, C.pink, a, FONT_MAIN, 10);
   if (o.draw) o.draw(top, w, h);
   else {
@@ -99,7 +100,17 @@ function overCard() {
       pg.save();
       pg.translate(0, top - 7);
       pg.scale(1, Math.max(0.04, Math.abs(Math.cos(f * Math.PI))));
-      ribbon(0, 0, 110, 16, after ? C.yel : C.pink, after ? (G.newBest ? 'NEW BEST!' : 'ON THE BOARD!') : 'GAME OVER', FONT_MAIN, 10, after ? C.pink : C.cream);
+      ribbon(
+        0,
+        0,
+        110,
+        16,
+        after ? C.yel : C.pink,
+        after ? (G.newBest ? 'NEW BEST!' : 'ON THE BOARD!') : 'GAME OVER',
+        FONT_MAIN,
+        10,
+        after ? C.pink : C.cream
+      );
       pg.restore();
     },
     draw: top => {
@@ -236,7 +247,16 @@ function clearCard() {
         } else if (t < T.mf1) {
           const f = (t - T.mf0) / (T.mf1 - T.mf0),
             e = f * f;
-          textF(FONT_MAIN, '+' + fmtNum(cb), R0 + (L0 - R0) * e, top + 124 + (113 - 124) * e - Math.sin(f * Math.PI) * 14, 8.5 + f * 2, C.yel, 'center', C.indigo);
+          textF(
+            FONT_MAIN,
+            '+' + fmtNum(cb),
+            R0 + (L0 - R0) * e,
+            top + 124 + (113 - 124) * e - Math.sin(f * Math.PI) * 14,
+            8.5 + f * 2,
+            C.yel,
+            'center',
+            C.indigo
+          );
         } else textF(FONT_MAIN, (one ? 'ONE MISS +' : 'NO MISSES +') + fmtNum(cb), R0, top + 124, 6, C.skyD, 'center'); // what it was worth, once it's landed
       } else if (t >= T.hn0) {
         // the horns left: a row of horns that pop off one at a time into the bonus, which then flies onto the points
@@ -327,7 +347,7 @@ function menuBody() {
     x = (PW - w) / 2,
     y = Math.max(18, (PH - h) / 2);
   ropePanel(x, y, w, h);
-  ribbon(PW / 2, y - 8, 96, 16, C.pink, 'PAUSED', FONT_MAIN, 10);
+  ribbon(PW / 2, y - 8, 96, 16, C.pink, G.pauseSub ? 'OPTIONS' : 'PAUSED', FONT_MAIN, 10);
   items.forEach((it, i) => {
     const sel = i === G.menu,
       ry = y + 22 + i * 11.5;

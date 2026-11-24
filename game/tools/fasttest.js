@@ -499,8 +499,14 @@ function quitsure() { // (2026-11-11) quitting or restarting from the pause menu
   ok(R('pauseItems()[' + qi + '][0]') === 'QUIT TO TITLE', 'quitsure: moving off the line should take the question back');
   step({ held: {}, pressed: { a: true } }); step({ held: {}, pressed: { a: true } });
   ok(R('G.state') !== 'pause' && R('G.state') !== 'play', 'quitsure: two As should quit to the title (' + R('G.state') + ')');
-  R('DEV.noEnemies = true; newGame(); G.state = "play"; pauseGame(); G.menu = 1'); step({ held: {}, pressed: { a: true } });
+  R('DEV.noEnemies = true; newGame(); G.state = "play"; pauseGame(); G.menu = pauseItems().findIndex(it => it[0] === "RESTART GAME")'); step({ held: {}, pressed: { a: true } });
   ok(R('G.state') === 'pause' && R('G.level') === 0, 'quitsure: one A on RESTART GAME should only ask');
+  // (2026-11-23) OPTIONS holds sound, music, print and play data; B goes back to the main list, on OPTIONS
+  R('G.menu = pauseItems().findIndex(it => it[0] === "OPTIONS")'); step({ held: {}, pressed: { a: true } });
+  ok(R('G.pauseSub') === 'opt' && R('pauseItems().some(it => /^SEND PLAY DATA/.test(it[0]))') && R('pauseItems().some(it => /^SOUND/.test(it[0]))'), 'options: OPTIONS should open sound, music, print and play data');
+  step({ held: {}, pressed: { b: true } });
+  ok(R('G.state') === 'pause' && !R('G.pauseSub') && R('pauseItems()[G.menu][0]') === 'OPTIONS', 'options: B should go back to the pause menu, on OPTIONS (' + R('G.state') + ')');
+  ok(R('ASK.on') === false && R('SHARE') === 'no', 'share: the tests never ask or send play data');
   R('DEV.noEnemies = false; G.state = "title"');
 }
 function pathfind() { // (2026-11-11) on 1-2's broken catwalks a Pratt finds his way round to Buck, wherever Buck stands

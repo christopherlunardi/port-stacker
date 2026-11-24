@@ -140,6 +140,12 @@ docs, Workshop text, store text or commit messages (the repo is public). release
   submitted}. Act on submitted ones; then mark the round decided (chosen) in workshop.json and republish.
 
 ## Play log
+- Play data (2026-11-23): outside claude.ai (the Pocket 6 web app, the Retroid app, any browser), players who say yes on the title's
+  one-time "Help tune the dock" notice (Pause > Options > SEND PLAY DATA switches it) send every play log event to the studio site:
+  `api/stacker.js` in christopherlunardi/idleloopingwebsite (https://idlelooping.com/api/stacker/), one row per event in the table
+  `stacker_events` of the Neon project lexicon-plays (red-sea-93378753; Lexicon Signal's `plays` table is next to it). Read it with the
+  Neon connector's run_sql (columns: pid, eid, owner, at, kind, sid, build, device, place web/webapp/app/link, label, score, dev, data
+  jsonb). Game side: `12b-share.js`. Copies opened from a file (our test tools) never ask or send.
 - Before tuning difficulty or chasing a bug, read the play log: ArtifactData list on the phone link, collection `telemetry`
   (errors with device/build, deaths by enemy and stage, stage times, game overs). The Retroid app posts its log to issue #1 on port-stacker
   once the PLAYLOG_TOKEN secret exists; until then it keeps it on the device.

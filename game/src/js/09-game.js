@@ -426,6 +426,7 @@ function update(inp) {
         if (inp.pressed.start || inp.pressed.a) G.t = Math.max(G.t, TI.logoAt - 16);
         break;
       } // a press skips the intro to the logo landing
+      if (askTitle(inp)) break; // the first time: may we send play data? (12b-share.js)
       if (attractTitle(inp)) break; // left alone long enough: a demo (09e-attract.js)
       if (inp.pressed.up || inp.pressed.down) {
         G.titleSel = ((G.titleSel || 0) + (inp.pressed.up ? TITLE_MENU.length - 1 : 1)) % TITLE_MENU.length;
@@ -568,6 +569,7 @@ function pauseGame() {
   G.sure = null;
   if (G.st) G.st.pauses = (G.st.pauses || 0) + 1;
   G.state = 'pause';
+  G.pauseSub = null;
   G.menu = 0;
   SFX.pause();
 }
@@ -587,41 +589,40 @@ function sure(key, label, fn) {
     key
   ];
 }
+// (Chris 2026-11-23, like Lexicon Signal's: the simple things up front, sound, music, print look and play data in OPTIONS, the lines that
+// end the game at the bottom)
 function pauseItems() {
+  if (G.pauseSub === 'opt')
+    return [
+      [
+        'SOUND: ' + (muted ? 'OFF' : 'ON'),
+        () => {
+          muted = !muted;
+          store.set('mute', muted);
+        }
+      ],
+      [
+        'MUSIC: ' + (musicOn ? 'ON' : 'OFF'),
+        () => {
+          musicOn = !musicOn;
+          store.set('music', musicOn);
+        }
+      ],
+      [
+        'PRINT: ' + (typeof PRINT_MODES !== 'undefined' ? PRINT_MODES[printMode][0] : ''),
+        () => {
+          printMode = (printMode + 1) % PRINT_MODES.length;
+          store.set('print2', printMode);
+        }
+      ],
+      ['SEND PLAY DATA: ' + (SHARE === 'yes' ? 'ON' : 'OFF'), () => shareSet(SHARE === 'yes' ? 'no' : 'yes')],
+      ['BACK', () => pauseSub(null)]
+    ];
   const items = [
     [
       'RESUME',
       () => {
         G.state = 'play';
-      }
-    ],
-    // (Chris 2026-11-10) no restarting a stage (it kept the points: a free do-over); RESTART GAME starts the whole run again from 1-1,
-    // asked twice so it can't happen by accident
-    sure('restart', 'RESTART GAME', () => {
-      teleQuit();
-      saveHi();
-      newGame();
-      startLevel(0);
-    }),
-    [
-      'SOUND: ' + (muted ? 'OFF' : 'ON'),
-      () => {
-        muted = !muted;
-        store.set('mute', muted);
-      }
-    ],
-    [
-      'MUSIC: ' + (musicOn ? 'ON' : 'OFF'),
-      () => {
-        musicOn = !musicOn;
-        store.set('music', musicOn);
-      }
-    ],
-    [
-      'PRINT: ' + (typeof PRINT_MODES !== 'undefined' ? PRINT_MODES[printMode][0] : ''),
-      () => {
-        printMode = (printMode + 1) % PRINT_MODES.length;
-        store.set('print2', printMode);
       }
     ],
     [
@@ -630,11 +631,7 @@ function pauseItems() {
         G.info = true;
       }
     ],
-    sure('title', 'QUIT TO TITLE', () => {
-      teleQuit();
-      saveHi();
-      toTitleFresh();
-    })
+    ['OPTIONS', () => pauseSub('opt')]
   ];
   if (NATIVE()) {
     if (G.updateReady) items.push(sure('reload', 'LOAD NEW BUILD ' + G.updateReady, () => (saveHi(), NATIVE().reload())));
@@ -651,10 +648,31 @@ function pauseItems() {
       au = NATIVE().appUpdate ? NATIVE().appUpdate() : 0;
     } catch (e) {}
     if (au) items.push(sure('app', 'UPDATE APP (NEW VERSION)', () => (saveHi(), NATIVE().installApp())));
-    items.push(sure('exit', 'EXIT GAME', () => (teleQuit(), saveHi(), NATIVE().quit())));
   }
+  // (Chris 2026-11-10) no restarting a stage (it kept the points: a free do-over); RESTART GAME starts the whole run again from 1-1,
+  // asked twice so it can't happen by accident
+  items.push(
+    sure('restart', 'RESTART GAME', () => {
+      teleQuit();
+      saveHi();
+      newGame();
+      startLevel(0);
+    }),
+    sure('title', 'QUIT TO TITLE', () => {
+      teleQuit();
+      saveHi();
+      toTitleFresh();
+    })
+  );
+  if (NATIVE()) items.push(sure('exit', 'EXIT GAME', () => (teleQuit(), saveHi(), NATIVE().quit())));
   // (no DEV lines here: the pause menu is the same for everyone; dev options are in the DEV panel, Chris 2026-11-08)
   return items;
+}
+// OPTIONS opens in place of the main list; BACK (or B) returns to it, on the OPTIONS line
+function pauseSub(v) {
+  G.pauseSub = v;
+  G.menu = v ? 0 : 2;
+  G.sure = null;
 }
 function updatePause(inp) {
   if (G.info) {
@@ -675,8 +693,14 @@ function updatePause(inp) {
   }
   G.menu = Math.min(G.menu, items.length - 1);
   if (G.sure && items[G.menu][2] !== G.sure) G.sure = null; // moved off the line: not armed any more
+  if (inp.pressed.b && G.pauseSub) {
+    pauseSub(null);
+    SFX.move();
+    return;
+  }
   if (inp.pressed.b || inp.pressed.start) {
     G.sure = null;
+    G.pauseSub = null;
     G.state = 'play';
     return;
   }
