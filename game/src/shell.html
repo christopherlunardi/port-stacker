@@ -74,6 +74,9 @@ body.padmode #screenWrap,body.inapp #screenWrap{position:fixed;top:0;right:0;bot
    Upright: screen edge to edge at the very top, a thin name strip, then the pad a third of the way down the free space (not at the
    bottom), Select/Start in their own row under it. Sideways: 4:3 screen in the middle, d-pad + Select left, A/B + Start right.
    Every piece has its own grid cell, so nothing can sit over anything else. Safe areas come in through --st/--sr/--sb/--sl. */
+/* (Chris 2026-11-23: the game sat far down the screen in the Claude app) claude.ai now pads the page's :root by the phone's safe areas, and our
+   layout already pads by them itself (--st and friends): it was counted twice. Take theirs off, like Lexicon Signal does. */
+:root{padding:0!important}
 :root{--st:env(safe-area-inset-top,0px);--sr:env(safe-area-inset-right,0px);--sb:env(safe-area-inset-bottom,0px);--sl:env(safe-area-inset-left,0px);
   --m:2px;--bz:4px;--chin:13px;--bezel:#333;--vh:100vh}
 @supports (height:1dvh){ :root{--vh:100dvh} }
