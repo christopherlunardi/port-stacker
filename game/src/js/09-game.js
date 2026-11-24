@@ -10,7 +10,7 @@ const G = {
   score: 0,
   hi: 0,
   lives: 3,
-  nextLife: 30000, // LIFE_FIRST (defined further down)
+  nextLife: 50000, // LIFE_FIRST (defined further down)
   p: null,
   enemies: [],
   pieces: [],
@@ -45,6 +45,8 @@ function newGame() {
   G.lives = 3;
   G.loop = 0;
   G.nextLife = LIFE_FIRST;
+  G.lifeOwed = 0; // lives earned, still to be delivered and picked up (06c-lifedrop.js)
+  G.lifeDrop = null;
   G.lifeFrom = 0;
   G.p = null;
   startLevel(0);
@@ -69,6 +71,7 @@ function buildStage(i) {
   G.landed = 0;
   G.itemSpawned = false;
   G.items = [];
+  lifeDropReset(); // (a life still out comes down again on the new stage)
   G.goldDone = false; // the power crate (06b-gold.js): once a stage
   G.goldFlash = null;
   G.goldBits = [];
@@ -156,8 +159,8 @@ function payHorns() {
 // Chris 2026-11-17: deep in overtime that still gave about a life a stage forever (points per stage grow with the shift number as fast
 // as the gaps do). Past LIFE_OT (about where the main game ends) the gaps' growth itself grows by LIFE_OT_K for each life: OT1 hardly
 // changes, OT2 gives a life or two fewer a shift, OT3 and on about two a shift and slowly fewer, never none.
-const LIFE_FIRST = 30000,
-  LIFE_GROW = 20000,
+const LIFE_FIRST = 50000, // (Chris 2026-11-24: scarcer from the start; was 30,000 and 20,000)
+  LIFE_GROW = 25000,
   LIFE_OT = 2000000,
   LIFE_OT_K = 1.08;
 function nextLifeAfter(v) {
@@ -213,14 +216,11 @@ function addScore(n, x, y, label = '', combo = true, size = 0) {
     G.st.drop = Math.max(G.st.drop, G.dropPts[G.dropNow]);
   } // BIGGEST DROP: every point a drop brings in (landings, chains, riders, squashes, bay bonus)
   while (G.score >= G.nextLife) {
-    // (a big score can pass more than one threshold at once: each one is a life)
-    G.lives++;
+    // (a big score can pass more than one threshold at once: each one is a life) (Chris 2026-11-24) a full bar doesn't give the life
+    // any more: the crane brings it down somewhere on the stage and Buck has to go and get it (06c-lifedrop.js)
     G.lifeFrom = G.nextLife;
-    G.lifeFlash = 40; // the life bar flashes full
     G.nextLife = nextLifeAfter(G.nextLife);
-    SFX.oneup();
-    teleLife();
-    addPop(G.p.x, G.p.y - 32, '1UP!', 'pink');
+    lifeEarned();
   }
   return pts; // (build 103-107 returned before the check above, so no extra lives were ever given: Chris noticed the bar sat full)
 }
@@ -367,6 +367,7 @@ function updatePlay(inp) {
   updateEnemies();
   updateClouds();
   updateItems();
+  updateLifeDrop();
   updateGold();
   updatePops();
   if (G.comboT > 0 && --G.comboT === 0) G.combo = 0;

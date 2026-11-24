@@ -2,7 +2,7 @@
 // They walk the same floors and ladders. At every crossing (a ladder meeting a floor) or dead end they pick a way: mostly toward the
 // worker, sometimes not (chase), never straight back unless there's no other way. The air horn stuns them; a stunned one can be walked through.
 const ENEMY_DEF = {
-  pratt: { speed: 0.52, top: 0.66, home: 0, chase: 0.8, pts: 150, worth: 1 }, // (Chris 2026-11-09: early enemies a little easier, was 0.55 to 0.68) // Inspector Pratt, the harbor inspector: shift 1's walker
+  pratt: { speed: 0.52, top: 0.66, home: 0, chase: 0.86, /* (Chris 2026-11-24: a bit harder; was 0.8) */ pts: 150, worth: 1 }, // (Chris 2026-11-09: early enemies a little easier, was 0.55 to 0.68) // Inspector Pratt, the harbor inspector: shift 1's walker
   gull: { speed: 0.55, chase: 0, pts: 300, worth: 1.5 }, // the Gull (shift 3, Chris 2026-11-09): flies, ignores ladders, dive-bombs you (updateGull)
   watch: { speed: 0.72, top: 0.82, home: 1, chase: 1, pts: 200, worth: 1.25, last: 0.86 }, // (Chris 2026-11-11: ramp a tiny bit more: Pratt's top 0.64 -> 0.66, the Watchman's start 0.70 -> 0.72 (still a step quicker than Pratt), top 0.80 -> 0.82, 0.84 -> 0.86 on 3-5) // (Chris 2026-11-09: was 0.76 to 0.86) last: his speed on 3-5, rising from top over shift 3 // top lowered from 0.94 (bot report: 2-4 cleared 1 in 6) // the Night Watchman (World 2): like Pratt, but turns round when you're behind him (updateWatch); chase 1 (Chris 2026-11-11): he never takes a wrong turn
   crab: { speed: 0.45, chase: 0, pts: 250, worth: 1.25 },

@@ -398,14 +398,27 @@ function clearcard() { // (Chris 2026-11-08) the SHIP LOADED card: the time bonu
   }
   R('DEV.noEnemies = false; G.state = "title"');
 }
-function lives() { // extra lives at 30k, then each gap 20k longer (80k, 150k, 240k...); the bar's start moves up with each
+function lives() { // (2026-11-24) a full life bar at 50k, then each gap 25k longer (125k, 225k, 350k...) sends a life down with the crane; the bar's start moves up with each
   R('DEV.noEnemies = true; newGame(); G.state = "play"');
   const got = [];
-  for (const n of [5000, 9000, 7000, 12000, 20000, 3000, 60000, 40000]) { R('addScore(' + n + ', 10, 10, "", false)'); got.push(R('[G.score, G.lives, G.lifeFrom, G.nextLife].join("/")')); }
-  const want = ['5000/3/0/30000', '14000/3/0/30000', '21000/3/0/30000', '33000/4/30000/80000', '53000/4/30000/80000', '56000/4/30000/80000', '116000/5/80000/150000', '156000/6/150000/240000'];
-  for (let i = 0; i < want.length; i++) ok(got[i] === want[i], 'lives: after ' + (i + 1) + ' scores ' + got[i] + ', wanted ' + want[i]);
-  ok(R('[240000, 350000, 630000, 990000].map(nextLifeAfter).join()') === '350000,480000,800000,1200000', 'lives: each gap should be 20,000 longer than the last');
-  R('DEV.noEnemies = false; G.state = "title"');
+  for (const n of [5000, 9000, 7000, 12000, 20000, 3000, 60000, 40000]) { R('addScore(' + n + ', 10, 10, "", false)'); got.push(R('[G.score, G.lifeOwed, G.lifeFrom, G.nextLife].join("/")')); }
+  const want = ['5000/0/0/50000', '14000/0/0/50000', '21000/0/0/50000', '33000/0/0/50000', '53000/1/50000/125000', '56000/1/50000/125000', '116000/1/50000/125000', '156000/2/125000/225000'];
+  for (let i = 0; i < want.length; i++) ok(got[i] === want[i], 'lives: after ' + (i + 1) + ' scores ' + got[i] + ' (score/owed/from/next), wanted ' + want[i]);
+  ok(R('G.lives') === 3, 'lives: a full bar should not give the life by itself');
+  ok(R('[225000, 350000, 500000, 875000].map(nextLifeAfter).join()') === '350000,500000,675000,1100000', 'lives: each gap should be 25,000 longer than the last');
+  // the crane brings it down well away from Buck; walking onto it gives the life
+  R('DEV.inv = true; G.st.f = 100'); step();
+  ok(R('!!G.lifeDrop'), 'lifedrop: an owed life should come down');
+  ok(R('Math.abs(G.lifeDrop.x - G.p.x) + 2.5 * Math.abs(G.lifeDrop.y - G.p.y)') > 60, 'lifedrop: it should land well away from Buck');
+  R('G.p.x = G.lifeDrop.x; G.p.y = G.lifeDrop.y'); for (let f = 0; f < 52; f++) step();
+  ok(R('G.lives') === 4 && R('G.lifeOwed') === 1, 'lifedrop: grabbing it should give the life (' + R('G.lives') + '/' + R('G.lifeOwed') + ')');
+  // the next one: left alone it goes back up after its time, and that life is gone
+  for (let f = 0; f < 5; f++) step();
+  ok(R('!!G.lifeDrop'), 'lifedrop: the second owed life should come down next');
+  R('G.p.x = 4; G.p.y = rowY(L.def.floors[0][0])');
+  for (let f = 0; f < 48 + 60 * 8 + 10; f++) step();
+  ok(R('G.lives') === 4 && R('G.lifeOwed') === 0, 'lifedrop: one left alone should go back up, its life gone (' + R('G.lives') + '/' + R('G.lifeOwed') + ')');
+  R('DEV.inv = false; DEV.noEnemies = false; G.state = "title"');
 }
 function crabspot() { // (Chris 2026-11-08) the Captain never lands on a catwalk piece shorter than CRAB_MIN_RUN
   for (let li = 0; li < R('LEVELS.length'); li++) {

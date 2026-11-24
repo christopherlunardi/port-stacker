@@ -403,7 +403,7 @@ function stunTime() {
   return Math.round(160 / buckSpeed());
 }
 function respawnDelay() {
-  return Math.round(softDown(220 - 35 * heat(), 60, 35, 0.88, 12)); // enemies come back sooner (their side), sooner every overtime
+  return Math.round(softDown(185 - 35 * heat(), 60, 35, 0.88, 12)); // enemies come back sooner (their side), sooner every overtime (Chris 2026-11-24: the main game a bit harder: was 220)
 }
 function freeHorns() {
   return 5;

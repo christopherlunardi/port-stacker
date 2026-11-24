@@ -185,7 +185,7 @@ body.padmode #screenWrap,body.inapp #screenWrap{position:fixed;top:0;right:0;bot
 // ---------- setup ----------
 // Port Stacker Deluxe: a container-stacking arcade game. One HTML page; played in a browser, on a phone (the artifact link) and on the
 // Retroid handhelds (the launcher app in android/ downloads the newest build and plays the last one it has when offline).
-const BUILD = 227; // set by assemble.py; the launcher compares it with dist/version.json
+const BUILD = 228; // set by assemble.py; the launcher compares it with dist/version.json
 const PW = 384,
   PH = 288,
   TK = PH / 240; // TK: screens laid out for the old 320x240 field (title, cards, menus, boards) draw at TK in their old coordinates           // the playfield in game pixels; the screen around it grows to fit any shape (10-render)
@@ -2303,7 +2303,7 @@ function stunTime() {
   return Math.round(160 / buckSpeed());
 }
 function respawnDelay() {
-  return Math.round(softDown(220 - 35 * heat(), 60, 35, 0.88, 12)); // enemies come back sooner (their side), sooner every overtime
+  return Math.round(softDown(185 - 35 * heat(), 60, 35, 0.88, 12)); // enemies come back sooner (their side), sooner every overtime (Chris 2026-11-24: the main game a bit harder: was 220)
 }
 function freeHorns() {
   return 5;
@@ -2870,12 +2870,135 @@ function goldFxTick() {
   if (G.goldBits) G.goldBits = G.goldBits.filter(b => b.t > 0);
 }
 
+// ===== 06c-lifedrop.js =====
+// ---------- extra lives are delivered (Chris 2026-11-24: lives came too easily; a good run went on and on) ----------
+// Filling the life bar no longer gives the life by itself: the crane lowers a crate somewhere on the stage, well away from Buck; it
+// bursts open into a little Buck (the lives counter's icon) with 1UP over him, and he has LIFE_DROP.secs to go and get it. Grab it: the
+// life. Too slow: the crane takes it back and the life is gone. So each extra life is a detour through the enemies that a player can go
+// for or let go. One at a time: a life earned while one is out (or on the SHIP LOADED card, or while Buck is down) waits in G.lifeOwed
+// and comes down a moment into play. One still out when the ship is loaded comes back next stage, its clock fresh. Overtime gives it
+// less time. (The delivery is the crane's, like the old horn refill: drawDelivery in 10-render.js.)
+const LIFE_DROP = { secs: 8, otSecs: 7, wait: 75, reach: [8, 6], leave: 36, arrive: 48 };
+function lifeDropTime() {
+  return 60 * (heat() ? LIFE_DROP.otSecs : LIFE_DROP.secs);
+}
+// addScore found the life bar full (09-game.js)
+function lifeEarned() {
+  G.lifeOwed = (G.lifeOwed || 0) + 1;
+  G.lifeFlash = 40; // the life bar flashes full
+  SFX.oneup();
+}
+// where it comes down: a walkable spot on a floor, chosen at random from the far half of them (by how long a walk it is: across, plus
+// the floors between counted heavier, as that's ladders), never on a ladder's top or foot
+function lifeDropSpot() {
+  const p = G.p,
+    spots = [];
+  for (const [r, a, b] of L.def.floors) {
+    if (r >= PLATE_ROW) continue;
+    for (let c = a + 3; c <= b - 3; c++) {
+      // (not right at a catwalk's end, against the frame)
+      const x = c * T + 4,
+        y = rowY(r);
+      if (L.ladders.some(l => Math.abs(l.x - x) < 6 && (l.top === y || l.bot === y))) continue;
+      if (G.pieces.some(pc => pc.state === 'rest' && pc.row === r && c >= pc.c - 1 && c <= pc.c + PIECE_W)) continue; // (not on a container: it'd be hidden, and walking there knocks it down)
+      spots.push({ x, y, d: Math.abs(x - p.x) + 2.5 * Math.abs(y - p.y) });
+    }
+  }
+  if (!spots.length) return null;
+  spots.sort((s, t) => t.d - s.d);
+  const far = spots.slice(0, Math.max(1, Math.ceil(spots.length / 2)));
+  return far[Math.floor(rand() * far.length)];
+}
+function updateLifeDrop() {
+  const p = G.p;
+  const d = G.lifeDrop;
+  if (!d) {
+    if (G.lifeOwed > 0 && G.st && G.st.f >= LIFE_DROP.wait) {
+      const s = lifeDropSpot();
+      if (s) G.lifeDrop = { x: s.x, y: s.y, t: lifeDropTime(), age: 0, gone: 0 };
+    }
+    return;
+  }
+  d.age++;
+  if (d.age === LIFE_DROP.arrive) SFX.pickupArrive();
+  if (d.gone) {
+    if (++d.gone > LIFE_DROP.leave) G.lifeDrop = null;
+    return;
+  }
+  if (d.age < LIFE_DROP.arrive) return; // still coming down
+  if (Math.abs(d.x - p.x) < LIFE_DROP.reach[0] && Math.abs(d.y - p.y) < LIFE_DROP.reach[1]) {
+    G.lifeDrop = null;
+    G.lifeOwed--;
+    G.lives++;
+    G.lifeFlash = 40;
+    SFX.oneup();
+    teleLife();
+    addPop(d.x, d.y - 26, '1UP!', 'pink');
+    return;
+  }
+  if (--d.t <= 0) {
+    d.gone = 1;
+    G.lifeOwed--;
+    SFX.pickup(); // (it goes back up)
+    addPop(d.x, d.y - 20, 'MISSED IT', 'cream');
+    tele('lifemiss', { label: stageId(), score: G.score, lives: G.lives });
+  }
+}
+// a new stage (09-game.js buildStage): one still out simply comes down again (its life is still owed)
+function lifeDropReset() {
+  G.lifeDrop = null;
+}
+// the crate comes down on the crane's line, bursts open in stars, and there's the little Buck with 1UP, bobbing in a pink glow; a
+// shrinking arc shows the time left, and it blinks in its last two seconds; missed, the crane lifts it back up and away
+function drawLifeDrop() {
+  const d = G.lifeDrop;
+  if (!d) return;
+  const a = d.age;
+  if (d.gone) {
+    // back up on the line
+    const y = d.y - 9 - d.gone * d.gone * 0.12;
+    pg.beginPath();
+    pg.moveTo(d.x, 22);
+    pg.lineTo(d.x, y - 8);
+    pg.lineWidth = 0.8;
+    pg.strokeStyle = ink(C.indigo);
+    pg.stroke();
+    pg.save();
+    pg.globalAlpha = Math.max(0, 1 - d.gone / LIFE_DROP.leave);
+    art('buck.stand', d.x, y + 10, { scale: 0.55 });
+    pg.restore();
+    return;
+  }
+  if (!drawDelivery(d.x, d.y, a, LIFE_DROP.arrive, C.pink)) return;
+  if (a < LIFE_DROP.arrive + 12) {
+    const t = a - LIFE_DROP.arrive;
+    for (let i = 0; i < 6; i++) {
+      const ang = (i / 6) * 6.283;
+      glyphStar(d.x + Math.cos(ang) * t * 1.2, d.y - 6 + Math.sin(ang) * t * 0.9, 2.2 - t * 0.12, i & 1 ? C.yel : C.cream);
+    }
+  }
+  if (d.t < 120 && (d.t >> 3) & 1) return;
+  const bob = Math.sin(G.frame * 0.12) * 1.2,
+    pop = a < LIFE_DROP.arrive + 12 ? 0.5 + ((a - LIFE_DROP.arrive) / 12) * 0.5 : 1,
+    cy = d.y - 9 + bob;
+  glowAt(d.x, cy, 16, C.pink, 0.55);
+  if (NIGHT()) nightGlow(d.x, cy, 16, C.pink, 0.55);
+  art('buck.stand', d.x, cy + 10 * pop, { scale: 0.55 * pop });
+  textF(FONT_MAIN, '1UP', d.x, cy - 15 * pop, 8 * pop, C.pink, 'center', C.indigo);
+  // time left
+  pg.lineWidth = 1.2;
+  pg.strokeStyle = ink(C.yel);
+  pg.beginPath();
+  pg.arc(d.x, cy, 14, -1.571, -1.571 + 6.283 * (d.t / lifeDropTime()));
+  pg.stroke();
+}
+
 // ===== 07-enemies.js =====
 // ---------- the dock pests that chase you ----------
 // They walk the same floors and ladders. At every crossing (a ladder meeting a floor) or dead end they pick a way: mostly toward the
 // worker, sometimes not (chase), never straight back unless there's no other way. The air horn stuns them; a stunned one can be walked through.
 const ENEMY_DEF = {
-  pratt: { speed: 0.52, top: 0.66, home: 0, chase: 0.8, pts: 150, worth: 1 }, // (Chris 2026-11-09: early enemies a little easier, was 0.55 to 0.68) // Inspector Pratt, the harbor inspector: shift 1's walker
+  pratt: { speed: 0.52, top: 0.66, home: 0, chase: 0.86, /* (Chris 2026-11-24: a bit harder; was 0.8) */ pts: 150, worth: 1 }, // (Chris 2026-11-09: early enemies a little easier, was 0.55 to 0.68) // Inspector Pratt, the harbor inspector: shift 1's walker
   gull: { speed: 0.55, chase: 0, pts: 300, worth: 1.5 }, // the Gull (shift 3, Chris 2026-11-09): flies, ignores ladders, dive-bombs you (updateGull)
   watch: { speed: 0.72, top: 0.82, home: 1, chase: 1, pts: 200, worth: 1.25, last: 0.86 }, // (Chris 2026-11-11: ramp a tiny bit more: Pratt's top 0.64 -> 0.66, the Watchman's start 0.70 -> 0.72 (still a step quicker than Pratt), top 0.80 -> 0.82, 0.84 -> 0.86 on 3-5) // (Chris 2026-11-09: was 0.76 to 0.86) last: his speed on 3-5, rising from top over shift 3 // top lowered from 0.94 (bot report: 2-4 cleared 1 in 6) // the Night Watchman (World 2): like Pratt, but turns round when you're behind him (updateWatch); chase 1 (Chris 2026-11-11): he never takes a wrong turn
   crab: { speed: 0.45, chase: 0, pts: 250, worth: 1.25 },
@@ -3620,7 +3743,7 @@ const G = {
   score: 0,
   hi: 0,
   lives: 3,
-  nextLife: 30000, // LIFE_FIRST (defined further down)
+  nextLife: 50000, // LIFE_FIRST (defined further down)
   p: null,
   enemies: [],
   pieces: [],
@@ -3655,6 +3778,8 @@ function newGame() {
   G.lives = 3;
   G.loop = 0;
   G.nextLife = LIFE_FIRST;
+  G.lifeOwed = 0; // lives earned, still to be delivered and picked up (06c-lifedrop.js)
+  G.lifeDrop = null;
   G.lifeFrom = 0;
   G.p = null;
   startLevel(0);
@@ -3679,6 +3804,7 @@ function buildStage(i) {
   G.landed = 0;
   G.itemSpawned = false;
   G.items = [];
+  lifeDropReset(); // (a life still out comes down again on the new stage)
   G.goldDone = false; // the power crate (06b-gold.js): once a stage
   G.goldFlash = null;
   G.goldBits = [];
@@ -3766,8 +3892,8 @@ function payHorns() {
 // Chris 2026-11-17: deep in overtime that still gave about a life a stage forever (points per stage grow with the shift number as fast
 // as the gaps do). Past LIFE_OT (about where the main game ends) the gaps' growth itself grows by LIFE_OT_K for each life: OT1 hardly
 // changes, OT2 gives a life or two fewer a shift, OT3 and on about two a shift and slowly fewer, never none.
-const LIFE_FIRST = 30000,
-  LIFE_GROW = 20000,
+const LIFE_FIRST = 50000, // (Chris 2026-11-24: scarcer from the start; was 30,000 and 20,000)
+  LIFE_GROW = 25000,
   LIFE_OT = 2000000,
   LIFE_OT_K = 1.08;
 function nextLifeAfter(v) {
@@ -3823,14 +3949,11 @@ function addScore(n, x, y, label = '', combo = true, size = 0) {
     G.st.drop = Math.max(G.st.drop, G.dropPts[G.dropNow]);
   } // BIGGEST DROP: every point a drop brings in (landings, chains, riders, squashes, bay bonus)
   while (G.score >= G.nextLife) {
-    // (a big score can pass more than one threshold at once: each one is a life)
-    G.lives++;
+    // (a big score can pass more than one threshold at once: each one is a life) (Chris 2026-11-24) a full bar doesn't give the life
+    // any more: the crane brings it down somewhere on the stage and Buck has to go and get it (06c-lifedrop.js)
     G.lifeFrom = G.nextLife;
-    G.lifeFlash = 40; // the life bar flashes full
     G.nextLife = nextLifeAfter(G.nextLife);
-    SFX.oneup();
-    teleLife();
-    addPop(G.p.x, G.p.y - 32, '1UP!', 'pink');
+    lifeEarned();
   }
   return pts; // (build 103-107 returned before the check above, so no extra lives were ever given: Chris noticed the bar sat full)
 }
@@ -3977,6 +4100,7 @@ function updatePlay(inp) {
   updateEnemies();
   updateClouds();
   updateItems();
+  updateLifeDrop();
   updateGold();
   updatePops();
   if (G.comboT > 0 && --G.comboT === 0) G.combo = 0;
@@ -4632,13 +4756,27 @@ const HOWTO = [
   {
     name: 'PAR TIME',
     title: 'PAR TIME AND SCORING',
-    text: "The clock at the top of the screen is the stage's par time: a minute and a half, counting down while you play. Every second left when the ship is loaded is a time bonus: 50 points, times the shift number (overtime keeps counting: OT1's shifts are 4, 5 and 6). Take longer and the clock turns to OVER PAR and counts up, and every second over comes off that stage's points instead (never more than you scored on it). The SHIP LOADED card adds the time bonus, 2,000 for each horn left and 5,000 for NO MISSES if you lost no life on the stage (2,000 for ONE MISS), all times the shift number. Loading the ship is worth 1,000 times the shift number. Extra lives come at 30,000 points, then 80,000, 150,000, 240,000..., each further on (more so past 2 million): the thin bar under your lives count fills up as you get close to the next one.",
+    text: "The clock at the top of the screen is the stage's par time: a minute and a half, counting down while you play. Every second left when the ship is loaded is a time bonus: 50 points, times the shift number (overtime keeps counting: OT1's shifts are 4, 5 and 6). Take longer and the clock turns to OVER PAR and counts up, and every second over comes off that stage's points instead (never more than you scored on it). The SHIP LOADED card adds the time bonus, 2,000 for each horn left and 5,000 for NO MISSES if you lost no life on the stage (2,000 for ONE MISS), all times the shift number. Loading the ship is worth 1,000 times the shift number. For extra lives (the bar under your lives count) see EXTRA LIVES.",
     setup() {
       onlyPieces(pc => pc.c === 20 && pc.row === 9);
       Object.assign(G.p, { x: 146, y: rowY(9), face: 1 });
       G.st.f = (parSecs() - 6) * 60; // the clock runs out during the demo
     },
     steps: [{ wait: 20 }, { held: { right: 1 }, until: p => p.x >= 228 }, { wait: 420 }]
+  },
+  {
+    // (Chris 2026-11-24) a full life bar no longer gives the life: the crane brings it down and you have to fetch it (06c-lifedrop.js)
+    name: 'EXTRA LIVES',
+    title: 'EXTRA LIVES',
+    text: 'The thin bar under your lives count fills as you score. When it fills, an extra life is on its way: the crane lowers a crate somewhere on the stage, usually far from you, and it bursts open into a little Buck with 1UP over him. Go and grab it within 8 seconds (7 in overtime; the ring round it shows the time left, and it blinks near the end). Too slow and the crane takes it back: that life is gone. Lives come at 50,000 points, then 125,000, 225,000, 350,000..., each further on (more so past 2 million). One comes down at a time; any others wait their turn.',
+    setup() {
+      onlyPieces(pc => pc.c === 20 && pc.row === 4);
+      Object.assign(G.p, { x: 146, y: rowY(19), face: 1 });
+      G.lifeOwed = 1;
+      G.lifeDrop = { x: 236, y: rowY(19), t: lifeDropTime(), age: 0, gone: 0 };
+    },
+    steps: [{ wait: 70 }, { held: { right: 1 }, until: p => p.x >= 236 }, { wait: 120 }],
+    expect: /1UP/
   },
   {
     // (Chris 2026-11-09) is a wait for a rider worth the time it costs? a horn? The board turns each thing into seconds of par time
@@ -4916,6 +5054,7 @@ function updateHowto(inp) {
   updateEnemies();
   updateClouds();
   updateItems();
+  updateLifeDrop();
   updateGold();
   updatePops();
   if (G.comboT > 0 && --G.comboT === 0) G.combo = 0;
@@ -6072,6 +6211,8 @@ function attractStart() {
   G.lives = 2;
   G.loop = d.loop;
   G.nextLife = LIFE_FIRST;
+  G.lifeOwed = 0;
+  G.lifeDrop = null;
   G.lifeFrom = 0;
   G.rushWait = false;
   G.banner = null;
@@ -6516,6 +6657,7 @@ function render() {
     drawGoldBack();
     for (const pc of G.pieces) if (pc.state === 'rest' || (pc.gold && (pc.state === 'lower' || pc.state === 'lift'))) drawContainer(pc);
     for (const it of G.items) drawItem(it);
+    drawLifeDrop(); // an extra life the crane brought down (06c-lifedrop.js)
     for (const e of G.enemies) drawEnemy(e);
     drawDoors(true);
     drawPlayer();

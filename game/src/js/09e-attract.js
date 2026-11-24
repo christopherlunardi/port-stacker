@@ -32,6 +32,8 @@ function attractStart() {
   G.lives = 2;
   G.loop = d.loop;
   G.nextLife = LIFE_FIRST;
+  G.lifeOwed = 0;
+  G.lifeDrop = null;
   G.lifeFrom = 0;
   G.rushWait = false;
   G.banner = null;

@@ -257,6 +257,7 @@ function render() {
     drawGoldBack();
     for (const pc of G.pieces) if (pc.state === 'rest' || (pc.gold && (pc.state === 'lower' || pc.state === 'lift'))) drawContainer(pc);
     for (const it of G.items) drawItem(it);
+    drawLifeDrop(); // an extra life the crane brought down (06c-lifedrop.js)
     for (const e of G.enemies) drawEnemy(e);
     drawDoors(true);
     drawPlayer();

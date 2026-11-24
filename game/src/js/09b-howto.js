@@ -210,13 +210,27 @@ const HOWTO = [
   {
     name: 'PAR TIME',
     title: 'PAR TIME AND SCORING',
-    text: "The clock at the top of the screen is the stage's par time: a minute and a half, counting down while you play. Every second left when the ship is loaded is a time bonus: 50 points, times the shift number (overtime keeps counting: OT1's shifts are 4, 5 and 6). Take longer and the clock turns to OVER PAR and counts up, and every second over comes off that stage's points instead (never more than you scored on it). The SHIP LOADED card adds the time bonus, 2,000 for each horn left and 5,000 for NO MISSES if you lost no life on the stage (2,000 for ONE MISS), all times the shift number. Loading the ship is worth 1,000 times the shift number. Extra lives come at 30,000 points, then 80,000, 150,000, 240,000..., each further on (more so past 2 million): the thin bar under your lives count fills up as you get close to the next one.",
+    text: "The clock at the top of the screen is the stage's par time: a minute and a half, counting down while you play. Every second left when the ship is loaded is a time bonus: 50 points, times the shift number (overtime keeps counting: OT1's shifts are 4, 5 and 6). Take longer and the clock turns to OVER PAR and counts up, and every second over comes off that stage's points instead (never more than you scored on it). The SHIP LOADED card adds the time bonus, 2,000 for each horn left and 5,000 for NO MISSES if you lost no life on the stage (2,000 for ONE MISS), all times the shift number. Loading the ship is worth 1,000 times the shift number. For extra lives (the bar under your lives count) see EXTRA LIVES.",
     setup() {
       onlyPieces(pc => pc.c === 20 && pc.row === 9);
       Object.assign(G.p, { x: 146, y: rowY(9), face: 1 });
       G.st.f = (parSecs() - 6) * 60; // the clock runs out during the demo
     },
     steps: [{ wait: 20 }, { held: { right: 1 }, until: p => p.x >= 228 }, { wait: 420 }]
+  },
+  {
+    // (Chris 2026-11-24) a full life bar no longer gives the life: the crane brings it down and you have to fetch it (06c-lifedrop.js)
+    name: 'EXTRA LIVES',
+    title: 'EXTRA LIVES',
+    text: 'The thin bar under your lives count fills as you score. When it fills, an extra life is on its way: the crane lowers a crate somewhere on the stage, usually far from you, and it bursts open into a little Buck with 1UP over him. Go and grab it within 8 seconds (7 in overtime; the ring round it shows the time left, and it blinks near the end). Too slow and the crane takes it back: that life is gone. Lives come at 50,000 points, then 125,000, 225,000, 350,000..., each further on (more so past 2 million). One comes down at a time; any others wait their turn.',
+    setup() {
+      onlyPieces(pc => pc.c === 20 && pc.row === 4);
+      Object.assign(G.p, { x: 146, y: rowY(19), face: 1 });
+      G.lifeOwed = 1;
+      G.lifeDrop = { x: 236, y: rowY(19), t: lifeDropTime(), age: 0, gone: 0 };
+    },
+    steps: [{ wait: 70 }, { held: { right: 1 }, until: p => p.x >= 236 }, { wait: 120 }],
+    expect: /1UP/
   },
   {
     // (Chris 2026-11-09) is a wait for a rider worth the time it costs? a horn? The board turns each thing into seconds of par time
@@ -494,6 +508,7 @@ function updateHowto(inp) {
   updateEnemies();
   updateClouds();
   updateItems();
+  updateLifeDrop();
   updateGold();
   updatePops();
   if (G.comboT > 0 && --G.comboT === 0) G.combo = 0;
