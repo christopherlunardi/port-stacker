@@ -385,10 +385,10 @@ function watchNextDoor(e, p) {
 // ---------- the crab: a floor guard, not a chaser ----------
 // It never climbs. It patrols its catwalk; when the worker is on the same catwalk and in front of it (or it turns to face him), it stops
 // and shakes for half a second (the warning), charges sideways three times faster until it passes him or hits the end, then rests.
-const CRAB = { wind: 32, charge: 2.1, rest: 50, sight: 150, reach: 96 }; // reach (Chris 2026-11-11: "I should be able to outrun him"): a charge runs out after 96 px (a container and a half)
+const CRAB = { wind: 32, charge: 2.1, rest: 50, sight: 150, reach: 160 }; // reach (Chris 2026-11-11: "I should be able to outrun him"): a charge runs out after 160 px, two and a half containers (Chris 2026-11-25: 96 was too short)
 // the Forklift (Chris 2026-11-09): revs up for longer (more warning), then charges flat out (he doesn't stop once he's past you) until his
 // charge runs out or the catwalk ends, and needs longer to cool off
-const FORK = { wind: 54, charge: 2.5, rest: 80, sight: 170, reach: 160 }; // reach: his charge runs out after 160 px, or at the end of the catwalk if that comes first (Chris 2026-11-11; it used to be always the end)
+const FORK = { wind: 54, charge: 2.5, rest: 80, sight: 170, reach: 256 }; // reach: his charge runs out after 256 px, four containers (Chris 2026-11-25: 160 was too short), or at the end of the catwalk if that comes first (Chris 2026-11-11; it used to be always the end)
 // ---------- the Gull (shift 3, Chris 2026-11-09) ----------
 // He ignores ladders. He flies in from a side of the screen above the top catwalk, glides along toward Buck, and when Buck is below him
 // and not too far off he dives at where Buck is standing, lands on that catwalk, struts toward him for a moment, then takes off again.
@@ -570,7 +570,7 @@ function updateCrab(e) {
     e.acc += K.charge * softUp(Math.min(difficulty(), 1.7) * (1 + 0.15 * heat()), 2.3, 0.8); // faster each overtime (as before up to OT2), more slowly deep in it
     // a charge runs out after K.reach (Chris 2026-11-11: run the moment he revs and you can get away), and the Captain also stops once he's
     // well past you or you've left his catwalk
-    if (Math.abs(e.x - e.from) >= K.reach || (e.type !== 'fork' && ((p.x - e.x) * e.dx < -28 || (!same && Math.abs(e.x - e.from) > 90)))) {
+    if (Math.abs(e.x - e.from) >= K.reach || (e.type !== 'fork' && ((p.x - e.x) * e.dx < -28 || (!same && Math.abs(e.x - e.from) > 140)))) {
       e.mode = 'rest';
       e.mt = K.rest;
     }

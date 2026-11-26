@@ -298,6 +298,7 @@ function render() {
     drawGoldFront();
     monoSnap(); // overtime's screen look: everything so far is play area; what's drawn after (score pops, cards, the bar) keeps its colours
     drawRushCount(); // POWER RUSH's 3, 2, 1 (over the overtime look, in its own colours)
+    drawLifeCall(); // EXTRA LIFE! GO GET IT / EXTRA LIFE! / MISSED (06c-lifedrop.js)
     for (const p of G.pops) {
       // score popups: pop in with an overshoot, float up, blink out; big scores get a burst behind them
       const age = 80 - p.t,

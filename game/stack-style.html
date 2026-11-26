@@ -185,7 +185,7 @@ body.padmode #screenWrap,body.inapp #screenWrap{position:fixed;top:0;right:0;bot
 // ---------- setup ----------
 // Port Stacker Deluxe: a container-stacking arcade game. One HTML page; played in a browser, on a phone (the artifact link) and on the
 // Retroid handhelds (the launcher app in android/ downloads the newest build and plays the last one it has when offline).
-const BUILD = 228; // set by assemble.py; the launcher compares it with dist/version.json
+const BUILD = 229; // set by assemble.py; the launcher compares it with dist/version.json
 const PW = 384,
   PH = 288,
   TK = PH / 240; // TK: screens laid out for the old 320x240 field (title, cards, menus, boards) draw at TK in their old coordinates           // the playfield in game pixels; the screen around it grows to fit any shape (10-render)
@@ -622,6 +622,24 @@ const SFX = {
   }, // something heavy hitting the bottom
   oneup() {
     [784, 1046, 1318, 1568].forEach((f, i) => tone(f, 0.08, 'triangle', 0.2, 0, i * 0.06));
+  },
+  // (Chris 2026-11-24: getting a life needs to be way clearer) the life bar is full: two bright bells, an extra life is coming down
+  lifeReady() {
+    [1318, 1760].forEach((f, i) => tone(f, 0.22, 'triangle', 0.16, 0, i * 0.12));
+  },
+  // the crane brings it down: a falling whistle, then the bells again
+  lifeDrop() {
+    tone(1568, 0.5, 'sine', 0.08, 784, 0);
+    [1318, 1760, 1318, 1760].forEach((f, i) => tone(f, 0.12, 'triangle', 0.12, 0, 0.45 + i * 0.1));
+  },
+  // got it: a run up and a held chord, louder than anything but the stage clear
+  extraLife() {
+    [523, 659, 784, 1046, 1318, 1568].forEach((f, i) => tone(f, 0.1, 'square', 0.12, 0, i * 0.055));
+    [1046, 1318, 1568].forEach(f => tone(f, 0.7, 'triangle', 0.14, 0, 0.33));
+  },
+  // too slow: it goes back up, a falling sigh
+  lifeMissed() {
+    [784, 659, 523, 392].forEach((f, i) => tone(f, 0.14, 'triangle', 0.13, 0, i * 0.1));
   },
   goldArrive() {
     [1568, 2093, 1568, 2349].forEach((f, i) => tone(f, 0.16, 'triangle', 0.09, 0, i * 0.09));
@@ -2886,7 +2904,8 @@ function lifeDropTime() {
 function lifeEarned() {
   G.lifeOwed = (G.lifeOwed || 0) + 1;
   G.lifeFlash = 40; // the life bar flashes full
-  SFX.oneup();
+  SFX.lifeReady(); // (not the 1UP sound: it isn't yours yet)
+  if (G.p && G.state === 'play') addPop(G.p.x, G.p.y - 32, '1UP ON ITS WAY', 'pink', 0, 9);
 }
 // where it comes down: a walkable spot on a floor, chosen at random from the far half of them (by how long a walk it is: across, plus
 // the floors between counted heavier, as that's ladders), never on a ladder's top or foot
@@ -2910,12 +2929,19 @@ function lifeDropSpot() {
   return far[Math.floor(rand() * far.length)];
 }
 function updateLifeDrop() {
+  // (the call and the burst count here, in game time, not in the drawing)
+  if (G.lifeCall && --G.lifeCall.t <= 0) G.lifeCall = null;
+  if (G.lifeFx && ++G.lifeFx.t > 34) G.lifeFx = null;
   const p = G.p;
   const d = G.lifeDrop;
   if (!d) {
     if (G.lifeOwed > 0 && G.st && G.st.f >= LIFE_DROP.wait) {
       const s = lifeDropSpot();
-      if (s) G.lifeDrop = { x: s.x, y: s.y, t: lifeDropTime(), age: 0, gone: 0 };
+      if (s) {
+        G.lifeDrop = { x: s.x, y: s.y, t: lifeDropTime(), age: 0, gone: 0 };
+        lifeCall('EXTRA LIFE! GO GET IT', C.pink, 150); // (Chris 2026-11-24: way clearer)
+        SFX.lifeDrop();
+      }
     }
     return;
   }
@@ -2931,16 +2957,19 @@ function updateLifeDrop() {
     G.lifeOwed--;
     G.lives++;
     G.lifeFlash = 40;
-    SFX.oneup();
+    SFX.extraLife();
     teleLife();
-    addPop(d.x, d.y - 26, '1UP!', 'pink');
+    addPop(d.x, d.y - 30, 'EXTRA LIFE!', 'pink', 0, 15);
+    lifeCall('EXTRA LIFE!', C.pink, 110);
+    G.lifeFx = { x: d.x, y: d.y - 10, t: 0 }; // the burst round Buck (drawLifeDrop)
     return;
   }
   if (--d.t <= 0) {
     d.gone = 1;
     G.lifeOwed--;
-    SFX.pickup(); // (it goes back up)
-    addPop(d.x, d.y - 20, 'MISSED IT', 'cream');
+    SFX.lifeMissed(); // (it goes back up)
+    addPop(d.x, d.y - 20, 'MISSED IT', 'cream', 0, 10);
+    lifeCall('EXTRA LIFE MISSED', C.blue, 100);
     tele('lifemiss', { label: stageId(), score: G.score, lives: G.lives });
   }
 }
@@ -2951,6 +2980,28 @@ function lifeDropReset() {
 // the crate comes down on the crane's line, bursts open in stars, and there's the little Buck with 1UP, bobbing in a pink glow; a
 // shrinking arc shows the time left, and it blinks in its last two seconds; missed, the crane lifts it back up and away
 function drawLifeDrop() {
+  const fx = G.lifeFx;
+  if (fx) {
+    // got it: rings and a ring of stars thrown out round Buck, half a second
+    const t = fx.t;
+    pg.save();
+    pg.globalAlpha = Math.max(0, 1 - t / 34);
+    pg.lineWidth = 2.2;
+    for (const [k, col] of [
+      [1, C.pink],
+      [0.65, C.yel]
+    ]) {
+      pg.strokeStyle = ink(col);
+      pg.beginPath();
+      pg.arc(fx.x, fx.y, 6 + t * 2.2 * k, 0, 6.283);
+      pg.stroke();
+    }
+    pg.restore();
+    for (let i = 0; i < 10; i++) {
+      const ang = (i / 10) * 6.283 + t * 0.04;
+      glyphStar(fx.x + Math.cos(ang) * t * 2, fx.y + Math.sin(ang) * t * 1.5, Math.max(0, 3.2 - t * 0.09), i & 1 ? C.yel : C.pink);
+    }
+  }
   const d = G.lifeDrop;
   if (!d) return;
   const a = d.age;
@@ -2981,6 +3032,18 @@ function drawLifeDrop() {
   const bob = Math.sin(G.frame * 0.12) * 1.2,
     pop = a < LIFE_DROP.arrive + 12 ? 0.5 + ((a - LIFE_DROP.arrive) / 12) * 0.5 : 1,
     cy = d.y - 9 + bob;
+  // a ping every second so the eye finds it
+  if (!d.gone) {
+    const ph = (d.age % 60) / 60;
+    pg.save();
+    pg.globalAlpha = (1 - ph) * 0.8;
+    pg.lineWidth = 1.6;
+    pg.strokeStyle = ink(C.pink);
+    pg.beginPath();
+    pg.arc(d.x, cy, 14 + ph * 30, 0, 6.283);
+    pg.stroke();
+    pg.restore();
+  }
   glowAt(d.x, cy, 16, C.pink, 0.55);
   if (NIGHT()) nightGlow(d.x, cy, 16, C.pink, 0.55);
   art('buck.stand', d.x, cy + 10 * pop, { scale: 0.55 * pop });
@@ -2991,6 +3054,23 @@ function drawLifeDrop() {
   pg.beginPath();
   pg.arc(d.x, cy, 14, -1.571, -1.571 + 6.283 * (d.t / lifeDropTime()));
   pg.stroke();
+}
+// the big call across the top of the stage: a ribbon that pops in with an overshoot, holds, and slides away
+function lifeCall(text, col, t) {
+  G.lifeCall = { text, col, t, len: t };
+}
+function drawLifeCall() {
+  const c = G.lifeCall;
+  if (!c || !PLAYING()) return;
+  const age = c.len - c.t,
+    k = age < 10 ? 0.5 + (0.6 * Math.sin((age / 10) * Math.PI * 0.75)) / Math.sin(Math.PI * 0.75) : 1,
+    out = c.t < 14 ? c.t / 14 : 1;
+  pg.save();
+  pg.globalAlpha = out;
+  pg.translate(PW / 2, 44 - (1 - out) * 10);
+  pg.scale(k, k);
+  ribbon(0, 0, 120, 22, c.col, c.text, FONT_MAIN, 12);
+  pg.restore();
 }
 
 // ===== 07-enemies.js =====
@@ -3381,10 +3461,10 @@ function watchNextDoor(e, p) {
 // ---------- the crab: a floor guard, not a chaser ----------
 // It never climbs. It patrols its catwalk; when the worker is on the same catwalk and in front of it (or it turns to face him), it stops
 // and shakes for half a second (the warning), charges sideways three times faster until it passes him or hits the end, then rests.
-const CRAB = { wind: 32, charge: 2.1, rest: 50, sight: 150, reach: 96 }; // reach (Chris 2026-11-11: "I should be able to outrun him"): a charge runs out after 96 px (a container and a half)
+const CRAB = { wind: 32, charge: 2.1, rest: 50, sight: 150, reach: 160 }; // reach (Chris 2026-11-11: "I should be able to outrun him"): a charge runs out after 160 px, two and a half containers (Chris 2026-11-25: 96 was too short)
 // the Forklift (Chris 2026-11-09): revs up for longer (more warning), then charges flat out (he doesn't stop once he's past you) until his
 // charge runs out or the catwalk ends, and needs longer to cool off
-const FORK = { wind: 54, charge: 2.5, rest: 80, sight: 170, reach: 160 }; // reach: his charge runs out after 160 px, or at the end of the catwalk if that comes first (Chris 2026-11-11; it used to be always the end)
+const FORK = { wind: 54, charge: 2.5, rest: 80, sight: 170, reach: 256 }; // reach: his charge runs out after 256 px, four containers (Chris 2026-11-25: 160 was too short), or at the end of the catwalk if that comes first (Chris 2026-11-11; it used to be always the end)
 // ---------- the Gull (shift 3, Chris 2026-11-09) ----------
 // He ignores ladders. He flies in from a side of the screen above the top catwalk, glides along toward Buck, and when Buck is below him
 // and not too far off he dives at where Buck is standing, lands on that catwalk, struts toward him for a moment, then takes off again.
@@ -3566,7 +3646,7 @@ function updateCrab(e) {
     e.acc += K.charge * softUp(Math.min(difficulty(), 1.7) * (1 + 0.15 * heat()), 2.3, 0.8); // faster each overtime (as before up to OT2), more slowly deep in it
     // a charge runs out after K.reach (Chris 2026-11-11: run the moment he revs and you can get away), and the Captain also stops once he's
     // well past you or you've left his catwalk
-    if (Math.abs(e.x - e.from) >= K.reach || (e.type !== 'fork' && ((p.x - e.x) * e.dx < -28 || (!same && Math.abs(e.x - e.from) > 90)))) {
+    if (Math.abs(e.x - e.from) >= K.reach || (e.type !== 'fork' && ((p.x - e.x) * e.dx < -28 || (!same && Math.abs(e.x - e.from) > 140)))) {
       e.mode = 'rest';
       e.mt = K.rest;
     }
@@ -3779,6 +3859,8 @@ function newGame() {
   G.loop = 0;
   G.nextLife = LIFE_FIRST;
   G.lifeOwed = 0; // lives earned, still to be delivered and picked up (06c-lifedrop.js)
+  G.lifeFx = null;
+  G.lifeCall = null;
   G.lifeDrop = null;
   G.lifeFrom = 0;
   G.p = null;
@@ -4728,7 +4810,7 @@ const HOWTO = [
   {
     name: 'THE CAPTAIN',
     title: 'THE CAPTAIN (CRAB)',
-    text: "The Captain is a crab who guards one catwalk. A shadow grows where he's about to land, then he drops in from above, always onto a long catwalk, never onto the short pieces of a broken one. He never climbs. He patrols his catwalk, and if you're on it in front of him, he stops and shakes (!), then charges, very fast, for about a container and a half (less if he gets past you or hits the end), and then he has to rest. Run the moment he shakes and you can stay ahead of his charge. Or get off his catwalk by a ladder, horn him, or drop a container on him. Horn him mid-charge and the charge is over: when he thaws he's back to patrolling, and he has to shake again before he can charge.",
+    text: "The Captain is a crab who guards one catwalk. A shadow grows where he's about to land, then he drops in from above, always onto a long catwalk, never onto the short pieces of a broken one. He never climbs. He patrols his catwalk, and if you're on it in front of him, he stops and shakes (!), then charges, very fast, for about two and a half containers (less if he gets past you or hits the end), and then he has to rest. Run the moment he shakes and you can stay ahead of his charge. Or get off his catwalk by a ladder, horn him, or drop a container on him. Horn him mid-charge and the charge is over: when he thaws he's back to patrolling, and he has to shake again before he can charge.",
     setup() {
       onlyPieces(pc => pc.row !== 14);
       Object.assign(G.p, { x: 160, y: rowY(14), face: 1 });
@@ -4776,7 +4858,7 @@ const HOWTO = [
       G.lifeDrop = { x: 236, y: rowY(19), t: lifeDropTime(), age: 0, gone: 0 };
     },
     steps: [{ wait: 70 }, { held: { right: 1 }, until: p => p.x >= 236 }, { wait: 120 }],
-    expect: /1UP/
+    expect: /EXTRA LIFE/
   },
   {
     // (Chris 2026-11-09) is a wait for a rider worth the time it costs? a horn? The board turns each thing into seconds of par time
@@ -4818,7 +4900,7 @@ const HOWTO = [
   {
     name: 'FORKLIFT',
     title: 'THE FORKLIFT',
-    text: "The Forklift, a burly dock hand at the wheel of a little forklift, takes over from the Captain on the storm shift: on 3-1 only now and then is a catwalk guard a Forklift; more of them turn up stage by stage, and on the finale, 3-5, they all are. Like the Captain he drops in onto a long catwalk, never climbs, and patrols. When you're on his catwalk in front of him he revs up, shaking, with his beacon flashing (!), for longer than the Captain winds up, so you get more warning. Then he charges flat out, faster than the Captain, and he doesn't stop once he's past you: he drives about two and a half containers (or to the end of the catwalk) before he can turn. Run as soon as he revs and you can get away. Get off his catwalk, horn him, or drop a container on him. Horn him while he revs or charges and it's called off: he has to rev up again.",
+    text: "The Forklift, a burly dock hand at the wheel of a little forklift, takes over from the Captain on the storm shift: on 3-1 only now and then is a catwalk guard a Forklift; more of them turn up stage by stage, and on the finale, 3-5, they all are. Like the Captain he drops in onto a long catwalk, never climbs, and patrols. When you're on his catwalk in front of him he revs up, shaking, with his beacon flashing (!), for longer than the Captain winds up, so you get more warning. Then he charges flat out, faster than the Captain, and he doesn't stop once he's past you: he drives about four containers (or to the end of the catwalk) before he can turn. Run as soon as he revs and you can get away. Get off his catwalk, horn him, or drop a container on him. Horn him while he revs or charges and it's called off: he has to rev up again.",
     level: 0,
     loop: 2,
     setup() {
@@ -6698,6 +6780,7 @@ function render() {
     drawGoldFront();
     monoSnap(); // overtime's screen look: everything so far is play area; what's drawn after (score pops, cards, the bar) keeps its colours
     drawRushCount(); // POWER RUSH's 3, 2, 1 (over the overtime look, in its own colours)
+    drawLifeCall(); // EXTRA LIFE! GO GET IT / EXTRA LIFE! / MISSED (06c-lifedrop.js)
     for (const p of G.pops) {
       // score popups: pop in with an overshoot, float up, blink out; big scores get a burst behind them
       const age = 80 - p.t,
@@ -10215,14 +10298,8 @@ const sidesWide = () => LAY.ox >= SIDES_MIN;
 function drawSides() {
   if (!sidesWide()) return;
   drawStacks(hudPop());
-  // at night and in the storm the stacks are dimmed a little like the backdrop behind them (the stage itself stays bright)
-  const dim = NIGHT() ? [NIGHT_SKY, 0.3] : STORM() ? [STORM_DIM, STORM_DIM_A * 0.6] : null;
-  if (dim) {
-    pg.save();
-    pg.globalAlpha = dim[1];
-    for (const [x0, x1] of sideStrips()) rect(x0, LAY.oy, x1 - x0, PH - 4, dim[0]);
-    pg.restore();
-  }
+  // (Chris 2026-11-25: they're part of the stage, in front, so they stay bright at night and in the storm like the stage does; they
+  // used to be dimmed like the backdrop)
 }
 // the two strips: [x0, x1, the edge that touches the field, which way is away from the field (-1 left, 1 right)]
 const sideStrips = () => [

@@ -46,6 +46,8 @@ function newGame() {
   G.loop = 0;
   G.nextLife = LIFE_FIRST;
   G.lifeOwed = 0; // lives earned, still to be delivered and picked up (06c-lifedrop.js)
+  G.lifeFx = null;
+  G.lifeCall = null;
   G.lifeDrop = null;
   G.lifeFrom = 0;
   G.p = null;

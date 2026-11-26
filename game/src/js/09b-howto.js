@@ -182,7 +182,7 @@ const HOWTO = [
   {
     name: 'THE CAPTAIN',
     title: 'THE CAPTAIN (CRAB)',
-    text: "The Captain is a crab who guards one catwalk. A shadow grows where he's about to land, then he drops in from above, always onto a long catwalk, never onto the short pieces of a broken one. He never climbs. He patrols his catwalk, and if you're on it in front of him, he stops and shakes (!), then charges, very fast, for about a container and a half (less if he gets past you or hits the end), and then he has to rest. Run the moment he shakes and you can stay ahead of his charge. Or get off his catwalk by a ladder, horn him, or drop a container on him. Horn him mid-charge and the charge is over: when he thaws he's back to patrolling, and he has to shake again before he can charge.",
+    text: "The Captain is a crab who guards one catwalk. A shadow grows where he's about to land, then he drops in from above, always onto a long catwalk, never onto the short pieces of a broken one. He never climbs. He patrols his catwalk, and if you're on it in front of him, he stops and shakes (!), then charges, very fast, for about two and a half containers (less if he gets past you or hits the end), and then he has to rest. Run the moment he shakes and you can stay ahead of his charge. Or get off his catwalk by a ladder, horn him, or drop a container on him. Horn him mid-charge and the charge is over: when he thaws he's back to patrolling, and he has to shake again before he can charge.",
     setup() {
       onlyPieces(pc => pc.row !== 14);
       Object.assign(G.p, { x: 160, y: rowY(14), face: 1 });
@@ -230,7 +230,7 @@ const HOWTO = [
       G.lifeDrop = { x: 236, y: rowY(19), t: lifeDropTime(), age: 0, gone: 0 };
     },
     steps: [{ wait: 70 }, { held: { right: 1 }, until: p => p.x >= 236 }, { wait: 120 }],
-    expect: /1UP/
+    expect: /EXTRA LIFE/
   },
   {
     // (Chris 2026-11-09) is a wait for a rider worth the time it costs? a horn? The board turns each thing into seconds of par time
@@ -272,7 +272,7 @@ const HOWTO = [
   {
     name: 'FORKLIFT',
     title: 'THE FORKLIFT',
-    text: "The Forklift, a burly dock hand at the wheel of a little forklift, takes over from the Captain on the storm shift: on 3-1 only now and then is a catwalk guard a Forklift; more of them turn up stage by stage, and on the finale, 3-5, they all are. Like the Captain he drops in onto a long catwalk, never climbs, and patrols. When you're on his catwalk in front of him he revs up, shaking, with his beacon flashing (!), for longer than the Captain winds up, so you get more warning. Then he charges flat out, faster than the Captain, and he doesn't stop once he's past you: he drives about two and a half containers (or to the end of the catwalk) before he can turn. Run as soon as he revs and you can get away. Get off his catwalk, horn him, or drop a container on him. Horn him while he revs or charges and it's called off: he has to rev up again.",
+    text: "The Forklift, a burly dock hand at the wheel of a little forklift, takes over from the Captain on the storm shift: on 3-1 only now and then is a catwalk guard a Forklift; more of them turn up stage by stage, and on the finale, 3-5, they all are. Like the Captain he drops in onto a long catwalk, never climbs, and patrols. When you're on his catwalk in front of him he revs up, shaking, with his beacon flashing (!), for longer than the Captain winds up, so you get more warning. Then he charges flat out, faster than the Captain, and he doesn't stop once he's past you: he drives about four containers (or to the end of the catwalk) before he can turn. Run as soon as he revs and you can get away. Get off his catwalk, horn him, or drop a container on him. Horn him while he revs or charges and it's called off: he has to rev up again.",
     level: 0,
     loop: 2,
     setup() {

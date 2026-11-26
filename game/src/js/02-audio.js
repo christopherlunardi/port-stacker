@@ -381,6 +381,24 @@ const SFX = {
   oneup() {
     [784, 1046, 1318, 1568].forEach((f, i) => tone(f, 0.08, 'triangle', 0.2, 0, i * 0.06));
   },
+  // (Chris 2026-11-24: getting a life needs to be way clearer) the life bar is full: two bright bells, an extra life is coming down
+  lifeReady() {
+    [1318, 1760].forEach((f, i) => tone(f, 0.22, 'triangle', 0.16, 0, i * 0.12));
+  },
+  // the crane brings it down: a falling whistle, then the bells again
+  lifeDrop() {
+    tone(1568, 0.5, 'sine', 0.08, 784, 0);
+    [1318, 1760, 1318, 1760].forEach((f, i) => tone(f, 0.12, 'triangle', 0.12, 0, 0.45 + i * 0.1));
+  },
+  // got it: a run up and a held chord, louder than anything but the stage clear
+  extraLife() {
+    [523, 659, 784, 1046, 1318, 1568].forEach((f, i) => tone(f, 0.1, 'square', 0.12, 0, i * 0.055));
+    [1046, 1318, 1568].forEach(f => tone(f, 0.7, 'triangle', 0.14, 0, 0.33));
+  },
+  // too slow: it goes back up, a falling sigh
+  lifeMissed() {
+    [784, 659, 523, 392].forEach((f, i) => tone(f, 0.14, 'triangle', 0.13, 0, i * 0.1));
+  },
   goldArrive() {
     [1568, 2093, 1568, 2349].forEach((f, i) => tone(f, 0.16, 'triangle', 0.09, 0, i * 0.09));
     tone(3136, 0.5, 'sine', 0.04, 0, 0.3);

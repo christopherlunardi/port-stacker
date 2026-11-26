@@ -8,14 +8,8 @@ const sidesWide = () => LAY.ox >= SIDES_MIN;
 function drawSides() {
   if (!sidesWide()) return;
   drawStacks(hudPop());
-  // at night and in the storm the stacks are dimmed a little like the backdrop behind them (the stage itself stays bright)
-  const dim = NIGHT() ? [NIGHT_SKY, 0.3] : STORM() ? [STORM_DIM, STORM_DIM_A * 0.6] : null;
-  if (dim) {
-    pg.save();
-    pg.globalAlpha = dim[1];
-    for (const [x0, x1] of sideStrips()) rect(x0, LAY.oy, x1 - x0, PH - 4, dim[0]);
-    pg.restore();
-  }
+  // (Chris 2026-11-25: they're part of the stage, in front, so they stay bright at night and in the storm like the stage does; they
+  // used to be dimmed like the backdrop)
 }
 // the two strips: [x0, x1, the edge that touches the field, which way is away from the field (-1 left, 1 right)]
 const sideStrips = () => [
